@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CMP Solutions</title>
+<meta name="description" content="Todo tu portfolio de pozo, comparable y al día. Una Sola Lista y CRM a medida para inmobiliarias que comercializan 3 o más desarrolladoras.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
+<style>
+/* Idea: obra de noche. Tinta azul profunda, cobalto de plano y amarillo de obra como señal. Todo en Outfit. */
+:root{
+  color-scheme: light;
+  --ink:#0B1020; --ink2:#141B33; --line-d:#27304F; --muted-d:#B4BBD0;
+  --paper:#F5F4EF; --card:#FFFFFF; --line:#DCDAD0; --muted:#4A5266;
+  --blue:#2B50FF; --blue-soft:#E9EDFF; --blue-l:#93A7FF; --yellow:#FFC42E;
+  --ok-bg:#DDF3E4; --ok:#14532D; --warn-bg:#FFEFC2; --warn:#6B4A00; --bad-bg:#FBD9D5; --bad:#8C1C13;
+  --display:'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --body:'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono:'Outfit', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --wrap:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{font-family:var(--display);text-wrap:balance}
+h2{font-weight:800;font-size:clamp(30px,4.2vw,50px);line-height:1.02;letter-spacing:-.025em}
+h3{font-weight:700;font-size:19px;line-height:1.2}
+a{color:var(--blue)}
+:focus-visible{outline:3px solid var(--yellow);outline-offset:3px;border-radius:4px}
+section{scroll-margin-top:76px}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 24px}
+.sec{padding:96px 0}
+.dark{background:var(--ink);color:#F5F4EF}
+.white{background:var(--card)}
+.eyebrow{font-family:var(--mono);font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:flex;align-items:center;gap:10px}
+.eyebrow::before{content:"";width:28px;height:2px;background:var(--blue)}
+.dark .eyebrow{color:var(--muted-d)}.dark .eyebrow::before{background:var(--yellow)}
+.lead{font-size:19px;color:var(--muted);max-width:34em}
+.dark .lead{color:var(--muted-d)}
+.head{display:flex;flex-direction:column;gap:16px;margin-bottom:48px}
+.mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.tag{font-family:var(--mono);font-size:12px;border:1px solid var(--line);border-radius:4px;padding:2px 8px;color:var(--muted);white-space:nowrap}
+.dark .tag,.demo .tag{border-color:var(--line-d);color:var(--muted-d)}
+.ph{font-family:var(--mono);background:var(--warn-bg);color:var(--warn);border-radius:4px;padding:1px 6px;font-size:.92em}
+
+/* Botón único */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 26px;border-radius:10px;border:0;background:var(--yellow);color:var(--ink);font:600 17px var(--body);text-decoration:none;cursor:pointer;transition:transform .18s ease, box-shadow .18s ease}
+.btn:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(255,196,46,.35)}
+.btn svg{transition:transform .18s ease}.btn:hover svg{transform:translateX(4px)}
+.btn.sm{min-height:44px;padding:0 18px;font-size:15px}
+.btn.blue{background:var(--blue);color:#fff}.btn.blue:hover{box-shadow:0 10px 24px rgba(43,80,255,.35)}
+.btn.line{background:transparent;color:var(--blue);border:1.5px solid var(--blue)}.btn.line:hover{box-shadow:none;background:var(--blue-soft)}
+
+/* 1. Barra */
+.bar{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.0);transition:background .25s ease, box-shadow .25s ease;margin-bottom:-68px}
+.bar.solid{background:rgba(11,16,32,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line-d)}
+.bar .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:800 22px var(--display);letter-spacing:-.02em;min-height:44px}
+.nav{display:flex;gap:30px}
+.nav a{color:#E4E7F2;text-decoration:none;font-size:15px;font-weight:500;padding:12px 0;position:relative}
+.nav a::after{content:"";position:absolute;left:0;right:0;bottom:8px;height:2px;background:var(--yellow);transform:scaleX(0);transform-origin:left;transition:transform .2s ease}
+.nav a:hover::after{transform:scaleX(1)}
+#progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--yellow);transform:scaleX(0);transform-origin:left;z-index:60}
+
+/* 2. Hero */
+.hero{position:relative;background:var(--ink);color:#fff;padding:148px 0 0;overflow:hidden}
+.hero-photo{position:absolute;inset:-4% -2%;background:#16204A url('https://images.unsplash.com/photo-1695067441231-a76a08f1ab89?auto=format&fit=crop&w=2000&q=70') center/cover;animation:kb 26s ease-in-out infinite alternate}
+.hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(11,16,32,.97) 0%,rgba(11,16,32,.9) 42%,rgba(11,16,32,.55) 100%),linear-gradient(0deg,rgba(11,16,32,1) 0%,rgba(11,16,32,0) 30%)}
+@keyframes kb{from{transform:scale(1)}to{transform:scale(1.09) translate(-1%,-1.5%)}}
+.hero .wrap{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(440px,100%),1fr));gap:56px;align-items:center}
+.hero-copy{display:flex;flex-direction:column;gap:26px}
+.hero .eyebrow{color:#D5DAEA}.hero .eyebrow::before{background:var(--yellow)}
+h1{font-weight:900;font-size:clamp(40px,6.2vw,78px);line-height:.96;letter-spacing:-.035em}
+h1 .w{display:inline-block}
+h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap}
+.hero p.sub{font-size:19px;color:#D5DAEA;max-width:33em}
+.hero-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
+.hero-cta small{font-size:15px;color:#D5DAEA}
+.hero-card{background:#fff;color:var(--ink);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 80px rgba(0,0,0,.45);transform:rotate(1.2deg);animation:float 7s ease-in-out infinite}
+@keyframes float{0%,100%{transform:rotate(1.2deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-10px)}}
+.hc-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
+.hc-top b{font:700 16px var(--display)}
+.chips{display:flex;gap:10px;flex-wrap:wrap}
+.chip{font-family:var(--mono);font-size:14px;background:var(--blue-soft);color:#1A33B8;border-radius:6px;padding:6px 10px;font-variant-numeric:tabular-nums}
+.hc-count{font:800 30px var(--display);letter-spacing:-.02em}
+.hc-count span{color:var(--blue)}
+.hc-rows{display:flex;flex-direction:column;font-size:14.5px;min-height:176px}
+.hc-rows div{display:flex;justify-content:space-between;gap:12px;padding:10px 0;border-top:1px solid #ECEBE4;animation:rowin .45s ease both}
+.hc-rows div:nth-child(2){animation-delay:.07s}.hc-rows div:nth-child(3){animation-delay:.14s}.hc-rows div:nth-child(4){animation-delay:.21s}
+@keyframes rowin{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.hc-bar{height:4px;background:#ECEBE4;border-radius:2px;overflow:hidden}
+.hc-bar i{display:block;height:100%;width:100%;background:var(--blue);transform-origin:left;animation:fill 3.6s linear infinite}
+@keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+.ticker{position:relative;z-index:2;margin-top:84px;border-top:1px solid var(--line-d);overflow:hidden;padding:16px 0;font-family:var(--mono);font-size:14px;color:var(--muted-d);white-space:nowrap}
+.ticker div{display:inline-block;animation:tick 38s linear infinite}
+.ticker span{margin:0 22px}.ticker span b{color:var(--yellow);font-weight:500}
+@keyframes tick{to{transform:translateX(-50%)}}
+
+/* 3. Para quién */
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:24px}
+.fit{border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:18px;background:var(--card);border:1px solid var(--line)}
+.fit.no{background:transparent}
+.fit ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
+.fit li{display:flex;gap:12px}.fit li svg{flex:none;margin-top:3px}
+.fit.no li{color:var(--muted)}
+
+/* 4. Problema */
+.prob{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:56px;align-items:center;margin-bottom:56px}
+.chat{background:#E9E4D8;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px;font-size:15.5px;max-width:460px;width:100%;justify-self:center;box-shadow:0 20px 50px rgba(11,16,32,.12)}
+.msg{max-width:84%;padding:10px 14px;border-radius:12px;background:#fff;align-self:flex-start;border-top-left-radius:3px}
+.msg.me{background:#D5F0C8;align-self:flex-end;border-radius:12px;border-top-right-radius:3px}
+.msg time{display:block;text-align:right;font-family:var(--mono);font-size:11px;color:#55606F}
+.gap{align-self:center;font-family:var(--mono);font-size:12px;background:rgba(11,16,32,.08);color:#3E4656;border-radius:20px;padding:3px 12px}
+.js .chat .msg,.js .chat .gap{opacity:0;transform:translateY(10px) scale(.97);transition:opacity .4s ease, transform .4s ease}
+.js .chat .show{opacity:1;transform:none}
+.costs{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(200px,100%),1fr));gap:16px}
+.cost{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:8px;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.cost:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,16,32,.1);border-color:var(--ink)}
+.cost .n{font-family:var(--mono);font-size:13px;color:#9A3B00}
+.cost p{font-size:15px;color:var(--muted)}
+
+/* 5. Cómo funciona */
+.steps{list-style:none;margin:0 0 56px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:28px}
+.steps li{display:flex;flex-direction:column;gap:10px;padding-top:18px;position:relative}
+.steps li::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;background:var(--ink);transform-origin:left}
+.js .steps li::before{transform:scaleX(0);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
+.js .steps li.in::before{transform:scaleX(1)}
+.steps .num{font:900 54px/1 var(--display);color:var(--blue)}
+.steps p{font-size:16px;color:var(--muted)}
+.ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:32px;align-items:stretch}
+@media (min-width:900px){.ba{grid-template-columns:1.5fr 1fr}}
+.tbl{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:16.5px;background:var(--card);display:flex;flex-direction:column}
+.tbl .r{flex:1}
+.tbl .r{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid #ECEBE4}
+.tbl .r span{padding:16px 18px;display:flex;align-items:center}
+.tbl .r span:first-child{font-weight:600}.tbl .r span:nth-child(2){color:var(--muted)}.tbl .r span:nth-child(3){background:var(--blue-soft)}
+.tbl .h{flex:none;background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;border:0}
+.tbl .h span,.tbl .h span:nth-child(2){color:#fff;background:none;font-weight:400}.tbl .h span:nth-child(3){background:none;color:var(--yellow)}
+.photo{margin:0;border-radius:14px;min-height:300px;overflow:hidden;position:relative;background:var(--ink)}
+.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.ba.noimg{grid-template-columns:1fr}.ba.noimg .photo{display:none}
+
+/* 6. Demo */
+.demo{background:var(--ink2);border:1px solid var(--line-d);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:26px}
+.demo-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
+.tabs{display:flex;gap:8px;flex-wrap:wrap}
+.tab{min-height:44px;padding:0 16px;border-radius:10px;border:1px solid var(--line-d);background:transparent;color:#F5F4EF;font:500 15px var(--body);cursor:pointer;transition:background .15s ease,color .15s ease}
+.tab:hover{border-color:var(--muted-d)}
+.tab[aria-selected="true"]{background:var(--yellow);color:var(--ink);border-color:var(--yellow)}
+.ctrl{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(260px,100%),1fr));gap:28px;align-items:end}
+.ctrl label{font-size:14px;color:var(--muted-d);display:block}
+.ctrl output{display:block;font-family:var(--mono);font-size:26px;font-variant-numeric:tabular-nums;margin:4px 0}
+.ctrl input[type=range]{width:100%;height:44px;accent-color:var(--yellow);cursor:pointer}
+.res small{font-size:14px;color:var(--muted-d);display:block}
+.res b{font:900 40px/1.1 var(--display);letter-spacing:-.02em;color:var(--yellow);display:inline-block}
+.res b.bump{animation:bump .3s ease}
+@keyframes bump{50%{transform:scale(1.08)}}
+.scroll{overflow-x:auto}
+.grid{min-width:720px;font-size:15px}
+.grow{display:grid;grid-template-columns:2.2fr .6fr 1fr 1fr 1fr .9fr 1.2fr;gap:12px;padding:12px;border-top:1px solid var(--line-d);align-items:center;transition:opacity .3s ease, background .3s ease}
+.grow.hd{border:0;font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted-d);padding-bottom:8px}
+.grow .r{text-align:right;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.grow.out{opacity:.5}
+.grow.ok{background:rgba(255,196,46,.06)}
+.grow em{font-style:normal;color:var(--muted-d)}
+.badge{display:inline-block;font-size:13px;border-radius:5px;padding:3px 10px;font-weight:600;background:var(--yellow);color:var(--ink)}
+.badge.no{background:none;border:1px solid #5A6788;color:var(--muted-d);font-weight:400;padding:2px 9px}
+.mk{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,2fr) auto;gap:16px;align-items:center;font-size:15px;padding:6px 0}
+.mk .track{height:14px;background:var(--line-d);border-radius:4px;overflow:hidden}
+.mk .track i{display:block;height:100%;background:var(--blue-l);border-radius:4px;transition:width .6s cubic-bezier(.2,.7,.2,1)}
+.mk .v{min-width:150px;text-align:right}
+.share{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:28px;align-items:start}
+.sheet{background:#fff;color:var(--ink);border-radius:8px;padding:24px;display:flex;flex-direction:column;gap:12px;font-size:14.5px}
+.sheet .row{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ECEBE4;padding-top:10px}
+.ghost{min-height:44px;padding:0 18px;border-radius:10px;border:1px solid #5A6788;background:transparent;color:#F5F4EF;font:500 15px var(--body);cursor:pointer}
+.ghost:hover{border-color:#fff}
+.hist{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:13px 0;border-top:1px solid var(--line-d);font-size:15px}
+.up{color:#FFB199}.down{color:#9BE3B5}
+.after{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:32px;color:var(--muted-d);font-size:15px}
+[hidden]{display:none !important}
+
+/* 7. Listas */
+.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:56px;align-items:start}
+.feats{display:flex;flex-direction:column}
+.feats div{padding:18px 0;border-top:1px solid var(--line)}
+.feats div:last-child{border-bottom:1px solid var(--line)}
+.feats p{color:var(--muted);font-size:16px;margin-top:4px}
+.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 24px 60px rgba(11,16,32,.08)}
+.panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px}
+.panel-top b{font:700 18px var(--display)}
+.li{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 0;border-top:1px solid #ECEBE4}
+.li small{display:block;font-size:14px;color:var(--muted)}
+.st{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;border-radius:6px;padding:5px 11px}
+.st.ok{background:var(--ok-bg);color:var(--ok)}.st.warn{background:var(--warn-bg);color:var(--warn)}.st.bad{background:var(--bad-bg);color:var(--bad)}
+.st.bad svg{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+
+/* 8. CRM */
+.crm{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:start}
+.phone{justify-self:center;width:310px;max-width:100%;border:10px solid var(--ink);border-radius:40px;background:var(--paper);padding:24px 16px;display:flex;flex-direction:column;gap:12px;font-size:14.5px;box-shadow:0 30px 70px rgba(11,16,32,.22)}
+.phone-top{display:flex;justify-content:space-between;align-items:baseline}
+.phone-top b{font:800 26px var(--display)}
+.task{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.task time{font-family:var(--mono);font-size:12px;color:var(--muted);display:block}
+.task.late{background:var(--bad-bg);color:var(--bad);border-color:transparent}
+.js .phone .task{opacity:0;transform:translateX(-16px);transition:opacity .45s ease, transform .45s ease}
+.js .phone.in .task{opacity:1;transform:none}
+.phone.in .task:nth-child(3){transition-delay:.12s}.phone.in .task:nth-child(4){transition-delay:.24s}.phone.in .task:nth-child(5){transition-delay:.36s}
+.phone-foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
+.f4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px;margin-bottom:26px}
+.f4 p{font-size:15px;color:var(--muted);margin-top:4px}
+.tpl{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
+.tpl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;font-size:15px}
+.cap{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:6px}
+.tpl-src{background:var(--paper);border-radius:8px;padding:12px;font-family:var(--mono);font-size:14px}
+.tpl-src i{font-style:normal;background:var(--blue-soft);color:#1A33B8;border-radius:3px;padding:0 3px}
+.tpl-out{background:#D5F0C8;border-radius:12px;border-top-left-radius:3px;padding:12px}
+
+/* 9. Reportes */
+.rep-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px}
+.seg{display:flex;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden}
+.seg button{min-height:44px;padding:0 22px;border:0;background:var(--card);color:var(--ink);font:600 15px var(--body);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin-bottom:24px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
+.tile small{font-size:14px;color:var(--muted);display:block}
+.tile b{font:900 52px/1.1 var(--display);font-variant-numeric:tabular-nums}
+.rep-foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:16px}
+
+/* 10. Confianza */
+.trust{position:relative;overflow:hidden}
+.trust-bg{position:absolute;inset:0;background:#141B33 url('https://images.unsplash.com/photo-1751978515498-7e2c37973888?auto=format&fit=crop&w=1800&q=60') center/cover;opacity:.16}
+.trust .wrap{position:relative}
+.t4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:28px}
+.t4 p{border-top:2px solid var(--yellow);padding-top:16px;font-size:17px;color:#D5DAEA}
+.t4 strong{color:#fff;display:block;font:700 20px var(--display);margin-bottom:4px}
+
+/* 11. Quién */
+.who{display:block}
+.who-copy{max-width:760px}
+.portrait{aspect-ratio:4/5;max-width:380px;width:100%;border-radius:18px;background:linear-gradient(160deg,var(--blue) 0%,var(--ink) 100%);display:flex;align-items:flex-end;padding:20px;color:#D5DAEA;font-family:var(--mono);font-size:13px}
+.who-copy{display:flex;flex-direction:column;gap:16px}
+
+/* 12. 30 días */
+.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:24px;font-size:15.5px}
+.tl li{display:flex;flex-direction:column;gap:10px;padding-top:18px;position:relative}
+.tl li::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line)}
+.tl li::after{content:"";position:absolute;top:0;left:0;height:3px;width:100%;background:var(--blue);transform-origin:left}
+.js .tl li::after{transform:scaleX(0);transition:transform .7s ease}
+.js .tl li.in::after{transform:scaleX(1)}
+.tl li:nth-child(2)::after{transition-delay:.25s}.tl li:nth-child(3)::after{transition-delay:.5s}.tl li:nth-child(4)::after{transition-delay:.75s}
+.tl .wk{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
+.tl .me{color:var(--muted)}.tl .me strong{color:var(--ink)}
+
+/* 13. Planes */
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px;align-items:stretch;margin-bottom:24px}
+.plan{border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:16px;background:var(--card);transition:transform .2s ease, box-shadow .2s ease}
+.plan:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(11,16,32,.1)}
+.plan h3{font-size:24px;}
+.plan > p{font-size:15px;color:var(--muted);min-height:3em}
+.plan .pr{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ECEBE4;padding-top:12px}
+.plan .btn{margin-top:auto}
+.plan.top{background:var(--ink);color:#fff;border-color:var(--ink);position:relative}
+.plan.top > p{color:var(--muted-d)}.plan.top .pr{border-color:var(--line-d)}
+.plan.top::before{content:"Los dos productos";position:absolute;top:-13px;left:24px;background:var(--yellow);color:var(--ink);font:600 13px var(--body);padding:3px 10px;border-radius:5px}
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;font-size:16px}
+.notes p{border-radius:14px;padding:20px 22px;background:var(--blue-soft)}
+.notes p + p{background:var(--paper)}
+
+/* 14. FAQ */
+.faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:48px;align-items:start}
+details{border-top:1px solid #C9C7BC}
+details:last-child{border-bottom:1px solid #C9C7BC}
+summary{min-height:60px;display:flex;align-items:center;justify-content:space-between;gap:16px;font-weight:600;cursor:pointer;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary i{font-style:normal;font-size:26px;line-height:1;color:var(--blue);transition:transform .2s ease}
+details[open] summary i{transform:rotate(45deg)}
+details p{padding-bottom:20px;color:var(--muted);max-width:38em}
+
+/* 15. Cierre */
+.close{position:relative;background:var(--ink);color:#fff;overflow:hidden}
+.close-bg{position:absolute;inset:0;background:#16204A url('https://images.unsplash.com/photo-1742427605934-db05a2a833f6?auto=format&fit=crop&w=2000&q=70') center/cover}
+.close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(11,16,32,.94) 0%,rgba(20,34,110,.8) 100%)}
+.close .wrap{position:relative;z-index:2;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:56px;align-items:center}
+.close h2{font-size:clamp(34px,5vw,60px)}
+.close-copy{display:flex;flex-direction:column;gap:20px}
+.close-copy p{font-size:19px;color:#D5DAEA;max-width:30em}
+.form{background:#fff;color:var(--ink);border-radius:18px;padding:32px;box-shadow:0 30px 80px rgba(0,0,0,.4)}
+form{display:flex;flex-direction:column;gap:16px}
+.fld{display:flex;flex-direction:column;gap:6px}
+.fld label{font-weight:600;font-size:15px}
+.fld input,.fld select{min-height:50px;padding:0 14px;border:1.5px solid #6B7487;border-radius:10px;font:400 17px var(--body);color:var(--ink);background:#fff}
+.fld input:focus,.fld select:focus{border-color:var(--blue);outline:3px solid var(--blue-soft)}
+form small{font-size:14px;color:var(--muted)}
+.done h3{font-size:28px;font-weight:800;margin-bottom:14px}
+.done ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
+
+/* 16. Pie */
+footer{background:var(--ink);color:var(--muted-d);font-size:15px;border-top:1px solid var(--line-d);padding:28px 0}
+footer .wrap{display:flex;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;align-items:center}
+footer a{color:var(--muted-d);padding:12px 0;display:inline-block}
+footer nav{display:flex;gap:20px}
+.mob{display:none}
+
+/* Aparición al bajar */
+.js .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1)}
+.js .reveal.in{opacity:1;transform:none}
+.js .stagger > *{opacity:0;transform:translateY(22px);transition:opacity .6s ease, transform .6s cubic-bezier(.2,.7,.2,1)}
+.js .stagger.in > *{opacity:1;transform:none}
+.stagger.in > *:nth-child(2){transition-delay:.08s}.stagger.in > *:nth-child(3){transition-delay:.16s}.stagger.in > *:nth-child(4){transition-delay:.24s}.stagger.in > *:nth-child(5){transition-delay:.32s}
+.js h1 .w{opacity:0;transform:translateY(.5em);animation:word .7s cubic-bezier(.2,.7,.2,1) forwards}
+@keyframes word{to{opacity:1;transform:none}}
+
+@media (max-width:760px){
+  body{font-size:16.5px}
+  .sec{padding:68px 0}
+  .nav,.bar .btn{display:none}
+  .hero{padding-top:112px}
+  .hero-card{transform:none;animation:none}
+  .ticker{margin-top:56px}
+  body{padding-bottom:72px}
+  .mob{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(245,244,239,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px}
+  .mob .btn{width:100%;background:var(--blue);color:#fff}
+  .head{margin-bottom:36px}
+  .tbl{font-size:14.5px}.tbl .r span{padding:12px 10px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .js .reveal,.js .stagger > *,.js h1 .w,.js .chat .msg,.js .chat .gap,.js .phone .task{opacity:1 !important;transform:none !important}
+  .js .steps li::before,.js .tl li::after{transform:none !important}
+}
+</style>
+</head>
+<body>
+<div id="progress" aria-hidden="true"></div>
+
+<!-- 1. Barra superior -->
+<header class="bar" id="bar">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Inicio">
+      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 30 30" fill="none"><rect width="30" height="30" rx="7" fill="#FFC42E"/><path d="M8 15.5l4.8 4.8L22 10.5" stroke="#0B1020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="#usl">Una Sola Lista</a>
+      <a href="#crm">CRM</a>
+      <a href="#precios">Precios</a>
+    </nav>
+    <a class="btn sm" href="#form">Quiero mi comparativo</a>
+  </div>
+</header>
+
+<main>
+<!-- 2. Hero -->
+<section class="hero" id="inicio">
+  <div class="hero-photo" role="img" aria-label="Edificio en construcción con una grúa"></div>
+  <div class="wrap">
+    <div class="hero-copy">
+      <p class="eyebrow">Para inmobiliarias que venden pozo de 3 o más desarrolladoras</p>
+      <h1 id="h1">Todo tu portfolio de pozo, comparable y <mark>al día.</mark></h1>
+      <p class="sub">Cada desarrolladora manda su lista con su formato, su plan de pagos y su fecha. Las paso a una sola lista comparable, y le armo a tu equipo un CRM a medida para que ningún cliente quede sin próximo paso.</p>
+      <div class="hero-cta">
+        <a class="btn" href="#form">Quiero mi comparativo <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <small>Sin costo. Firmo NDA antes de recibir tus listas.</small>
+      </div>
+    </div>
+    <div class="hero-card" aria-live="off">
+      <div class="hc-top"><b>Una Sola Lista</b><span class="tag">Datos ficticios</span></div>
+      <div class="chips"><span class="chip" id="hc-a">Anticipo USD 30.000</span><span class="chip" id="hc-c">Cuota USD 1.600</span></div>
+      <p class="hc-count">Entran <span id="hc-n">4</span> de 8 unidades</p>
+      <div class="hc-rows" id="hc-rows">
+        <div><span>Tilo Norte · 1 amb</span><span class="mono">14.400 + 960/mes</span></div>
+        <div><span>Patio Lapacho · monoamb</span><span class="mono">15.250 + 953/mes</span></div>
+        <div><span>Torre Ceibo · 1 amb</span><span class="mono">23.400 + 1.517/mes</span></div>
+        <div><span>Patio Lapacho · 2 amb</span><span class="mono">24.500 + 1.531/mes</span></div>
+      </div>
+      <div class="hc-bar" aria-hidden="true"><i id="hc-bar"></i></div>
+    </div>
+  </div>
+  <div class="ticker" aria-hidden="true"><div>
+    <span>Lista en Excel</span><span><b>→</b></span><span>Lista en PDF</span><span><b>→</b></span><span>Foto por WhatsApp</span><span><b>→</b></span><span>Carpeta de Drive</span><span><b>→ Una sola lista</b></span>
+    <span>Anticipo 20%</span><span><b>→</b></span><span>36 cuotas</span><span><b>→</b></span><span>60 cuotas</span><span><b>→</b></span><span>Entrega 2028</span><span><b>→ La misma cuenta para todos</b></span>
+    <span>Lista en Excel</span><span><b>→</b></span><span>Lista en PDF</span><span><b>→</b></span><span>Foto por WhatsApp</span><span><b>→</b></span><span>Carpeta de Drive</span><span><b>→ Una sola lista</b></span>
+    <span>Anticipo 20%</span><span><b>→</b></span><span>36 cuotas</span><span><b>→</b></span><span>60 cuotas</span><span><b>→</b></span><span>Entrega 2028</span><span><b>→ La misma cuenta para todos</b></span>
+  </div></div>
+</section>
+
+<!-- 3. Para quién es -->
+<section class="sec white">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Para quién es</p><h2>Sirve si vendés pozo de varias desarrolladoras a la vez</h2></div>
+    <div class="two stagger">
+      <div class="fit">
+        <h3>Es para vos si</h3>
+        <ul>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Comercializás pozo de 3 o más desarrolladoras.</span></li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cada lista te llega distinta: Excel, PDF o foto por WhatsApp.</span></li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tus brokers arman cada comparativo a mano.</span></li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Querés saber qué pasa con cada consulta sin perseguir a nadie.</span></li>
+        </ul>
+      </div>
+      <div class="fit no">
+        <h3>No es para vos si</h3>
+        <ul>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Vendés un solo desarrollo o solo usados.</span></li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Buscás un portal para publicar avisos.</span></li>
+          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Querés un CRM genérico para configurar por tu cuenta.</span></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 4. El problema -->
+<section class="sec">
+  <div class="wrap">
+    <div class="prob">
+      <div class="head reveal" style="margin:0"><p class="eyebrow">El problema</p><h2>Una pregunta simple que hoy tarda horas en responderse</h2><p class="lead">El comprador ya sabe cuánto tiene y cuánto puede pagar por mes. La respuesta está repartida en varias listas con formatos, planes y fechas distintas.</p></div>
+      <div class="chat" id="chat" aria-label="Conversación de ejemplo entre un comprador y un broker">
+        <div class="msg">Hola. Tengo 30 mil de anticipo y puedo pagar hasta 1.600 por mes. ¿Qué me entra?<time>10:12</time></div>
+        <div class="msg me">Dame un rato que reviso las listas y te digo.<time>10:15</time></div>
+        <div class="gap">3 horas después</div>
+        <div class="msg">¿Pudiste ver algo?<time>13:40</time></div>
+        <div class="msg me">Te paso dos opciones. Me falta confirmar si los precios siguen vigentes.<time>14:05</time></div>
+      </div>
+    </div>
+    <div class="costs stagger">
+      <div class="cost"><span class="n">01</span><h3>Precios viejos</h3><p>Cotizás con la lista de hace dos meses y te enterás en la reserva.</p></div>
+      <div class="cost"><span class="n">02</span><h3>Comparaciones falsas</h3><p>Un plan en 24 cuotas y otro en 60 no se comparan por precio total.</p></div>
+      <div class="cost"><span class="n">03</span><h3>Stock equivocado</h3><p>Ofrecés una unidad que se vendió la semana pasada.</p></div>
+      <div class="cost"><span class="n">04</span><h3>Carpetas abiertas</h3><p>Listas confidenciales en carpetas que abre cualquiera que tenga el link.</p></div>
+      <div class="cost"><span class="n">05</span><h3>Referidos perdidos</h3><p>Alguien te recomienda un comprador y nadie anota quién lo trajo.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5. Cómo funciona -->
+<section class="sec white">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Cómo funciona</p><h2>Mandás las listas como están. Yo las dejo comparables.</h2></div>
+    <ol class="steps">
+      <li class="obs"><span class="num">1</span><h3>Mandás las listas</h3><p>En Excel, PDF o foto. Antes firmamos el NDA.</p></li>
+      <li class="obs"><span class="num">2</span><h3>Quedan comparables</h3><p>Mismo formato para todas: precio, anticipo, cuotas, entrega y USD por m². Controlo cada número contra el archivo original.</p></li>
+      <li class="obs"><span class="num">3</span><h3>Tu equipo vende</h3><p>Carga anticipo y cuota del comprador y ve qué entra en todas las desarrolladoras a la vez.</p></li>
+    </ol>
+    <div class="ba">
+      <div class="tbl reveal">
+        <div class="r h"><span>Tarea</span><span>Antes</span><span>Después</span></div>
+        <div class="r"><span>Decir qué entra</span><span>Lista por lista</span><span>Anticipo y cuota</span></div>
+        <div class="r"><span>Confirmar el precio</span><span>Llamar y preguntar</span><span>Fecha de lista a la vista</span></div>
+        <div class="r"><span>Comparar planes</span><span>Cuenta a mano</span><span>Misma cuenta para todos</span></div>
+        <div class="r"><span>Enviar opciones</span><span>Capturas sueltas</span><span>Una hoja para compartir</span></div>
+        <div class="r"><span>Seguir al cliente</span><span>De memoria</span><span>Próximo paso con fecha</span></div>
+      </div>
+      <figure class="photo reveal" id="ba-photo"><img src="https://images.unsplash.com/photo-1758523671391-c510afb87d19?auto=format&fit=crop&w=1400&q=70" alt="Pareja mirando opciones en una tablet" loading="lazy"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- 6. Una Sola Lista -->
+<section class="sec dark" id="usl">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Una Sola Lista · Probala</p><h2>Cargás anticipo y cuota. Ves qué entra.</h2></div>
+    <div class="demo reveal">
+      <div class="demo-top">
+        <div class="tabs" role="tablist" aria-label="Funciones de Una Sola Lista">
+          <button class="tab" role="tab" aria-selected="true" data-tab="filtrar">Filtrar</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="mercado">Comparar contra mercado</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="compartir">Imprimir y compartir</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="historial">Historial de precios</button>
+        </div>
+        <span class="tag">Datos ficticios</span>
+      </div>
+      <div class="ctrl">
+        <div><label for="d-ant">Anticipo del comprador</label><output id="o-ant" for="d-ant">USD 30.000</output><input id="d-ant" type="range" min="10000" max="60000" step="1000" value="30000"></div>
+        <div><label for="d-cuo">Cuota mensual que puede pagar</label><output id="o-cuo" for="d-cuo">USD 1.600</output><input id="d-cuo" type="range" min="800" max="3500" step="50" value="1600"></div>
+        <div class="res" aria-live="polite"><small>Resultado</small><b id="d-res">Entran 4 de 8</b></div>
+      </div>
+      <div data-panel="filtrar" class="scroll"><div class="grid" id="d-grid"></div></div>
+      <div data-panel="mercado" hidden><p style="font-size:15px;color:var(--muted-d);margin-bottom:10px">USD por m² de cada unidad que entra, contra una referencia de zona de USD 2.150 por m².</p><div id="d-mk"></div></div>
+      <div data-panel="compartir" hidden>
+        <div class="share">
+          <div class="sheet"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><strong style="font:700 18px var(--display)">Comparativo para Laura M.</strong><span class="mono" style="font-size:12px;color:var(--muted)">Listas vigentes al 17/11</span></div><span class="mono" id="d-sh-h"></span><div id="d-sh"></div></div>
+          <div style="display:flex;flex-direction:column;gap:14px"><p style="color:var(--muted-d);font-size:16px">Una hoja con tu logo y solo las unidades que le sirven a ese comprador.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" class="ghost">Imprimir</button><button type="button" class="ghost">Compartir por WhatsApp</button></div></div>
+        </div>
+      </div>
+      <div data-panel="historial" hidden>
+        <div class="hist"><span><span class="mono" style="color:var(--muted-d)">03/11</span> · Torre Ceibo · 1 amb</span><span class="mono">USD 76.500 → 78.000 · <span class="up">+2,0%</span></span></div>
+        <div class="hist"><span><span class="mono" style="color:var(--muted-d)">28/10</span> · Aromo 1450 · 2 amb</span><span class="mono">USD 121.000 → 124.000 · <span class="up">+2,5%</span></span></div>
+        <div class="hist"><span><span class="mono" style="color:var(--muted-d)">20/10</span> · Tilo Norte · 1 amb</span><span class="mono">USD 70.000 → 72.000 · <span class="up">+2,9%</span></span></div>
+        <div class="hist"><span><span class="mono" style="color:var(--muted-d)">02/10</span> · Jacarandá Plaza · 2 amb</span><span class="mono">USD 138.000 → 135.000 · <span class="down">−2,2%</span></span></div>
+      </div>
+    </div>
+    <div class="after"><a class="btn" href="#form">Quiero mi comparativo</a><span>Lo armo con 3 de tus listas reales.</span></div>
+  </div>
+</section>
+
+<!-- 7. Listas al día -->
+<section class="sec">
+  <div class="wrap split">
+    <div>
+      <div class="head reveal"><p class="eyebrow">Listas al día</p><h2>Sabés qué lista está vieja antes de cotizar</h2></div>
+      <div class="feats reveal">
+        <div><h3>Control de carpetas</h3><p>Detecta el cambio solo y yo cargo la lista.</p></div>
+        <div><h3>Archivos pisados</h3><p>Si alguien reemplaza un archivo, te avisa.</p></div>
+        <div><h3>Listas por WhatsApp</h3><p>Me reenviás la lista por WhatsApp y la cargo.</p></div>
+        <div><h3>Aviso de listas viejas</h3><p>Te avisa qué lista pedir cuando pasa los 45 días.</p></div>
+      </div>
+    </div>
+    <div class="panel reveal">
+      <div class="panel-top"><b>Estado de tus listas</b><span class="tag">Datos ficticios</span></div>
+      <div class="li"><span>Torre Ceibo<small>Cargada hace 6 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
+      <div class="li"><span>Patio Lapacho<small>Cargada hace 12 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
+      <div class="li"><span>Aromo 1450<small>Cargada hace 38 días</small></span><span class="st warn"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l5 10H1z" fill="currentColor"/></svg>Por vencer</span></div>
+      <div class="li"><span>Jacarandá Plaza<small>Cargada hace 52 días · Pedila a la desarrolladora</small></span><span class="st bad"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" fill="currentColor"/></svg>Vieja</span></div>
+      <div class="li"><span>Tilo Norte<small>Cargada hace 3 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- 8. CRM a medida -->
+<section class="sec white" id="crm">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Próximo Paso · CRM a medida</p><h2>Ningún cliente sin próximo paso con fecha</h2></div>
+    <div class="crm">
+      <div class="phone obs">
+        <div class="phone-top"><b>Hoy</b><span class="mono" style="font-size:12px;color:var(--muted)">Datos ficticios</span></div>
+        <div class="task late"><strong>Vencido ayer</strong><br>Confirmar reserva con Martín P.</div>
+        <div class="task"><time>10:00</time>Llamar a Laura M. por el comparativo de 2 ambientes</div>
+        <div class="task"><time>11:30</time>Visita con Diego R. en Torre Ceibo</div>
+        <div class="task"><time>15:00</time>Mandar plan de pagos a Sofía T.</div>
+        <div class="phone-foot"><span>Sin próximo paso</span><strong>0 clientes</strong></div>
+      </div>
+      <div class="reveal">
+        <div class="f4">
+          <div><h3>Pantalla Hoy</h3><p>Cada broker abre y ve a quién llamar, en orden.</p></div>
+          <div><h3>Ficha del cliente</h3><p>Presupuesto, unidades que vio y todo lo conversado.</p></div>
+          <div><h3>Referidos con link propio</h3><p>Cada referidor tiene su link y queda anotado quién trajo a quién.</p></div>
+          <div><h3>Asignación</h3><p>Cada consulta nueva llega a un broker según tus reglas.</p></div>
+        </div>
+        <div class="tpl">
+          <h3>Plantillas de WhatsApp y mail</h3>
+          <div class="tpl-g">
+            <div><span class="cap">Plantilla</span><div class="tpl-src">Hola <i>[nombre]</i>, te paso el comparativo de <i>[proyecto]</i> con tu anticipo de <i>[anticipo]</i>. ¿Lo vemos mañana?</div></div>
+            <div><span class="cap">Así le llega</span><div class="tpl-out">Hola Laura, te paso el comparativo de Torre Ceibo con tu anticipo de USD 30.000. ¿Lo vemos mañana?</div></div>
+          </div>
+        </div>
+        <p style="color:var(--muted)"><strong style="color:var(--ink)">Se adapta a tu negocio:</strong> etapas de venta, datos de la ficha, reglas de asignación y textos de las plantillas.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 9. Reportes -->
+<section class="sec">
+  <div class="wrap">
+    <div class="rep-head reveal">
+      <div class="head" style="margin:0"><p class="eyebrow">Reportes</p><h2 style="max-width:14em">Cada rol ve sus números sin pedirlos</h2></div>
+      <div class="seg" role="group" aria-label="Elegir rol"><button type="button" aria-pressed="true" data-rol="dueno">Dueño</button><button type="button" aria-pressed="false" data-rol="broker">Broker</button></div>
+    </div>
+    <div class="tiles obs" id="tiles"></div>
+    <div class="rep-foot"><p id="rol-det" style="max-width:44em"></p><span class="tag" style="align-self:flex-start">Datos ficticios</span></div>
+  </div>
+</section>
+
+<!-- 10. Confianza -->
+<section class="sec dark trust">
+  <div class="trust-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Confianza</p><h2>Tus listas son confidenciales. Así las trato.</h2></div>
+    <div class="t4 stagger">
+      <p><strong>Firmo NDA</strong>antes de recibir el primer archivo.</p>
+      <p><strong>Controlo cada número</strong>contra el archivo original de la desarrolladora.</p>
+      <p><strong>Cada persona entra con su mail</strong>Das de baja a alguien y pierde el acceso.</p>
+      <p><strong>Tus datos van separados</strong>de los de cualquier otro cliente.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 11. Quién lo hace -->
+<section class="sec white">
+  <div class="wrap who">
+    <div class="who-copy reveal">
+      <p class="eyebrow">Quién lo hace</p>
+      <h2>Lo hago yo, no un equipo de soporte</h2>
+      <p style="font-size:19px"><strong><span class="ph">[TU NOMBRE]</span></strong></p>
+      <p class="lead"><span class="ph">[TU HISTORIA EN 3 LÍNEAS: qué problema viste trabajando con listas de pozo y por qué armaste esto. Sin nombrar clientes.]</span></p>
+      <p class="lead">Cargo tus listas, configuro tu CRM y te contesto por WhatsApp.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 12. Primeros 30 días -->
+<section class="sec">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Puesta en marcha</p><h2>Tus primeros 30 días, semana por semana</h2></div>
+    <ol class="tl" id="tl">
+      <li class="obs"><span class="wk">Semana 1</span><p><strong>Vos:</strong> firmamos el NDA y mandás las listas.</p><p class="me"><strong>Yo:</strong> las paso a formato comparable y las controlo.</p></li>
+      <li class="obs"><span class="wk">Semana 2</span><p><strong>Vos:</strong> probás Una Sola Lista con uno o dos brokers.</p><p class="me"><strong>Yo:</strong> ajusto y relevo cómo trabaja tu equipo.</p></li>
+      <li class="obs"><span class="wk">Semana 3</span><p><strong>Vos:</strong> sumás al resto del equipo.</p><p class="me"><strong>Yo:</strong> configuro etapas, asignación y plantillas, y capacito.</p></li>
+      <li class="obs"><span class="wk">Semana 4</span><p><strong>Vos:</strong> lo usás con compradores reales.</p><p class="me"><strong>Yo:</strong> corrijo lo que aparezca y te mando el primer informe.</p></li>
+    </ol>
+  </div>
+</section>
+
+<!-- 13. Planes y garantía -->
+<section class="sec white" id="precios">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes. Puesta en marcha y abono por separado.</h2></div>
+    <div class="plans stagger">
+      <div class="plan">
+        <h3>Una Sola Lista</h3><p>Tus listas comparables y al día.</p>
+        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <a class="btn line" href="#form">Quiero mi comparativo</a>
+      </div>
+      <div class="plan">
+        <h3>Próximo Paso</h3><p>El CRM a medida para tu equipo.</p>
+        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <a class="btn line" href="#form">Quiero mi comparativo</a>
+      </div>
+      <div class="plan top">
+        <h3>Los dos juntos</h3><p>El comparativo sale desde la ficha del cliente.</p>
+        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
+        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <a class="btn" href="#form">Quiero mi comparativo</a>
+      </div>
+    </div>
+    <div class="notes reveal">
+      <p><strong>La cuenta de retorno:</strong> una venta que hoy se pierde por un precio viejo te deja <span class="ph">[TU COMISIÓN PROMEDIO]</span>. El abono anual es <span class="ph">[PRECIO ANUAL]</span>.</p>
+      <p><strong>Cupos:</strong> tomo <span class="ph">[N]</span> clientes nuevos por mes, porque cargo y controlo cada lista en persona.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 14. Preguntas frecuentes -->
+<section class="sec">
+  <div class="wrap faq">
+    <div class="head reveal" style="margin:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que me preguntan antes de empezar</h2></div>
+    <div class="reveal">
+      <details><summary>¿Tengo que dejar de usar Excel?<i aria-hidden="true">+</i></summary><p>No. Las desarrolladoras te siguen mandando sus listas como siempre y yo las paso al formato comparable.</p></details>
+      <details><summary>Ya tengo un CRM. ¿Me sirve igual?<i aria-hidden="true">+</i></summary><p>Sí. Una Sola Lista se contrata sola y la usás sin cambiar tu CRM actual.</p></details>
+      <details><summary>¿Cuánto trabajo le lleva a mi equipo?<i aria-hidden="true">+</i></summary><p>Poco: mandar las listas y una capacitación de <span class="ph">[DURACIÓN]</span>. La carga y el control los hago yo.</p></details>
+      <details><summary>¿Tengo que ordenar mi Drive antes?<i aria-hidden="true">+</i></summary><p>No. Trabajo con tus carpetas como están hoy.</p></details>
+      <details><summary>¿Quién ve mis listas?<i aria-hidden="true">+</i></summary><p>Solo yo y las personas de tu equipo que autorices. Firmo NDA antes de recibirlas y tus datos van separados de los de otros clientes.</p></details>
+      <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>Te llevás tus datos. <span class="ph">[DEFINIR: formato, plazo y aviso de baja]</span></p></details>
+    </div>
+  </div>
+</section>
+
+<!-- 15. Cierre y formulario -->
+<section class="sec close" id="form">
+  <div class="close-bg" role="img" aria-label="Fachada de un edificio al atardecer con las ventanas iluminadas"></div>
+  <div class="wrap">
+    <div class="close-copy reveal">
+      <p class="eyebrow">Sin costo</p>
+      <h2>Mirá 3 de tus listas en una sola</h2>
+      <p>Me dejás tus datos, firmamos el NDA y recién ahí me mandás las listas. Te devuelvo el comparativo armado.</p>
+    </div>
+    <div class="form reveal">
+      <form id="lead" novalidate>
+        <div class="fld"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" type="text" autocomplete="name" required></div>
+        <div class="fld"><label for="f-wa">WhatsApp</label><input id="f-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="11 5555 5555" required></div>
+        <div class="fld"><label for="f-cant">¿Cuántas desarrolladoras comercializás?</label><select id="f-cant" name="cantidad"><option value="3">3</option><option value="4 o 5">4 o 5</option><option value="6 o más">6 o más</option><option value="menos de 3">Menos de 3</option></select></div>
+        <p id="f-err" role="alert" style="color:var(--bad);font-size:15px" hidden>Completá tu nombre y tu WhatsApp para que pueda escribirte.</p>
+        <button class="btn blue" type="submit">Quiero mi comparativo</button>
+        <small>Sin costo. No adjuntes nada todavía: primero firmo el NDA.</small>
+      </form>
+      <div class="done" id="done" role="status" hidden>
+        <h3>Recibido. Esto es lo que sigue:</h3>
+        <ol>
+          <li>Te escribo por WhatsApp dentro de <span class="ph">[PLAZO]</span>.</li>
+          <li>Te mando el NDA firmado.</li>
+          <li>Me pasás 3 listas y te devuelvo el comparativo en <span class="ph">[PLAZO]</span>.</li>
+        </ol>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<!-- 16. Pie -->
+<footer>
+  <div class="wrap">
+    <span><span class="ph">[TU MAIL]</span> · <span class="ph">[TU WHATSAPP]</span></span>
+    <nav aria-label="Legales"><a href="#inicio">Privacidad</a><a href="#inicio">Términos</a></nav>
+  </div>
+</footer>
+<div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>
+
+<script>
+(function(){
+  'use strict';
+  /* CONFIGURAR: número de WhatsApp que recibe las consultas, con código de país y sin signos. Ej: '5491155555555'.
+     Vacío = el formulario solo muestra la confirmación y no envía nada. */
+  var WHATSAPP = '';
+
+  var doc = document.documentElement;
+  doc.classList.add('js');
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var $ = function(s, r){ return (r || document).querySelector(s); };
+  var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
+  var fmt = function(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
+
+  /* Titular: palabra por palabra */
+  var h1 = $('#h1');
+  (function split(){
+    var i = 0, out = document.createDocumentFragment();
+    Array.prototype.slice.call(h1.childNodes).forEach(function(node){
+      if (node.nodeType === 3) {
+        node.textContent.split(/(\s+)/).forEach(function(t){
+          if (!t) return;
+          if (/^\s+$/.test(t)) { out.appendChild(document.createTextNode(' ')); return; }
+          var s = document.createElement('span'); s.className = 'w'; s.textContent = t;
+          s.style.animationDelay = (0.08 * i++) + 's'; out.appendChild(s);
+        });
+      } else { node.classList.add('w'); node.style.animationDelay = (0.08 * i++) + 's'; out.appendChild(node); }
+    });
+    h1.textContent = ''; h1.appendChild(out);
+  })();
+
+  /* Barra y progreso */
+  var bar = $('#bar'), prog = $('#progress'), ticking = false;
+  function onScroll(){
+    if (ticking) return; ticking = true;
+    requestAnimationFrame(function(){
+      var y = window.scrollY || 0, h = doc.scrollHeight - window.innerHeight;
+      bar.classList.toggle('solid', y > 24);
+      prog.style.transform = 'scaleX(' + (h > 0 ? Math.min(1, y / h) : 0) + ')';
+      ticking = false;
+    });
+  }
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  /* Aparición al bajar */
+  var targets = $$('.reveal, .stagger, .obs');
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function(es){
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.id === 'tiles') drawTiles(true); } });
+    }, { threshold: 0.08 });
+    targets.forEach(function(t){ io.observe(t); });
+    var chat = $('#chat');
+    var cio = new IntersectionObserver(function(es){
+      if (!es[0].isIntersecting) return; cio.disconnect();
+      $$('.msg, .gap', chat).forEach(function(m, i){ setTimeout(function(){ m.classList.add('show'); }, reduce ? 0 : 500 + i * 900); });
+    }, { threshold: 0.4 });
+    cio.observe(chat);
+  } else {
+    targets.forEach(function(t){ t.classList.add('in'); });
+    $$('#chat .msg, #chat .gap').forEach(function(m){ m.classList.add('show'); });
+  }
+
+  /* Si la foto no carga, la tabla ocupa todo el ancho */
+  (function(){
+    var fig = $('#ba-photo'); if (!fig) return;
+    var im = $('img', fig), off = function(){ fig.parentNode.classList.add('noimg'); };
+    im.addEventListener('error', off);
+    if (im.complete && im.naturalWidth === 0 && im.currentSrc) off();
+  })();
+
+  /* Datos ficticios de la demo */
+  var REF = 2150;
+  var UNITS = [
+    { n:'Tilo Norte', d:'E', t:'1 amb', m:40, p:72000, pct:.20, c:60 },
+    { n:'Patio Lapacho', d:'C', t:'monoamb', m:32, p:61000, pct:.25, c:48 },
+    { n:'Torre Ceibo', d:'A', t:'1 amb', m:38, p:78000, pct:.30, c:36 },
+    { n:'Patio Lapacho', d:'C', t:'2 amb', m:52, p:98000, pct:.25, c:48 },
+    { n:'Torre Ceibo', d:'A', t:'2 amb', m:54, p:112000, pct:.30, c:36 },
+    { n:'Aromo 1450', d:'B', t:'1 amb', m:41, p:84500, pct:.40, c:24 },
+    { n:'Jacarandá Plaza', d:'D', t:'2 amb', m:60, p:135000, pct:.35, c:30 },
+    { n:'Aromo 1450', d:'B', t:'2 amb', m:58, p:124000, pct:.40, c:24 }
+  ].map(function(u){ u.ant = u.p * u.pct; u.cuo = (u.p - u.ant) / u.c; u.pm2 = u.p / u.m; return u; });
+  function calc(a, c){
+    return UNITS.map(function(u){
+      var okA = u.ant <= a, okC = u.cuo <= c;
+      return { u:u, ok: okA && okC, why: !okA && !okC ? 'Falta anticipo y cuota' : (!okA ? 'Falta anticipo' : 'Cuota alta') };
+    });
+  }
+  function esc(s){ return String(s).replace(/[&<>"]/g, function(ch){ return { '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;' }[ch]; }); }
+
+  /* Tarjeta del hero: tres compradores en loop */
+  var SC = [[30000,1600],[35000,2200],[50000,3200]], si = 0;
+  function heroCard(){
+    var a = SC[si][0], c = SC[si][1], ok = calc(a, c).filter(function(r){ return r.ok; });
+    $('#hc-a').textContent = 'Anticipo USD ' + fmt(a);
+    $('#hc-c').textContent = 'Cuota USD ' + fmt(c);
+    $('#hc-n').textContent = ok.length;
+    var html = ok.slice(0, 4).map(function(r, i){
+      var last = i === 3 && ok.length > 4;
+      return '<div><span>' + esc(r.u.n) + ' · ' + esc(r.u.t) + '</span><span class="mono">' + fmt(r.u.ant) + ' + ' + fmt(r.u.cuo) + '/mes' + (last ? ' · y ' + (ok.length - 4) + ' más' : '') + '</span></div>';
+    }).join('');
+    $('#hc-rows').innerHTML = html;
+  }
+  if (!reduce) setInterval(function(){ si = (si + 1) % SC.length; heroCard(); }, 3600);
+
+  /* Demo */
+  var ant = $('#d-ant'), cuo = $('#d-cuo'), res = $('#d-res'), lastN = -1;
+  function demo(){
+    var a = +ant.value, c = +cuo.value, rows = calc(a, c), ok = rows.filter(function(r){ return r.ok; });
+    $('#o-ant').textContent = 'USD ' + fmt(a);
+    $('#o-cuo').textContent = 'USD ' + fmt(c);
+    res.textContent = 'Entran ' + ok.length + ' de ' + rows.length;
+    if (ok.length !== lastN && lastN !== -1) { res.classList.remove('bump'); void res.offsetWidth; res.classList.add('bump'); }
+    lastN = ok.length;
+    $('#d-grid').innerHTML = '<div class="grow hd"><span>Unidad</span><span>Des.</span><span class="r">Precio</span><span class="r">Anticipo</span><span class="r">Cuota</span><span class="r">USD/m²</span><span>Estado</span></div>' +
+      rows.map(function(r){ var u = r.u;
+        return '<div class="grow ' + (r.ok ? 'ok' : 'out') + '"><span>' + esc(u.n) + ' <em>· ' + esc(u.t) + ' · ' + u.m + ' m²</em></span><span class="mono">' + u.d + '</span><span class="r">' + fmt(u.p) + '</span><span class="r">' + fmt(u.ant) + '</span><span class="r">' + fmt(u.cuo) + '</span><span class="r">' + fmt(u.pm2) + '</span><span>' + (r.ok ? '<span class="badge">Entra</span>' : '<span class="badge no">' + r.why + '</span>') + '</span></div>';
+      }).join('');
+    $('#d-mk').innerHTML = ok.length ? ok.map(function(r){ var u = r.u, d = (u.pm2 / REF - 1) * 100;
+      return '<div class="mk"><span>' + esc(u.n) + ' <em style="font-style:normal;color:var(--muted-d)">· ' + esc(u.t) + '</em></span><div class="track"><i style="width:' + Math.min(100, u.pm2 / 2400 * 100).toFixed(1) + '%"></i></div><span class="mono v">' + fmt(u.pm2) + ' · ' + (d >= 0 ? '+' : '−') + Math.abs(d).toFixed(1).replace('.', ',') + '%</span></div>';
+    }).join('') : '<p style="color:var(--muted-d)">Con ese anticipo y esa cuota no entra ninguna unidad. Subí alguno de los dos.</p>';
+    $('#d-sh-h').textContent = 'Anticipo USD ' + fmt(a) + ' · Cuota USD ' + fmt(c);
+    $('#d-sh').innerHTML = ok.length ? ok.map(function(r){ var u = r.u;
+      return '<div class="row" style="margin-top:10px"><span>' + esc(u.n) + ' · ' + esc(u.t) + ' · ' + u.m + ' m²</span><span class="mono">' + fmt(u.ant) + ' + ' + fmt(u.cuo) + '/mes</span></div>';
+    }).join('') : '<p style="color:var(--muted)">Sin unidades para este presupuesto.</p>';
+  }
+  ant.addEventListener('input', demo); cuo.addEventListener('input', demo); demo();
+  $$('.tab').forEach(function(t){
+    t.addEventListener('click', function(){
+      $$('.tab').forEach(function(x){ x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
+      $$('[data-panel]').forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== t.getAttribute('data-tab'); });
+    });
+  });
+
+  /* Reportes por rol */
+  var ROL = {
+    dueno: { t: [['Consultas nuevas en la quincena', 42], ['Clientes sin próximo paso', 0], ['Visitas hechas', 11], ['Reservas', 3]],
+      d: 'Después de los números, el detalle: informe quincenal, ventas por broker y cuánto usa el sistema cada persona del equipo.' },
+    broker: { t: [['Mis clientes activos', 18], ['Pasos para hoy', 5], ['Pasos vencidos', 1], ['Mis reservas del mes', 1]],
+      d: 'Después de los números, el detalle: sus clientes por etapa, sus ventas y lo que tiene pendiente esta semana.' }
+  }, rol = 'dueno';
+  function drawTiles(animate){
+    var box = $('#tiles'), data = ROL[rol];
+    box.innerHTML = data.t.map(function(k){ return '<div class="tile"><small>' + k[0] + '</small><b data-to="' + k[1] + '">' + k[1] + '</b></div>'; }).join('');
+    $('#rol-det').textContent = data.d;
+    if (!animate || reduce) return;
+    $$('b', box).forEach(function(b){
+      var to = +b.getAttribute('data-to'), t0 = null;
+      if (!to) return;
+      b.textContent = '0';
+      requestAnimationFrame(function step(ts){
+        if (t0 === null) t0 = ts;
+        var k = Math.min(1, (ts - t0) / 700);
+        b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(step);
+      });
+    });
+  }
+  drawTiles(false);
+  $$('.seg button').forEach(function(b){
+    b.addEventListener('click', function(){
+      rol = b.getAttribute('data-rol');
+      $$('.seg button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
+      drawTiles(true);
+    });
+  });
+
+  /* Formulario */
+  var form = $('#lead');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var n = $('#f-nombre').value.trim(), w = $('#f-wa').value.trim(), c = $('#f-cant').value;
+    if (!n || w.replace(/\D/g, '').length < 8) { $('#f-err').hidden = false; (n ? $('#f-wa') : $('#f-nombre')).focus(); return; }
+    form.hidden = true; $('#done').hidden = false;
+    if (WHATSAPP) {
+      var msg = 'Hola, soy ' + n + '. Quiero mi comparativo. Comercializo ' + c + ' desarrolladoras. Mi WhatsApp: ' + w;
+      var a = document.createElement('a');
+      a.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
+      a.target = '_blank'; a.rel = 'noopener'; a.className = 'btn blue'; a.style.marginTop = '18px';
+      a.textContent = 'Abrir WhatsApp para enviar';
+      $('#done').appendChild(a);
+    }
+  });
+})();
+</script>
+</body>
+</html>
