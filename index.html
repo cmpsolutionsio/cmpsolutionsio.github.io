@@ -73,7 +73,8 @@ section{scroll-margin-top:76px}
 .bar{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.0);transition:background .25s ease, box-shadow .25s ease;margin-bottom:-68px}
 .bar.solid{background:rgba(11,16,32,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line-d)}
 .bar .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
-.logo img{width:44px;height:44px;border-radius:10px;display:block}
+.logo img{height:40px;width:auto;display:block}
+.logo span{font:700 19px var(--display);letter-spacing:-.01em;color:#fff;white-space:nowrap}
 .logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:800 22px var(--display);letter-spacing:-.02em;min-height:44px}
 .nav{display:flex;gap:30px}
 .nav a{color:#E4E7F2;text-decoration:none;font-size:15px;font-weight:500;padding:12px 0;position:relative}
@@ -382,7 +383,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <!-- 1. Barra superior -->
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="logo" href="#inicio" aria-label="Inicio"><img src="logo.png" alt="" width="44" height="44"></a>
+    <a class="logo" href="#inicio" aria-label="CMP Solutions, inicio"><img src="logo-claro.png" alt="" width="34" height="40"><span>CMP Solutions</span></a>
     <nav class="nav" aria-label="Secciones">
       <a href="#usl">Una Sola Lista</a>
       <a href="#crm">CRM</a>
@@ -717,7 +718,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <!-- 16. Pie -->
 <footer>
   <div class="wrap">
-    <img src="logo.png" alt="CMP Solutions" width="40" height="40" style="border-radius:9px">
+    <span class="logo" style="min-height:0"><img src="logo-claro.png" alt="" width="27" height="32" style="height:32px"><span style="font-size:17px">CMP Solutions</span></span>
     <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
     <nav aria-label="Legales"><a href="#inicio">Privacidad</a><a href="#inicio">Términos</a></nav>
   </div>
