@@ -14,6 +14,13 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 - Poner el número de WhatsApp en la constante `WHATSAPP` al principio del `<script>` de `index.html` (con código de país, sin signos). Sin ese número, el formulario solo muestra la confirmación y no envía nada.
 - Verificar nombre, dominio y marca.
 
+## Contactos y analítica en Google Sheets
+
+- El código que recibe los datos vive en la planilla de prospectos (Extensiones > Apps Script) y está publicado como aplicación web.
+- Su dirección (termina en `/exec`) está en la constante `ENDPOINT` de `index.html`. Vacía, no se guarda nada.
+- Pestañas que crea: "Leads web" (formulario y checklist), "Analítica web" (actividad anónima) y "Resumen web" (se actualiza cada hora).
+- `checklist-7-controles.pdf` es el documento que entrega el aviso emergente.
+
 ## Reglas del contenido
 
 - Todas las demos usan datos ficticios. Nunca cargar datos reales de un cliente.
