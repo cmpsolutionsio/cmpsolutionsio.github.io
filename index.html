@@ -324,6 +324,9 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 .pop-x{position:absolute;top:10px;right:10px;width:44px;height:44px;border:0;border-radius:50%;background:rgba(255,255,255,.92);color:var(--ink);font-size:26px;line-height:1;cursor:pointer;z-index:2}
 .pop-x:hover{background:var(--blue-soft)}
 #pop-f{gap:12px}
+.pop-tab{position:fixed;right:0;top:50%;z-index:35;transform:translateY(-50%) rotate(180deg);writing-mode:vertical-rl;border:0;border-radius:0 10px 10px 0;background:var(--yellow);color:var(--ink);font:600 15px var(--body);padding:16px 11px;min-height:44px;cursor:pointer;box-shadow:0 8px 24px rgba(11,16,32,.28);transition:padding .18s ease}
+.pop-tab:hover{padding-left:15px}
+.pop-tab[hidden]{display:none}
 @media (max-width:620px){.pop-art{display:none}.pop-body{padding:44px 22px 24px}}
 
 /* Aparición al bajar */
@@ -703,6 +706,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 </footer>
 <div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>
 
+<button type="button" class="pop-tab" id="pop-tab" hidden>Checklist gratis</button>
 <dialog id="pop" aria-labelledby="pop-t">
   <button type="button" class="pop-x" id="pop-x" aria-label="Cerrar">×</button>
   <div class="pop-g">
@@ -937,33 +941,35 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   });
 
 
-  /* Aviso del checklist: una vez por visitante, a mitad de página o al irse */
+  /* Aviso del checklist: salta solo a los 10 segundos, una vez por visitante. Después queda la pestaña del costado. */
   (function(){
-    var pop = $('#pop'); if (!pop || !pop.showModal) return;
-    var shown = false;
+    var pop = $('#pop'), tab = $('#pop-tab'); if (!pop || !pop.showModal) return;
     function inView(el){ var r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
+    function listo(){ $('#pop-ask').hidden = true; $('#pop-ok').hidden = false; }
     function open(why){
-      if (shown || store.get('pop') || store.get('lead') || inView($('#form'))) return;
-      shown = true; store.set('pop', '1');
-      try { pop.showModal(); track('popup_visto', why); setTimeout(function(){ $('#pop-wa').focus(); }, 60); } catch(e){}
+      if (pop.open) return;
+      if (store.get('pop_ok')) listo();
+      store.set('pop', '1'); tab.hidden = true;
+      try { pop.showModal(); track('popup_visto', why); setTimeout(function(){ ($('#pop-ok').hidden ? $('#pop-wa') : $('#pop-dl')).focus(); }, 60); } catch(e){ tab.hidden = false; }
     }
-    window.addEventListener('scroll', function(){
-      var h = doc.scrollHeight - window.innerHeight;
-      if (h > 0 && (window.scrollY || 0) / h >= 0.5) open('mitad de página');
-    }, { passive: true });
-    var t0 = Date.now();
-    document.addEventListener('mouseout', function(e){ if (!e.relatedTarget && e.clientY <= 0 && Date.now() - t0 > 8000) open('al irse'); });
+    function auto(){
+      if (store.get('pop') || store.get('lead')) return;
+      if (inView($('#form'))) { setTimeout(auto, 5000); return; }
+      open('a los 10 segundos');
+    }
+    if (store.get('pop')) tab.hidden = false; else setTimeout(auto, 10000);
+    tab.addEventListener('click', function(){ open('pestaña del costado'); });
     $('#pop-x').addEventListener('click', function(){ pop.close(); });
     pop.addEventListener('click', function(e){ if (e.target === pop) pop.close(); });
-    pop.addEventListener('close', function(){ track('popup_cerrado', $('#pop-ok').hidden ? 'sin dejar datos' : 'con datos', true); });
+    pop.addEventListener('close', function(){ tab.hidden = false; track('popup_cerrado', $('#pop-ok').hidden ? 'sin dejar datos' : 'con datos'); });
     $('#pop-f').addEventListener('submit', function(e){
       e.preventDefault();
       var w = $('#pop-wa').value.trim();
       if (w.replace(/\D/g, '').length < 8) { $('#pop-err').hidden = false; $('#pop-wa').focus(); return; }
       send({ type: 'lead', origen: 'Checklist', nombre: '', whatsapp: w, desarrolladoras: '' }); track('popup_enviado', '');
-      $('#pop-ask').hidden = true; $('#pop-ok').hidden = false; $('#pop-dl').focus();
+      store.set('pop_ok', '1'); listo(); $('#pop-dl').focus();
     });
-    $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga', '', true); });
+    $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga', ''); });
     $('#pop-cta').addEventListener('click', function(){ pop.close(); });
   })();
 
