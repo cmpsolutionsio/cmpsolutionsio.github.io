@@ -272,17 +272,35 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .tl .wk{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
 .tl .me{color:var(--muted)}.tl .me strong{color:var(--ink)}
 
-/* 13. Planes */
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px;align-items:stretch;margin-bottom:24px}
-.plan{border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:16px;background:var(--card);transition:transform .2s ease, box-shadow .2s ease}
-.plan:hover{transform:translateY(-6px);box-shadow:0 22px 50px rgba(11,16,32,.1)}
-.plan h3{font-size:24px;}
-.plan > p{font-size:15px;color:var(--muted);min-height:3em}
-.plan .pr{display:flex;justify-content:space-between;gap:12px;border-top:1px solid #ECEBE4;padding-top:12px}
+/* 13. Planes: un solo plan destacado, un solo badge, un solo botón lleno */
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+.bill{display:flex;align-items:center;gap:12px 16px;flex-wrap:wrap;margin:-20px 0 40px}
+.tog{display:inline-flex;gap:4px;padding:4px;border:1.5px solid var(--ink);border-radius:12px;background:var(--card)}
+.tog button{min-height:44px;padding:0 22px;border:0;border-radius:8px;background:none;color:var(--ink);font:600 15px var(--body);cursor:pointer;transition:background .2s ease,color .2s ease}
+.tog button[aria-pressed="true"]{background:var(--ink);color:#fff}
+.save{font:600 15px var(--body);color:var(--ok);background:var(--ok-bg);border-radius:8px;padding:8px 12px}
+.bill small{flex-basis:100%;font-size:15px;color:var(--muted)}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px;align-items:stretch;margin-bottom:28px}
+.plan{border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:18px;background:var(--paper);position:relative}
+.plan h3{font-size:24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.plan .desc{font-size:15px;color:var(--muted);margin-top:6px}
+.price{display:flex;flex-direction:column;gap:2px;padding-top:16px;border-top:1px solid var(--line)}
+.price s{font-size:16px;color:var(--muted)}
+.price b{font:800 44px/1.05 var(--display);letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.price b span{font:500 16px var(--body);letter-spacing:0;color:var(--muted);margin-left:4px}
+.price small{font-size:14px;color:var(--muted)}
+.setup{font-size:15px;color:var(--muted)}.setup strong{color:var(--ink);font-variant-numeric:tabular-nums}
+.inc-h{font-size:14px;font-weight:600}
+.inc{list-style:none;margin:-8px 0 0;padding:0;display:flex;flex-direction:column;gap:10px;font-size:15px}
+.inc li{display:flex;gap:10px}
+.inc li::before{content:"";flex:none;width:6px;height:11px;margin:4px 5px 0 3px;border:solid var(--blue);border-width:0 2px 2px 0;transform:rotate(45deg)}
 .plan .btn{margin-top:auto}
-.plan.top{background:var(--ink);color:#fff;border-color:var(--ink);position:relative}
-.plan.top > p{color:var(--muted-d)}.plan.top .pr{border-color:var(--line-d)}
-.plan.top::before{content:"Los dos productos";position:absolute;top:-13px;left:24px;background:var(--yellow);color:var(--ink);font:600 13px var(--body);padding:3px 10px;border-radius:5px}
+.plan.top{background:var(--ink);color:#fff;border-color:var(--ink);box-shadow:0 30px 70px rgba(11,16,32,.28)}
+.plan.top .desc,.plan.top .price s,.plan.top .price small,.plan.top .price b span,.plan.top .setup{color:var(--muted-d)}
+.plan.top .setup strong{color:#fff}.plan.top .price{border-color:var(--line-d)}
+.plan.top .inc li::before{border-color:var(--yellow)}
+.plan.top::before{content:"Recomendado";position:absolute;top:-13px;left:24px;background:var(--yellow);color:var(--ink);font:600 13px var(--body);padding:3px 10px;border-radius:5px}
+@media (min-width:980px){.plan.top{margin:-16px 0;padding:44px 28px}}
 .guar{font-size:17px;margin-bottom:20px;padding:18px 22px;border:1.5px solid var(--ink);border-radius:14px}
 .fine{font-size:14px;color:var(--muted);margin-top:18px}
 .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;font-size:16px}
@@ -636,36 +654,63 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <!-- 13. Planes y garantía -->
 <section class="sec white" id="precios">
   <div class="wrap">
-    <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes. Puesta en marcha y abono por separado.</h2></div>
+    <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes, todos armados a medida</h2><p class="lead">Pagás la puesta en marcha una sola vez y después un abono. Empezás por tus listas y sumás el CRM cuando quieras.</p></div>
+    <!-- Precios: los abonos mensuales están en data-m. El anual es 10 meses (2 sin cargo) y lo calcula el script. -->
+    <div class="bill reveal">
+      <div class="tog" id="bill" role="group" aria-label="Forma de pago">
+        <button type="button" aria-pressed="true" data-p="anual">Anual</button>
+        <button type="button" aria-pressed="false" data-p="mensual">Mensual</button>
+      </div>
+      <span class="save" id="bill-save">Ahorrás hasta USD 900 por año</span>
+      <small id="bill-note">Anual: 12 meses al precio de 10.</small>
+    </div>
     <div class="plans stagger">
-      <div class="plan">
-        <h3>Una Sola Lista</h3><p>Tus listas comparables y al día. Hasta 5 desarrolladoras.</p>
-        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 300</strong></div>
-        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 150</strong></div>
-        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
+      <div class="plan" data-plan="Una Sola Lista">
+        <div><h3>Una Sola Lista</h3><p class="desc">Tus listas de precios, centralizadas y al día. Hasta 5 desarrolladoras.</p></div>
+        <div class="price" data-m="250"><s><span class="sr">Antes </span>USD 250</s><b>USD 208<span>/mes</span></b><small>USD 2.500 por año · ahorrás USD 500</small></div>
+        <p class="setup"><strong>+ USD 500</strong> de puesta en marcha, una sola vez</p>
+        <p class="inc-h">Incluye:</p>
+        <ul class="inc">
+          <li>Todas tus listas en una sola base: desarrolladoras, desarrollos y unidades conectados</li>
+          <li>Historial y evolución de precios de cada desarrollo</li>
+          <li>Te avisa qué lista pedir cuando pasa los 45 días</li>
+          <li>Brochures conectados a cada desarrollo</li>
+          <li>Tablas para imprimir y mandar a tus clientes</li>
+        </ul>
         <a class="btn line" href="#form">Quiero mi comparativo</a>
       </div>
-      <div class="plan">
-        <h3>Próximo Paso</h3><p>El CRM a medida para tu equipo. Hasta 5 usuarios.</p>
-        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 600</strong></div>
-        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 100</strong></div>
-        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
-        <a class="btn line" href="#form">Quiero mi comparativo</a>
-      </div>
-      <div class="plan top">
-        <h3>Los dos juntos</h3><p>El comparativo sale desde la ficha del cliente.</p>
-        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 750</strong></div>
-        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 220</strong></div>
-        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
+      <div class="plan top" data-plan="Lista + CRM">
+        <div><h3>Lista + CRM</h3><p class="desc">Tus listas y un CRM hecho para tu equipo. Hasta 5 brokers.</p></div>
+        <div class="price" data-m="450"><s><span class="sr">Antes </span>USD 450</s><b>USD 375<span>/mes</span></b><small>USD 4.500 por año · ahorrás USD 900</small></div>
+        <p class="setup"><strong>+ USD 1.000</strong> de puesta en marcha, una sola vez</p>
+        <p class="inc-h">Todo lo de Una Sola Lista, más:</p>
+        <ul class="inc">
+          <li>CRM armado según cómo vende tu equipo</li>
+          <li>Seguimiento desde el WhatsApp de cada broker, con plantillas</li>
+          <li>Panel para seguir a tus brokers: consultas, próximos pasos y ventas</li>
+          <li>El comparativo sale desde la ficha del cliente</li>
+        </ul>
         <a class="btn" href="#form">Quiero mi comparativo</a>
       </div>
+      <div class="plan" data-plan="Integral">
+        <div><h3>Integral <span class="tag">En desarrollo</span></h3><p class="desc">Tu comercial completo, con las redes de tus desarrollos.</p></div>
+        <div class="price"><b>A medida</b><small>Lo cotizamos según tus desarrollos y tus redes.</small></div>
+        <p class="setup">Puesta en marcha según el alcance</p>
+        <p class="inc-h">Todo lo de Lista + CRM, más:</p>
+        <ul class="inc">
+          <li>Videos con IA de cada desarrollo</li>
+          <li>Manejo de tus redes</li>
+          <li>Piezas para cada lanzamiento</li>
+        </ul>
+        <a class="btn line" href="https://wa.me/5491158714730?text=Hola%2C%20me%20interesa%20el%20plan%20Integral%20de%20CMP%20Solutions." target="_blank" rel="noopener">Hablemos por WhatsApp</a>
+      </div>
     </div>
-    <p class="guar reveal"><strong>Garantía:</strong> si en los primeros 30 días no te sirve, te devolvemos la puesta en marcha. Sin permanencia: te das de baja cuando quieras.</p>
+    <p class="guar reveal"><strong>Garantía de 30 días:</strong> si no te sirve, te devolvemos la puesta en marcha y, si pagaste el anual, también el abono. El mensual no tiene permanencia.</p>
     <div class="notes reveal">
-      <p><strong>La cuenta de retorno:</strong> el abono anual de Una Sola Lista es USD 1.800. Comparalo con la comisión de una sola venta de pozo que hoy se cae por un precio viejo.</p>
-      <p><strong>Cupos:</strong> tomamos 3 clientes nuevos por mes, porque cargamos y controlamos cada lista a mano.</p>
+      <p><strong>La cuenta de retorno:</strong> el anual de Una Sola Lista es USD 2.500. Comparalo con la comisión de una sola venta de pozo que hoy se cae por un precio viejo.</p>
+      <p><strong>Cupos:</strong> tomamos 3 clientes nuevos por mes, porque la puesta en marcha la hacemos a mano: relevamos, cargamos y controlamos cada lista.</p>
     </div>
-    <p class="fine reveal">Precios en dólares, sin impuestos. Desarrolladora adicional: USD 25 por mes. Usuario adicional del CRM: USD 15 por mes.</p>
+    <p class="fine reveal">Precios en dólares, sin impuestos. Desarrolladora adicional: USD 25 por mes. Broker adicional en el CRM: USD 15 por mes.</p>
   </div>
 </section>
 
@@ -679,7 +724,9 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <details><summary>¿Cuánto trabajo le lleva a mi equipo?<i aria-hidden="true">+</i></summary><p>Poco: mandar las listas y una capacitación por videollamada de 1 hora. La carga y el control los hacemos nosotros.</p></details>
       <details><summary>¿Tengo que ordenar mi Drive antes?<i aria-hidden="true">+</i></summary><p>No. Trabajamos con tus carpetas como están hoy.</p></details>
       <details><summary>¿Quién ve mis listas?<i aria-hidden="true">+</i></summary><p>Solo nuestro equipo y las personas del tuyo que autorices. Firmamos NDA antes de recibirlas y tus datos van separados de los de otros clientes.</p></details>
-      <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>No hay permanencia: avisás con 30 días y te llevás tus datos en Excel.</p></details>
+      <details><summary>¿Por qué se cobra una puesta en marcha?<i aria-hidden="true">+</i></summary><p>Porque es lo que más trabajo lleva: relevamos cómo vende tu equipo, cargamos y controlamos cada lista contra el original y armamos todo a tu medida. Se paga una sola vez.</p></details>
+      <details><summary>¿Puedo empezar con las listas y sumar el CRM después?<i aria-hidden="true">+</i></summary><p>Sí. Pagás la diferencia de puesta en marcha y pasás al abono de Lista + CRM.</p></details>
+      <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>En el mensual no hay permanencia: avisás con 30 días. El anual cubre 12 meses y al terminar elegís si renovás. En los dos casos te llevás tus datos en Excel.</p></details>
     </div>
   </div>
 </section>
@@ -764,6 +811,8 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   /* CONFIGURAR: dirección de la aplicación web de Apps Script pegada en la planilla (termina en /exec).
      Vacío = no se guarda nada: ni contactos ni actividad. */
   var ENDPOINT = 'https://script.google.com/macros/s/AKfycbwxHFPy4kbrZypfUxl2ynjeTWDVKrcgYju6WHmqFJ604AeGfcdYDQlXFc9CDo_ESKAI/exec';
+  /* Las pruebas en la compu (archivo local, vista previa o localhost) no ensucian la planilla. */
+  if (!/^https?:$/.test(location.protocol) || /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)) ENDPOINT = '';
 
   var doc = document.documentElement;
   doc.classList.add('js');
@@ -800,11 +849,37 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     var pct = (window.scrollY || 0) / h * 100;
     marks.forEach(function(m){ if (pct >= m - 1) track('scroll', m + '%', true); });
   }, { passive: true });
+  var planElegido = '';
   document.addEventListener('click', function(e){
-    var a = e.target.closest ? e.target.closest('a[href="#form"]') : null; if (!a) return;
-    var sec = a.closest('section, header, dialog, .mob');
-    track('clic_boton', sec ? (sec.id || sec.className.split(' ')[0] || sec.tagName.toLowerCase()) : '');
+    var a = e.target.closest ? e.target.closest('a[href="#form"], .plan a') : null; if (!a) return;
+    var sec = a.closest('section, header, dialog, .mob'), plan = a.closest('[data-plan]');
+    var det = sec ? (sec.id || sec.className.split(' ')[0] || sec.tagName.toLowerCase()) : '';
+    if (plan) { planElegido = plan.getAttribute('data-plan') + ' (' + periodo + ')'; det += ' · ' + planElegido; }
+    track('clic_boton', det);
   });
+
+  /* Precios: anual por defecto. Mensual = data-m; anual = 10 meses (2 sin cargo). */
+  var periodo = 'anual';
+  var bill = $('#bill');
+  if (bill) {
+    var precios = $$('.price[data-m]');
+    var maxAhorro = Math.max.apply(null, precios.map(function(el){ return +el.getAttribute('data-m') * 2; }));
+    var setPeriodo = function(p){
+      periodo = p;
+      var anual = p === 'anual';
+      $$('button', bill).forEach(function(b){ b.setAttribute('aria-pressed', b.getAttribute('data-p') === p ? 'true' : 'false'); });
+      precios.forEach(function(el){
+        var m = +el.getAttribute('data-m');
+        $('s', el).hidden = !anual;
+        $('b', el).firstChild.nodeValue = 'USD ' + fmt(anual ? m * 10 / 12 : m);
+        $('small', el).textContent = anual ? 'USD ' + fmt(m * 10) + ' por año · ahorrás USD ' + fmt(m * 2) : 'Por mes · sin permanencia';
+      });
+      $('#bill-save').textContent = (anual ? 'Ahorrás hasta' : 'Con el anual ahorrás hasta') + ' USD ' + fmt(maxAhorro) + ' por año';
+      $('#bill-note').textContent = anual ? 'Anual: 12 meses al precio de 10.' : 'Mensual: sin permanencia, te das de baja cuando quieras.';
+    };
+    $$('button', bill).forEach(function(b){ b.addEventListener('click', function(){ setPeriodo(b.getAttribute('data-p')); track('precios_periodo', periodo, true); }); });
+    setPeriodo('anual');
+  }
   $$('details').forEach(function(d){ d.addEventListener('toggle', function(){ if (d.open) track('pregunta', $('summary', d).textContent.replace('+', '').trim(), true); }); });
 
   /* Titular: palabra por palabra */
@@ -1008,7 +1083,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     form.hidden = true; $('#done').hidden = false;
     send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c }); track('form_enviado', c); store.set('lead', '1');
     if (WHATSAPP) {
-      var msg = 'Hola, soy ' + n + '. Quiero mi comparativo. Comercializo ' + c + ' desarrolladoras. Mi WhatsApp: ' + w;
+      var msg = 'Hola, soy ' + n + '. Quiero mi comparativo. Comercializo ' + c + ' desarrolladoras.' + (planElegido ? ' Me interesa el plan ' + planElegido + '.' : '') + ' Mi WhatsApp: ' + w;
       var a = document.createElement('a');
       a.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(msg);
       a.target = '_blank'; a.rel = 'noopener'; a.className = 'btn blue'; a.style.marginTop = '18px';
