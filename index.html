@@ -325,7 +325,7 @@ footer nav{display:flex;gap:20px}
 .mob{display:none}
 
 /* Aviso del checklist */
-dialog#pop{border:0;padding:0;border-radius:18px;max-width:min(760px,calc(100vw - 32px));width:100%;background:#fff;color:var(--ink);box-shadow:0 40px 100px rgba(0,0,0,.5);overflow:hidden}
+dialog#pop{max-height:calc(100dvh - 24px);overflow:auto;border:0;padding:0;border-radius:18px;max-width:min(760px,calc(100vw - 32px));width:100%;background:#fff;color:var(--ink);box-shadow:0 40px 100px rgba(0,0,0,.5);overflow:hidden}
 dialog#pop::backdrop{background:rgba(11,16,32,.72);backdrop-filter:blur(3px)}
 dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 @keyframes popin{from{opacity:0;transform:translateY(24px) scale(.97)}to{opacity:1;transform:none}}
@@ -694,9 +694,9 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <p>Dejanos tus datos, firmamos el NDA y recién ahí nos mandás las listas. Te devolvemos el comparativo armado.</p>
     </div>
     <div class="form reveal">
-      <form id="lead" novalidate>
-        <div class="fld"><label for="f-nombre">Nombre</label><input id="f-nombre" name="nombre" type="text" autocomplete="name" required></div>
-        <div class="fld"><label for="f-wa">WhatsApp</label><input id="f-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="11 5555 5555" required></div>
+      <form id="lead" autocomplete="on" novalidate>
+        <div class="fld"><label for="f-nombre">Nombre</label><input id="f-nombre" name="name" type="text" autocomplete="name" autocapitalize="words" required></div>
+        <div class="fld"><label for="f-wa">WhatsApp</label><input id="f-wa" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="11 5555 5555" required></div>
         <div class="fld"><label for="f-cant">¿Cuántas desarrolladoras comercializás?</label><select id="f-cant" name="cantidad"><option value="3">3</option><option value="4 o 5">4 o 5</option><option value="6 o más">6 o más</option><option value="menos de 3">Menos de 3</option></select></div>
         <p id="f-err" role="alert" style="color:var(--bad);font-size:15px" hidden>Completá tu nombre y tu WhatsApp para que podamos escribirte.</p>
         <button class="btn blue" type="submit">Quiero mi comparativo</button>
@@ -735,9 +735,11 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <h3 id="pop-t">7 controles antes de cotizar un pozo</h3>
       <div id="pop-ask">
         <p style="margin-bottom:14px">Dos minutos por unidad. Te evitan pasar un precio viejo u ofrecer algo que ya se vendió.</p>
-        <form id="pop-f" novalidate>
-          <div class="fld"><label for="pop-wa">Tu WhatsApp</label><input id="pop-wa" name="whatsapp" type="tel" autocomplete="tel" placeholder="11 5555 5555" required></div>
-          <p id="pop-err" role="alert" style="color:var(--bad);font-size:15px" hidden>Escribí tu WhatsApp con código de área.</p>
+        <form id="pop-f" autocomplete="on" novalidate>
+          <div class="fld"><label for="pop-nombre">Nombre</label><input id="pop-nombre" name="name" type="text" autocomplete="name" autocapitalize="words" required></div>
+          <div class="fld"><label for="pop-mail">Mail</label><input id="pop-mail" name="email" type="email" autocomplete="email" inputmode="email" placeholder="nombre@inmobiliaria.com" required></div>
+          <div class="fld"><label for="pop-wa">WhatsApp</label><input id="pop-wa" name="tel" type="tel" autocomplete="tel" inputmode="tel" placeholder="11 5555 5555" required></div>
+          <p id="pop-err" role="alert" style="color:var(--bad);font-size:15px" hidden></p>
           <button class="btn blue" type="submit">Quiero el checklist</button>
           <small>Lo descargás al instante.</small>
         </form>
@@ -969,7 +971,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       if (pop.open) return;
       if (store.get('pop_ok')) listo();
       store.set('pop', '1'); tab.hidden = true;
-      try { pop.showModal(); track('popup_visto', why); setTimeout(function(){ ($('#pop-ok').hidden ? $('#pop-wa') : $('#pop-dl')).focus(); }, 60); } catch(e){ tab.hidden = false; }
+      try { pop.showModal(); track('popup_visto', why); setTimeout(function(){ ($('#pop-ok').hidden ? $('#pop-nombre') : $('#pop-dl')).focus(); }, 60); } catch(e){ tab.hidden = false; }
     }
     function auto(){
       if (store.get('pop') || store.get('lead')) return;
@@ -983,9 +985,13 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     pop.addEventListener('close', function(){ tab.hidden = false; track('popup_cerrado', $('#pop-ok').hidden ? 'sin dejar datos' : 'con datos'); });
     $('#pop-f').addEventListener('submit', function(e){
       e.preventDefault();
-      var w = $('#pop-wa').value.trim();
-      if (w.replace(/\D/g, '').length < 8) { $('#pop-err').hidden = false; $('#pop-wa').focus(); return; }
-      send({ type: 'lead', origen: 'Checklist', nombre: '', whatsapp: w, desarrolladoras: '' }); track('popup_enviado', '');
+      var n = $('#pop-nombre').value.trim(), m = $('#pop-mail').value.trim(), w = $('#pop-wa').value.trim();
+      var falla = !n ? ['#pop-nombre', 'Escribí tu nombre.']
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m) ? ['#pop-mail', 'Revisá el mail: tiene que tener el formato nombre@dominio.com.']
+        : w.replace(/\D/g, '').length < 8 ? ['#pop-wa', 'Escribí tu WhatsApp con código de área.'] : null;
+      if (falla) { $('#pop-err').textContent = falla[1]; $('#pop-err').hidden = false; $(falla[0]).focus(); return; }
+      $('#pop-err').hidden = true;
+      send({ type: 'lead', origen: 'Checklist', nombre: n, mail: m, whatsapp: w, desarrolladoras: '' }); track('popup_enviado', '');
       store.set('pop_ok', '1'); listo(); $('#pop-dl').focus();
     });
     $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga', ''); });
@@ -1000,7 +1006,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     var n = $('#f-nombre').value.trim(), w = $('#f-wa').value.trim(), c = $('#f-cant').value;
     if (!n || w.replace(/\D/g, '').length < 8) { $('#f-err').hidden = false; (n ? $('#f-wa') : $('#f-nombre')).focus(); return; }
     form.hidden = true; $('#done').hidden = false;
-    send({ type: 'lead', origen: 'Formulario', nombre: n, whatsapp: w, desarrolladoras: c }); track('form_enviado', c); store.set('lead', '1');
+    send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c }); track('form_enviado', c); store.set('lead', '1');
     if (WHATSAPP) {
       var msg = 'Hola, soy ' + n + '. Quiero mi comparativo. Comercializo ' + c + ' desarrolladoras. Mi WhatsApp: ' + w;
       var a = document.createElement('a');
