@@ -83,7 +83,7 @@ section{scroll-margin-top:76px}
 #progress{position:fixed;top:0;left:0;height:3px;width:100%;background:var(--yellow);transform:scaleX(0);transform-origin:left;z-index:60}
 
 /* 2. Hero */
-.hero{position:relative;background:var(--ink);color:#fff;padding:148px 0 0;overflow:hidden}
+.hero{position:relative;background:var(--ink);color:#fff;padding:148px 0 104px;overflow:hidden}
 .hero-photo{position:absolute;inset:-4% -2%;background:#16204A url('https://images.unsplash.com/photo-1695067441231-a76a08f1ab89?auto=format&fit=crop&w=2000&q=70') center/cover;animation:kb 26s ease-in-out infinite alternate}
 .hero::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(100deg,rgba(11,16,32,.97) 0%,rgba(11,16,32,.9) 42%,rgba(11,16,32,.55) 100%),linear-gradient(0deg,rgba(11,16,32,1) 0%,rgba(11,16,32,0) 30%)}
 @keyframes kb{from{transform:scale(1)}to{transform:scale(1.09) translate(-1%,-1.5%)}}
@@ -95,7 +95,10 @@ h1 .w{display:inline-block}
 h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap}
 .hero p.sub{font-size:19px;color:#D5DAEA;max-width:33em}
 .hero-cta{display:flex;flex-direction:column;gap:12px;align-items:flex-start}
-.hero-cta small{font-size:15px;color:#D5DAEA}
+.assure{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px;font-size:15px;color:#D5DAEA}
+.assure li{display:flex;align-items:center;gap:8px}
+.assure li::before{content:"";width:5px;height:10px;margin:0 3px 3px 2px;border:solid var(--yellow);border-width:0 2px 2px 0;transform:rotate(45deg)}
+.assure a{color:#fff;font-weight:600;text-underline-offset:3px}
 .hero-card{background:#fff;color:var(--ink);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px;box-shadow:0 30px 80px rgba(0,0,0,.45);transform:rotate(1.2deg);animation:float 7s ease-in-out infinite}
 @keyframes float{0%,100%{transform:rotate(1.2deg) translateY(0)}50%{transform:rotate(.6deg) translateY(-10px)}}
 .hc-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
@@ -111,20 +114,8 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .hc-bar{height:4px;background:#ECEBE4;border-radius:2px;overflow:hidden}
 .hc-bar i{display:block;height:100%;width:100%;background:var(--blue);transform-origin:left;animation:fill 3.6s linear infinite}
 @keyframes fill{from{transform:scaleX(0)}to{transform:scaleX(1)}}
-.ticker{position:relative;z-index:2;margin-top:84px;border-top:1px solid var(--line-d);overflow:hidden;padding:16px 0;font-family:var(--mono);font-size:14px;color:var(--muted-d);white-space:nowrap}
-.ticker div{display:inline-block;animation:tick 38s linear infinite}
-.ticker span{margin:0 22px}.ticker span b{color:var(--yellow);font-weight:500}
-@keyframes tick{to{transform:translateX(-50%)}}
 
-/* 3. Para quién */
-.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(360px,100%),1fr));gap:24px}
-.fit{border-radius:14px;padding:32px;display:flex;flex-direction:column;gap:18px;background:var(--card);border:1px solid var(--line)}
-.fit.no{background:transparent}
-.fit ul{margin:0;padding:0;list-style:none;display:flex;flex-direction:column;gap:14px}
-.fit li{display:flex;gap:12px}.fit li svg{flex:none;margin-top:3px}
-.fit.no li{color:var(--muted)}
-
-/* 4. Problema */
+/* 3. Problema */
 .prob{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(400px,100%),1fr));gap:56px;align-items:center;margin-bottom:56px}
 .chat{background:#E9E4D8;border-radius:18px;padding:22px;display:flex;flex-direction:column;gap:10px;font-size:15.5px;max-width:460px;width:100%;justify-self:center;box-shadow:0 20px 50px rgba(11,16,32,.12)}
 .msg{max-width:84%;padding:10px 14px;border-radius:12px;background:#fff;align-self:flex-start;border-top-left-radius:3px}
@@ -139,28 +130,23 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .cost .n{font-family:var(--mono);font-size:13px;color:#9A3B00}
 .cost p{font-size:15px;color:var(--muted)}
 
-/* 5. Cómo funciona */
-.steps{list-style:none;margin:0 0 56px;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:28px}
+/* 4. Cómo funciona */
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(280px,100%),1fr));gap:28px}
 .steps li{display:flex;flex-direction:column;gap:10px;padding-top:18px;position:relative}
 .steps li::before{content:"";position:absolute;top:0;left:0;height:3px;width:100%;background:var(--ink);transform-origin:left}
 .js .steps li::before{transform:scaleX(0);transition:transform .8s cubic-bezier(.2,.7,.2,1)}
 .js .steps li.in::before{transform:scaleX(1)}
 .steps .num{font:900 54px/1 var(--display);color:var(--blue)}
 .steps p{font-size:16px;color:var(--muted)}
-.ba{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(380px,100%),1fr));gap:32px;align-items:stretch}
-@media (min-width:900px){.ba{grid-template-columns:1.5fr 1fr}}
-.tbl{border:1px solid var(--line);border-radius:14px;overflow:hidden;font-size:16.5px;background:var(--card);display:flex;flex-direction:column}
-.tbl .r{flex:1}
-.tbl .r{display:grid;grid-template-columns:1.1fr 1fr 1fr;border-top:1px solid #ECEBE4}
-.tbl .r span{padding:16px 18px;display:flex;align-items:center}
-.tbl .r span:first-child{font-weight:600}.tbl .r span:nth-child(2){color:var(--muted)}.tbl .r span:nth-child(3){background:var(--blue-soft)}
-.tbl .h{flex:none;background:var(--ink);color:#fff;font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.05em;border:0}
-.tbl .h span,.tbl .h span:nth-child(2){color:#fff;background:none;font-weight:400}.tbl .h span:nth-child(3){background:none;color:var(--yellow)}
-.photo{margin:0;border-radius:14px;min-height:300px;overflow:hidden;position:relative;background:var(--ink)}
-.photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
-.ba.noimg{grid-template-columns:1fr}.ba.noimg .photo{display:none}
-
-/* 6. Demo */
+.steps .wk{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted)}
+.panel-note{font-size:15px;color:var(--muted-d);margin-bottom:6px}
+.demo .li{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 0;border-top:1px solid var(--line-d);font-size:15px}
+.demo .li small{display:block;font-size:14px;color:var(--muted-d)}
+.st{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;border-radius:6px;padding:5px 11px}
+.st.ok{background:var(--ok-bg);color:var(--ok)}.st.warn{background:var(--warn-bg);color:var(--warn)}.st.bad{background:var(--bad-bg);color:var(--bad)}
+.st.bad svg{animation:pulse 1.6s ease-in-out infinite}
+@keyframes pulse{50%{opacity:.25}}
+/* 5. Demo */
 .demo{background:var(--ink2);border:1px solid var(--line-d);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:26px}
 .demo-top{display:flex;justify-content:space-between;align-items:center;gap:16px;flex-wrap:wrap}
 .tabs{display:flex;gap:8px;flex-wrap:wrap}
@@ -199,23 +185,7 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .after{display:flex;align-items:center;gap:20px;flex-wrap:wrap;margin-top:32px;color:var(--muted-d);font-size:15px}
 [hidden]{display:none !important}
 
-/* 7. Listas */
-.split{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(420px,100%),1fr));gap:56px;align-items:start}
-.feats{display:flex;flex-direction:column}
-.feats div{padding:18px 0;border-top:1px solid var(--line)}
-.feats div:last-child{border-bottom:1px solid var(--line)}
-.feats p{color:var(--muted);font-size:16px;margin-top:4px}
-.panel{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px;box-shadow:0 24px 60px rgba(11,16,32,.08)}
-.panel-top{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding-bottom:12px}
-.panel-top b{font:700 18px var(--display)}
-.li{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;padding:13px 0;border-top:1px solid #ECEBE4}
-.li small{display:block;font-size:14px;color:var(--muted)}
-.st{display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:14px;border-radius:6px;padding:5px 11px}
-.st.ok{background:var(--ok-bg);color:var(--ok)}.st.warn{background:var(--warn-bg);color:var(--warn)}.st.bad{background:var(--bad-bg);color:var(--bad)}
-.st.bad svg{animation:pulse 1.6s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.25}}
-
-/* 8. CRM */
+/* 6. CRM */
 .crm{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:48px;align-items:start}
 .phone{justify-self:center;width:310px;max-width:100%;border:10px solid var(--ink);border-radius:40px;background:var(--paper);padding:24px 16px;display:flex;flex-direction:column;gap:12px;font-size:14.5px;box-shadow:0 30px 70px rgba(11,16,32,.22)}
 .phone-top{display:flex;justify-content:space-between;align-items:baseline}
@@ -229,25 +199,7 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .phone-foot{display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:10px}
 .f4{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(230px,100%),1fr));gap:22px;margin-bottom:26px}
 .f4 p{font-size:15px;color:var(--muted);margin-top:4px}
-.tpl{border:1px solid var(--line);border-radius:14px;padding:22px;display:flex;flex-direction:column;gap:14px;margin-bottom:22px}
-.tpl-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;font-size:15px}
-.cap{font-family:var(--mono);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);display:block;margin-bottom:6px}
-.tpl-src{background:var(--paper);border-radius:8px;padding:12px;font-family:var(--mono);font-size:14px}
-.tpl-src i{font-style:normal;background:var(--blue-soft);color:#1A33B8;border-radius:3px;padding:0 3px}
-.tpl-out{background:#D5F0C8;border-radius:12px;border-top-left-radius:3px;padding:12px}
-
-/* 9. Reportes */
-.rep-head{display:flex;justify-content:space-between;align-items:end;gap:24px;flex-wrap:wrap;margin-bottom:32px}
-.seg{display:flex;border:1.5px solid var(--ink);border-radius:10px;overflow:hidden}
-.seg button{min-height:44px;padding:0 22px;border:0;background:var(--card);color:var(--ink);font:600 15px var(--body);cursor:pointer}
-.seg button[aria-pressed="true"]{background:var(--ink);color:#fff}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(220px,100%),1fr));gap:16px;margin-bottom:24px}
-.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:22px}
-.tile small{font-size:14px;color:var(--muted);display:block}
-.tile b{font:900 52px/1.1 var(--display);font-variant-numeric:tabular-nums}
-.rep-foot{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;color:var(--muted);font-size:16px}
-
-/* 10. Confianza */
+/* 7. Confianza */
 .trust{position:relative;overflow:hidden}
 .trust-bg{position:absolute;inset:0;background:#141B33 url('https://images.unsplash.com/photo-1751978515498-7e2c37973888?auto=format&fit=crop&w=1800&q=60') center/cover;opacity:.16}
 .trust .wrap{position:relative}
@@ -255,24 +207,7 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .t4 p{border-top:2px solid var(--yellow);padding-top:16px;font-size:17px;color:#D5DAEA}
 .t4 strong{color:#fff;display:block;font:700 20px var(--display);margin-bottom:4px}
 
-/* 11. Quién */
-.who{display:block}
-.who-copy{max-width:760px}
-.portrait{aspect-ratio:4/5;max-width:380px;width:100%;border-radius:18px;background:linear-gradient(160deg,var(--blue) 0%,var(--ink) 100%);display:flex;align-items:flex-end;padding:20px;color:#D5DAEA;font-family:var(--mono);font-size:13px}
-.who-copy{display:flex;flex-direction:column;gap:16px}
-
-/* 12. 30 días */
-.tl{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(min(240px,100%),1fr));gap:24px;font-size:15.5px}
-.tl li{display:flex;flex-direction:column;gap:10px;padding-top:18px;position:relative}
-.tl li::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--line)}
-.tl li::after{content:"";position:absolute;top:0;left:0;height:3px;width:100%;background:var(--blue);transform-origin:left}
-.js .tl li::after{transform:scaleX(0);transition:transform .7s ease}
-.js .tl li.in::after{transform:scaleX(1)}
-.tl li:nth-child(2)::after{transition-delay:.25s}.tl li:nth-child(3)::after{transition-delay:.5s}.tl li:nth-child(4)::after{transition-delay:.75s}
-.tl .wk{font-family:var(--mono);font-size:13px;text-transform:uppercase;letter-spacing:.05em}
-.tl .me{color:var(--muted)}.tl .me strong{color:var(--ink)}
-
-/* 13. Planes: un solo plan destacado, un solo badge, un solo botón lleno */
+/* 8. Planes: un solo plan destacado, un solo badge, un solo botón lleno */
 .sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 .p-head{display:flex;justify-content:space-between;align-items:flex-end;gap:28px 48px;flex-wrap:wrap;margin-bottom:48px}
 .p-head .head{margin:0}
@@ -283,7 +218,7 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .off{position:absolute;left:50%;top:-19px;transform:translateX(-50%);white-space:nowrap;font:600 12px/1.4 var(--body);color:var(--ok);background:var(--ok-bg);border:1px solid #A8D9B8;border-radius:20px;padding:2px 9px;pointer-events:none}
 .save{font:600 15px var(--body);color:var(--ok)}
 @media (max-width:1000px){.bill{align-items:flex-start}}
-.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px;align-items:stretch;margin-bottom:28px}
+.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(290px,100%),1fr));gap:20px;align-items:stretch;margin-bottom:44px}
 .plan{border:1px solid var(--line);border-radius:18px;padding:28px;display:flex;flex-direction:column;gap:18px;background:var(--paper);position:relative}
 .plan h3{font-size:24px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .plan .desc{font-size:15px;color:var(--muted);margin-top:6px}
@@ -304,13 +239,16 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .plan.top .inc li::before{border-color:var(--yellow)}
 .plan.top::before{content:"Recomendado";position:absolute;top:-13px;left:24px;background:var(--yellow);color:var(--ink);font:600 13px var(--body);padding:3px 10px;border-radius:5px}
 @media (min-width:980px){.plan.top{margin:-16px 0;padding:44px 28px}}
-.guar{font-size:17px;margin-bottom:20px;padding:18px 22px;border:1.5px solid var(--ink);border-radius:14px}
+.guar{display:flex;align-items:center;gap:28px;margin-bottom:20px;padding:30px 32px;border-radius:18px;background:var(--warn-bg);border:2px solid var(--yellow);scroll-margin-top:96px}
+.guar .eyebrow{color:var(--warn)}.guar .eyebrow::before{background:var(--ink)}
+.guar h3{font-size:clamp(24px,2.6vw,32px);font-weight:800;letter-spacing:-.02em;margin:6px 0 8px}
+.guar p:last-child{font-size:17px;color:#3A3F4E;max-width:44em}
+.seal{flex:none;width:112px;height:112px;border-radius:50%;background:var(--ink);color:var(--yellow);display:flex;flex-direction:column;align-items:center;justify-content:center;font:900 46px/1 var(--display);box-shadow:0 0 0 6px var(--yellow)}
+.seal small{font:600 13px var(--body);color:#fff;text-transform:uppercase;letter-spacing:.08em;margin-top:2px}
+@media (max-width:620px){.guar{flex-direction:column;align-items:flex-start;gap:18px;padding:24px 22px}.seal{width:88px;height:88px;font-size:36px}}
 .fine{font-size:14px;color:var(--muted);margin-top:18px}
-.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;font-size:16px}
-.notes p{border-radius:14px;padding:20px 22px;background:var(--blue-soft)}
-.notes p + p{background:var(--paper)}
 
-/* 14. FAQ */
+/* 9. FAQ */
 .faq{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(340px,100%),1fr));gap:48px;align-items:start}
 details{border-top:1px solid #C9C7BC}
 details:last-child{border-bottom:1px solid #C9C7BC}
@@ -320,7 +258,7 @@ summary i{font-style:normal;font-size:26px;line-height:1;color:var(--blue);trans
 details[open] summary i{transform:rotate(45deg)}
 details p{padding-bottom:20px;color:var(--muted);max-width:38em}
 
-/* 15. Cierre */
+/* 10. Cierre */
 .close{position:relative;background:var(--ink);color:#fff;overflow:hidden}
 .close-bg{position:absolute;inset:0;background:#16204A url('https://images.unsplash.com/photo-1742427605934-db05a2a833f6?auto=format&fit=crop&w=2000&q=70') center/cover}
 .close::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(11,16,32,.94) 0%,rgba(20,34,110,.8) 100%)}
@@ -338,7 +276,7 @@ form small{font-size:14px;color:var(--muted)}
 .done h3{font-size:28px;font-weight:800;margin-bottom:14px}
 .done ol{margin:0;padding-left:22px;display:flex;flex-direction:column;gap:8px}
 
-/* 16. Pie */
+/* 11. Pie */
 footer{background:var(--ink);color:var(--muted-d);font-size:15px;border-top:1px solid var(--line-d);padding:28px 0}
 footer .wrap{display:flex;justify-content:space-between;gap:16px 32px;flex-wrap:wrap;align-items:center}
 footer a{color:var(--muted-d);padding:12px 0;display:inline-block}
@@ -381,20 +319,18 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   body{font-size:16.5px}
   .sec{padding:68px 0}
   .nav,.bar .btn{display:none}
-  .hero{padding-top:112px}
+  .hero{padding:112px 0 72px}
   .hero-card{transform:none;animation:none}
-  .ticker{margin-top:56px}
   body{padding-bottom:72px}
   .mob{display:block;position:fixed;left:0;right:0;bottom:0;z-index:40;background:rgba(245,244,239,.96);backdrop-filter:blur(8px);border-top:1px solid var(--line);padding:10px 16px}
   .mob .btn{width:100%;background:var(--blue);color:#fff}
   .head{margin-bottom:36px}
-  .tbl{font-size:14.5px}.tbl .r span{padding:12px 10px}
 }
 @media (prefers-reduced-motion:reduce){
   html{scroll-behavior:auto}
   *,*::before,*::after{animation:none !important;transition:none !important}
   .js .reveal,.js .stagger > *,.js h1 .w,.js .chat .msg,.js .chat .gap,.js .phone .task{opacity:1 !important;transform:none !important}
-  .js .steps li::before,.js .tl li::after{transform:none !important}
+  .js .steps li::before{transform:none !important}
 }
 </style>
 </head>
@@ -422,10 +358,10 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     <div class="hero-copy">
       <p class="eyebrow">Para inmobiliarias que venden pozo de 3 o más desarrolladoras</p>
       <h1 id="h1">Todo tu portfolio de pozo, comparable y <mark>al día.</mark></h1>
-      <p class="sub">Cada desarrolladora manda su lista con su formato, su plan de pagos y su fecha. Las pasamos a una sola lista comparable, y le armamos a tu equipo un CRM a medida para que ningún cliente quede sin próximo paso.</p>
+      <p class="sub">Las listas de todas tus desarrolladoras en una sola, comparable y al día. Y un CRM a medida para que tu equipo no pierda ningún cliente.</p>
       <div class="hero-cta">
         <a class="btn" href="#form">Quiero mi comparativo <svg aria-hidden="true" width="18" height="18" viewBox="0 0 18 18" fill="none"><path d="M3 9h12M10 4l5 5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <small>Sin costo. Firmamos NDA antes de recibir tus listas.</small>
+        <ul class="assure"><li>Comparativo sin costo</li><li>NDA antes de tus listas</li><li><a href="#garantia">Garantía de 30 días</a></li></ul>
       </div>
     </div>
     <div class="hero-card" aria-live="off">
@@ -441,45 +377,13 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <div class="hc-bar" aria-hidden="true"><i id="hc-bar"></i></div>
     </div>
   </div>
-  <div class="ticker" aria-hidden="true"><div>
-    <span>Lista en Excel</span><span><b>→</b></span><span>Lista en PDF</span><span><b>→</b></span><span>Foto por WhatsApp</span><span><b>→</b></span><span>Carpeta de Drive</span><span><b>→ Una sola lista</b></span>
-    <span>Anticipo 20%</span><span><b>→</b></span><span>36 cuotas</span><span><b>→</b></span><span>60 cuotas</span><span><b>→</b></span><span>Entrega 2028</span><span><b>→ La misma cuenta para todos</b></span>
-    <span>Lista en Excel</span><span><b>→</b></span><span>Lista en PDF</span><span><b>→</b></span><span>Foto por WhatsApp</span><span><b>→</b></span><span>Carpeta de Drive</span><span><b>→ Una sola lista</b></span>
-    <span>Anticipo 20%</span><span><b>→</b></span><span>36 cuotas</span><span><b>→</b></span><span>60 cuotas</span><span><b>→</b></span><span>Entrega 2028</span><span><b>→ La misma cuenta para todos</b></span>
-  </div></div>
 </section>
 
-<!-- 3. Para quién es -->
+<!-- 3. El problema -->
 <section class="sec white">
   <div class="wrap">
-    <div class="head reveal"><p class="eyebrow">Para quién es</p><h2>Sirve si vendés pozo de varias desarrolladoras a la vez</h2></div>
-    <div class="two stagger">
-      <div class="fit">
-        <h3>Es para vos si</h3>
-        <ul>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Comercializás pozo de 3 o más desarrolladoras.</span></li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Cada lista te llega distinta: Excel, PDF o foto por WhatsApp.</span></li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Tus brokers arman cada comparativo a mano.</span></li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="11" fill="#2B50FF"/><path d="M6 11.5l3.4 3.4L16 8" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Querés saber qué pasa con cada consulta sin perseguir a nadie.</span></li>
-        </ul>
-      </div>
-      <div class="fit no">
-        <h3>No es para vos si</h3>
-        <ul>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Vendés un solo desarrollo o solo usados.</span></li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Buscás un portal para publicar avisos.</span></li>
-          <li><svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M5.5 5.5l11 11M16.5 5.5l-11 11" stroke="#4A5266" stroke-width="2.2" stroke-linecap="round"/></svg><span>Querés un CRM genérico para configurar por tu cuenta.</span></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 4. El problema -->
-<section class="sec">
-  <div class="wrap">
     <div class="prob">
-      <div class="head reveal" style="margin:0"><p class="eyebrow">El problema</p><h2>Una pregunta simple que hoy tarda horas en responderse</h2><p class="lead">El comprador ya sabe cuánto tiene y cuánto puede pagar por mes. La respuesta está repartida en varias listas con formatos, planes y fechas distintas.</p></div>
+      <div class="head reveal" style="margin:0"><p class="eyebrow">El problema</p><h2>Una pregunta simple que hoy tarda horas en responderse</h2></div>
       <div class="chat" id="chat" aria-label="Conversación de ejemplo entre un comprador y un broker">
         <div class="msg">Hola. Tengo 30 mil de anticipo y puedo pagar hasta 1.600 por mes. ¿Qué me entra?<time>10:12</time></div>
         <div class="msg me">Dame un rato que reviso las listas y te digo.<time>10:15</time></div>
@@ -490,38 +394,25 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     </div>
     <div class="costs stagger">
       <div class="cost"><span class="n">01</span><h3>Precios viejos</h3><p>Cotizás con la lista de hace dos meses y te enterás en la reserva.</p></div>
-      <div class="cost"><span class="n">02</span><h3>Comparaciones falsas</h3><p>Un plan en 24 cuotas y otro en 60 no se comparan por precio total.</p></div>
-      <div class="cost"><span class="n">03</span><h3>Stock equivocado</h3><p>Ofrecés una unidad que se vendió la semana pasada.</p></div>
-      <div class="cost"><span class="n">04</span><h3>Carpetas abiertas</h3><p>Listas confidenciales en carpetas que abre cualquiera que tenga el link.</p></div>
-      <div class="cost"><span class="n">05</span><h3>Referidos perdidos</h3><p>Alguien te recomienda un comprador y nadie anota quién lo trajo.</p></div>
+      <div class="cost"><span class="n">02</span><h3>Comparaciones falsas</h3><p>Un plan en 24 cuotas y otro en 60 no se comparan a ojo.</p></div>
+      <div class="cost"><span class="n">03</span><h3>Clientes sin seguimiento</h3><p>Nadie sabe a quién hay que llamar hoy ni quién trajo a cada cliente.</p></div>
     </div>
   </div>
 </section>
 
-<!-- 5. Cómo funciona -->
-<section class="sec white">
+<!-- 4. Cómo funciona: los primeros 30 días -->
+<section class="sec">
   <div class="wrap">
-    <div class="head reveal"><p class="eyebrow">Cómo funciona</p><h2>Mandás las listas como están. Nosotros las dejamos comparables.</h2></div>
+    <div class="head reveal"><p class="eyebrow">Cómo funciona</p><h2>En 30 días, tu equipo vende con todo ordenado</h2></div>
     <ol class="steps">
-      <li class="obs"><span class="num">1</span><h3>Mandás las listas</h3><p>En Excel, PDF o foto. Antes firmamos el NDA.</p></li>
-      <li class="obs"><span class="num">2</span><h3>Quedan comparables</h3><p>Mismo formato para todas: precio, anticipo, cuotas, entrega y USD por m². Controlamos cada número contra el archivo original.</p></li>
-      <li class="obs"><span class="num">3</span><h3>Tu equipo vende</h3><p>Carga anticipo y cuota del comprador y ve qué entra en todas las desarrolladoras a la vez.</p></li>
+      <li class="obs"><span class="num">1</span><span class="wk">Semana 1</span><h3>Mandás las listas</h3><p>Como te llegan: Excel, PDF o foto. Antes firmamos el NDA.</p></li>
+      <li class="obs"><span class="num">2</span><span class="wk">Semanas 2 y 3</span><h3>Lo armamos a tu medida</h3><p>Pasamos todo a una sola lista, controlamos cada número y configuramos el CRM según cómo vende tu equipo.</p></li>
+      <li class="obs"><span class="num">3</span><span class="wk">Semana 4</span><h3>Tu equipo vende</h3><p>Capacitamos al equipo y corregimos lo que aparezca con los primeros compradores.</p></li>
     </ol>
-    <div class="ba">
-      <div class="tbl reveal">
-        <div class="r h"><span>Tarea</span><span>Antes</span><span>Después</span></div>
-        <div class="r"><span>Decir qué entra</span><span>Lista por lista</span><span>Anticipo y cuota</span></div>
-        <div class="r"><span>Confirmar el precio</span><span>Llamar y preguntar</span><span>Fecha de lista a la vista</span></div>
-        <div class="r"><span>Comparar planes</span><span>Cuenta a mano</span><span>Misma cuenta para todos</span></div>
-        <div class="r"><span>Enviar opciones</span><span>Capturas sueltas</span><span>Una hoja para compartir</span></div>
-        <div class="r"><span>Seguir al cliente</span><span>De memoria</span><span>Próximo paso con fecha</span></div>
-      </div>
-      <figure class="photo reveal" id="ba-photo"><img src="https://images.unsplash.com/photo-1758523671391-c510afb87d19?auto=format&fit=crop&w=1400&q=70" alt="Pareja mirando opciones en una tablet" loading="lazy"></figure>
-    </div>
   </div>
 </section>
 
-<!-- 6. Una Sola Lista -->
+<!-- 5. Una Sola Lista -->
 <section class="sec dark" id="usl">
   <div class="wrap">
     <div class="head reveal"><p class="eyebrow">Una Sola Lista · Probala</p><h2>Cargás anticipo y cuota. Ves qué entra.</h2></div>
@@ -529,9 +420,10 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <div class="demo-top">
         <div class="tabs" role="tablist" aria-label="Funciones de Una Sola Lista">
           <button class="tab" role="tab" aria-selected="true" data-tab="filtrar">Filtrar</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="mercado">Comparar contra mercado</button>
-          <button class="tab" role="tab" aria-selected="false" data-tab="compartir">Imprimir y compartir</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="aldia">Listas al día</button>
           <button class="tab" role="tab" aria-selected="false" data-tab="historial">Historial de precios</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="compartir">Imprimir y compartir</button>
+          <button class="tab" role="tab" aria-selected="false" data-tab="mercado">Comparar contra mercado</button>
         </div>
         <span class="tag">Datos ficticios</span>
       </div>
@@ -541,12 +433,12 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
         <div class="res" aria-live="polite"><small>Resultado</small><b id="d-res">Entran 4 de 8</b></div>
       </div>
       <div data-panel="filtrar" class="scroll"><div class="grid" id="d-grid"></div></div>
-      <div data-panel="mercado" hidden><p style="font-size:15px;color:var(--muted-d);margin-bottom:10px">USD por m² de cada unidad que entra, contra una referencia de zona de USD 2.150 por m².</p><div id="d-mk"></div></div>
-      <div data-panel="compartir" hidden>
-        <div class="share">
-          <div class="sheet"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><strong style="font:700 18px var(--display)">Comparativo para Laura M.</strong><span class="mono" style="font-size:12px;color:var(--muted)">Listas vigentes al 17/11</span></div><span class="mono" id="d-sh-h"></span><div id="d-sh"></div></div>
-          <div style="display:flex;flex-direction:column;gap:14px"><p style="color:var(--muted-d);font-size:16px">Una hoja con tu logo y solo las unidades que le sirven a ese comprador.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" class="ghost">Imprimir</button><button type="button" class="ghost">Compartir por WhatsApp</button></div></div>
-        </div>
+      <div data-panel="aldia" hidden>
+        <p class="panel-note">Te avisa qué lista pedir cuando pasa los 45 días, y si alguien reemplaza un archivo.</p>
+        <div class="li"><span>Torre Ceibo<small>Cargada hace 6 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
+        <div class="li"><span>Patio Lapacho<small>Cargada hace 12 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
+        <div class="li"><span>Aromo 1450<small>Cargada hace 38 días</small></span><span class="st warn"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l5 10H1z" fill="currentColor"/></svg>Por vencer</span></div>
+        <div class="li"><span>Jacarandá Plaza<small>Cargada hace 52 días · Pedila a la desarrolladora</small></span><span class="st bad"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" fill="currentColor"/></svg>Vieja</span></div>
       </div>
       <div data-panel="historial" hidden>
         <div class="hist"><span><span class="mono" style="color:var(--muted-d)">03/11</span> · Torre Ceibo · 1 amb</span><span class="mono">USD 76.500 → 78.000 · <span class="up">+2,0%</span></span></div>
@@ -554,35 +446,19 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
         <div class="hist"><span><span class="mono" style="color:var(--muted-d)">20/10</span> · Tilo Norte · 1 amb</span><span class="mono">USD 70.000 → 72.000 · <span class="up">+2,9%</span></span></div>
         <div class="hist"><span><span class="mono" style="color:var(--muted-d)">02/10</span> · Jacarandá Plaza · 2 amb</span><span class="mono">USD 138.000 → 135.000 · <span class="down">−2,2%</span></span></div>
       </div>
+      <div data-panel="compartir" hidden>
+        <div class="share">
+          <div class="sheet"><div style="display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap"><strong style="font:700 18px var(--display)">Comparativo para Laura M.</strong><span class="mono" style="font-size:12px;color:var(--muted)">Listas vigentes al 17/11</span></div><span class="mono" id="d-sh-h"></span><div id="d-sh"></div></div>
+          <div style="display:flex;flex-direction:column;gap:14px"><p style="color:var(--muted-d);font-size:16px">Una hoja con tu logo y solo las unidades que le sirven a ese comprador.</p><div style="display:flex;gap:12px;flex-wrap:wrap"><button type="button" class="ghost">Imprimir</button><button type="button" class="ghost">Compartir por WhatsApp</button></div></div>
+        </div>
+      </div>
+      <div data-panel="mercado" hidden><p style="font-size:15px;color:var(--muted-d);margin-bottom:10px">USD por m² de cada unidad que entra, contra una referencia de zona de USD 2.150 por m².</p><div id="d-mk"></div></div>
     </div>
     <div class="after"><a class="btn" href="#form">Quiero mi comparativo</a><span>Lo armamos con 3 de tus listas reales.</span></div>
   </div>
 </section>
 
-<!-- 7. Listas al día -->
-<section class="sec">
-  <div class="wrap split">
-    <div>
-      <div class="head reveal"><p class="eyebrow">Listas al día</p><h2>Sabés qué lista está vieja antes de cotizar</h2></div>
-      <div class="feats reveal">
-        <div><h3>Control de carpetas</h3><p>Detecta el cambio solo y nosotros cargamos la lista.</p></div>
-        <div><h3>Archivos pisados</h3><p>Si alguien reemplaza un archivo, te avisa.</p></div>
-        <div><h3>Listas por WhatsApp</h3><p>Nos reenviás la lista por WhatsApp y la cargamos.</p></div>
-        <div><h3>Aviso de listas viejas</h3><p>Te avisa qué lista pedir cuando pasa los 45 días.</p></div>
-      </div>
-    </div>
-    <div class="panel reveal">
-      <div class="panel-top"><b>Estado de tus listas</b><span class="tag">Datos ficticios</span></div>
-      <div class="li"><span>Torre Ceibo<small>Cargada hace 6 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
-      <div class="li"><span>Patio Lapacho<small>Cargada hace 12 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
-      <div class="li"><span>Aromo 1450<small>Cargada hace 38 días</small></span><span class="st warn"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><path d="M6 1l5 10H1z" fill="currentColor"/></svg>Por vencer</span></div>
-      <div class="li"><span>Jacarandá Plaza<small>Cargada hace 52 días · Pedila a la desarrolladora</small></span><span class="st bad"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><rect x="1" y="1" width="10" height="10" fill="currentColor"/></svg>Vieja</span></div>
-      <div class="li"><span>Tilo Norte<small>Cargada hace 3 días</small></span><span class="st ok"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 12 12"><circle cx="6" cy="6" r="5" fill="currentColor"/></svg>Al día</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- 8. CRM a medida -->
+<!-- 6. CRM a medida -->
 <section class="sec white" id="crm">
   <div class="wrap">
     <div class="head reveal"><p class="eyebrow">Próximo Paso · CRM a medida</p><h2>Ningún cliente sin próximo paso con fecha</h2></div>
@@ -598,36 +474,17 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <div class="reveal">
         <div class="f4">
           <div><h3>Pantalla Hoy</h3><p>Cada broker abre y ve a quién llamar, en orden.</p></div>
-          <div><h3>Ficha del cliente</h3><p>Presupuesto, unidades que vio y todo lo conversado.</p></div>
-          <div><h3>Referidos con link propio</h3><p>Cada referidor tiene su link y queda anotado quién trajo a quién.</p></div>
-          <div><h3>Asignación</h3><p>Cada consulta nueva llega a un broker según tus reglas.</p></div>
+          <div><h3>WhatsApp con plantillas</h3><p>Cada broker le escribe al cliente desde su WhatsApp, con mensajes ya armados.</p></div>
+          <div><h3>Panel del dueño</h3><p>Consultas, ventas y actividad de cada broker, sin tener que pedirlos.</p></div>
+          <div><h3>Referidos con link propio</h3><p>Queda anotado quién trajo a cada cliente.</p></div>
         </div>
-        <div class="tpl">
-          <h3>Plantillas de WhatsApp y mail</h3>
-          <div class="tpl-g">
-            <div><span class="cap">Plantilla</span><div class="tpl-src">Hola <i>[nombre]</i>, te paso el comparativo de <i>[proyecto]</i> con tu anticipo de <i>[anticipo]</i>. ¿Lo vemos mañana?</div></div>
-            <div><span class="cap">Así le llega</span><div class="tpl-out">Hola Laura, te paso el comparativo de Torre Ceibo con tu anticipo de USD 30.000. ¿Lo vemos mañana?</div></div>
-          </div>
-        </div>
-        <p style="color:var(--muted)"><strong style="color:var(--ink)">Se adapta a tu negocio:</strong> etapas de venta, datos de la ficha, reglas de asignación y textos de las plantillas.</p>
+        <p style="color:var(--muted)"><strong style="color:var(--ink)">Hecho a tu medida:</strong> etapas de venta, datos de la ficha, reglas de asignación y textos de las plantillas.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 9. Reportes -->
-<section class="sec">
-  <div class="wrap">
-    <div class="rep-head reveal">
-      <div class="head" style="margin:0"><p class="eyebrow">Reportes</p><h2 style="max-width:14em">Cada rol ve sus números sin pedirlos</h2></div>
-      <div class="seg" role="group" aria-label="Elegir rol"><button type="button" aria-pressed="true" data-rol="dueno">Dueño</button><button type="button" aria-pressed="false" data-rol="broker">Broker</button></div>
-    </div>
-    <div class="tiles obs" id="tiles"></div>
-    <div class="rep-foot"><p id="rol-det" style="max-width:44em"></p><span class="tag" style="align-self:flex-start">Datos ficticios</span></div>
-  </div>
-</section>
-
-<!-- 10. Confianza -->
+<!-- 7. Confianza -->
 <section class="sec dark trust">
   <div class="trust-bg" aria-hidden="true"></div>
   <div class="wrap">
@@ -641,24 +498,11 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   </div>
 </section>
 
-<!-- 12. Primeros 30 días -->
-<section class="sec">
-  <div class="wrap">
-    <div class="head reveal"><p class="eyebrow">Puesta en marcha</p><h2>Tus primeros 30 días, semana por semana</h2></div>
-    <ol class="tl" id="tl">
-      <li class="obs"><span class="wk">Semana 1</span><p><strong>Vos:</strong> firmamos el NDA y mandás las listas.</p><p class="me"><strong>Nosotros:</strong> las pasamos a formato comparable y las controlamos.</p></li>
-      <li class="obs"><span class="wk">Semana 2</span><p><strong>Vos:</strong> probás Una Sola Lista con uno o dos brokers.</p><p class="me"><strong>Nosotros:</strong> ajustamos y relevamos cómo trabaja tu equipo.</p></li>
-      <li class="obs"><span class="wk">Semana 3</span><p><strong>Vos:</strong> sumás al resto del equipo.</p><p class="me"><strong>Nosotros:</strong> configuramos etapas, asignación y plantillas, y capacitamos.</p></li>
-      <li class="obs"><span class="wk">Semana 4</span><p><strong>Vos:</strong> lo usás con compradores reales.</p><p class="me"><strong>Nosotros:</strong> corregimos lo que aparezca y te mandamos el primer informe.</p></li>
-    </ol>
-  </div>
-</section>
-
-<!-- 13. Planes y garantía -->
+<!-- 8. Planes y garantía -->
 <section class="sec white" id="precios">
   <div class="wrap">
     <div class="p-head">
-      <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes, todos armados a medida</h2><p class="lead">Pagás la puesta en marcha una sola vez y después un abono. Empezás por tus listas y sumás el CRM cuando quieras.</p></div>
+      <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes, todos armados a medida</h2><p class="lead">Un año de Una Sola Lista cuesta USD 2.500. Comparalo con la comisión de una sola venta de pozo que se cae por un precio viejo.</p></div>
       <!-- Precios: los abonos mensuales están en data-m. El anual es 10 meses (2 sin cargo) y lo calcula el script. -->
       <div class="bill reveal">
         <div class="tog" id="bill" role="group" aria-label="Forma de pago">
@@ -709,16 +553,19 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
         <a class="btn line" href="https://wa.me/5491158714730?text=Hola%2C%20me%20interesa%20el%20plan%20Integral%20de%20CMP%20Solutions." target="_blank" rel="noopener">Hablemos por WhatsApp</a>
       </div>
     </div>
-    <p class="guar reveal"><strong>Garantía de 30 días:</strong> si no te sirve, te devolvemos la puesta en marcha y, si pagaste el anual, también el abono. El mensual no tiene permanencia.</p>
-    <div class="notes reveal">
-      <p><strong>La cuenta de retorno:</strong> el anual de Una Sola Lista es USD 2.500. Comparalo con la comisión de una sola venta de pozo que hoy se cae por un precio viejo.</p>
-      <p><strong>Cupos:</strong> tomamos 3 clientes nuevos por mes, porque la puesta en marcha la hacemos a mano: relevamos, cargamos y controlamos cada lista.</p>
+    <div class="guar reveal" id="garantia">
+      <div class="seal" aria-hidden="true">30<small>días</small></div>
+      <div>
+        <p class="eyebrow">Garantía de 30 días</p>
+        <h3>Si no te sirve, te devolvemos la puesta en marcha</h3>
+        <p>Tenés 30 días para probarlo con tu equipo. Si pagaste el anual, también te devolvemos el abono. El mensual no tiene permanencia.</p>
+      </div>
     </div>
-    <p class="fine reveal">Precios en dólares, sin impuestos. Desarrolladora adicional: USD 25 por mes. Broker adicional en el CRM: USD 15 por mes.</p>
+    <p class="fine reveal">Precios en dólares, sin impuestos. Desarrolladora adicional: USD 25 por mes. Broker adicional en el CRM: USD 15 por mes. Tomamos 3 clientes nuevos por mes, porque la puesta en marcha la hacemos a mano.</p>
   </div>
 </section>
 
-<!-- 14. Preguntas frecuentes -->
+<!-- 9. Preguntas frecuentes -->
 <section class="sec">
   <div class="wrap faq">
     <div class="head reveal" style="margin:0"><p class="eyebrow">Preguntas frecuentes</p><h2>Lo que nos preguntan antes de empezar</h2></div>
@@ -726,8 +573,6 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <details><summary>¿Tengo que dejar de usar Excel?<i aria-hidden="true">+</i></summary><p>No. Las desarrolladoras te siguen mandando sus listas como siempre y nosotros las pasamos al formato comparable.</p></details>
       <details><summary>Ya tengo un CRM. ¿Me sirve igual?<i aria-hidden="true">+</i></summary><p>Sí. Una Sola Lista se contrata sola y la usás sin cambiar tu CRM actual.</p></details>
       <details><summary>¿Cuánto trabajo le lleva a mi equipo?<i aria-hidden="true">+</i></summary><p>Poco: mandar las listas y una capacitación por videollamada de 1 hora. La carga y el control los hacemos nosotros.</p></details>
-      <details><summary>¿Tengo que ordenar mi Drive antes?<i aria-hidden="true">+</i></summary><p>No. Trabajamos con tus carpetas como están hoy.</p></details>
-      <details><summary>¿Quién ve mis listas?<i aria-hidden="true">+</i></summary><p>Solo nuestro equipo y las personas del tuyo que autorices. Firmamos NDA antes de recibirlas y tus datos van separados de los de otros clientes.</p></details>
       <details><summary>¿Por qué se cobra una puesta en marcha?<i aria-hidden="true">+</i></summary><p>Porque es lo que más trabajo lleva: relevamos cómo vende tu equipo, cargamos y controlamos cada lista contra el original y armamos todo a tu medida. Se paga una sola vez.</p></details>
       <details><summary>¿Puedo empezar con las listas y sumar el CRM después?<i aria-hidden="true">+</i></summary><p>Sí. Pagás la diferencia de puesta en marcha y pasás al abono de Lista + CRM.</p></details>
       <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>En el mensual no hay permanencia: avisás con 30 días. El anual cubre 12 meses y al terminar elegís si renovás. En los dos casos te llevás tus datos en Excel.</p></details>
@@ -735,7 +580,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   </div>
 </section>
 
-<!-- 15. Cierre y formulario -->
+<!-- 10. Cierre y formulario -->
 <section class="sec close" id="form">
   <div class="close-bg" role="img" aria-label="Fachada de un edificio al atardecer con las ventanas iluminadas"></div>
   <div class="wrap">
@@ -743,6 +588,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <p class="eyebrow">Sin costo</p>
       <h2>Mirá 3 de tus listas en una sola</h2>
       <p>Dejanos tus datos, firmamos el NDA y recién ahí nos mandás las listas. Te devolvemos el comparativo armado.</p>
+      <ul class="assure"><li>Comparativo sin costo</li><li>NDA antes de tus listas</li><li><a href="#garantia">Garantía de 30 días</a></li></ul>
     </div>
     <div class="form reveal">
       <form id="lead" autocomplete="on" novalidate>
@@ -766,12 +612,11 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 </section>
 </main>
 
-<!-- 16. Pie -->
+<!-- 11. Pie. Faltan páginas reales de Privacidad y Términos: sumarlas acá cuando existan. -->
 <footer>
   <div class="wrap">
     <span class="logo" style="min-height:0"><img src="logo-claro.png" alt="" width="27" height="32" style="height:32px"><span style="font-size:17px">CMP Solutions</span></span>
     <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
-    <nav aria-label="Legales"><a href="#inicio">Privacidad</a><a href="#inicio">Términos</a></nav>
   </div>
 </footer>
 <div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>
@@ -919,7 +764,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   var targets = $$('.reveal, .stagger, .obs');
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function(es){
-      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); if (e.target.id === 'tiles') drawTiles(true); } });
+      es.forEach(function(e){ if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
     }, { threshold: 0.08 });
     targets.forEach(function(t){ io.observe(t); });
     var chat = $('#chat');
@@ -932,14 +777,6 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     targets.forEach(function(t){ t.classList.add('in'); });
     $$('#chat .msg, #chat .gap').forEach(function(m){ m.classList.add('show'); });
   }
-
-  /* Si la foto no carga, la tabla ocupa todo el ancho */
-  (function(){
-    var fig = $('#ba-photo'); if (!fig) return;
-    var im = $('img', fig), off = function(){ fig.parentNode.classList.add('noimg'); };
-    im.addEventListener('error', off);
-    if (im.complete && im.naturalWidth === 0 && im.currentSrc) off();
-  })();
 
   /* Datos ficticios de la demo */
   var REF = 2150;
@@ -1006,41 +843,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     });
   });
 
-  /* Reportes por rol */
-  var ROL = {
-    dueno: { t: [['Consultas nuevas en la quincena', 42], ['Clientes sin próximo paso', 0], ['Visitas hechas', 11], ['Reservas', 3]],
-      d: 'Después de los números, el detalle: informe quincenal, ventas por broker y cuánto usa el sistema cada persona del equipo.' },
-    broker: { t: [['Mis clientes activos', 18], ['Pasos para hoy', 5], ['Pasos vencidos', 1], ['Mis reservas del mes', 1]],
-      d: 'Después de los números, el detalle: sus clientes por etapa, sus ventas y lo que tiene pendiente esta semana.' }
-  }, rol = 'dueno';
-  function drawTiles(animate){
-    var box = $('#tiles'), data = ROL[rol];
-    box.innerHTML = data.t.map(function(k){ return '<div class="tile"><small>' + k[0] + '</small><b data-to="' + k[1] + '">' + k[1] + '</b></div>'; }).join('');
-    $('#rol-det').textContent = data.d;
-    if (!animate || reduce) return;
-    $$('b', box).forEach(function(b){
-      var to = +b.getAttribute('data-to'), t0 = null;
-      if (!to) return;
-      b.textContent = '0';
-      requestAnimationFrame(function step(ts){
-        if (t0 === null) t0 = ts;
-        var k = Math.min(1, (ts - t0) / 700);
-        b.textContent = Math.round(to * (1 - Math.pow(1 - k, 3)));
-        if (k < 1) requestAnimationFrame(step);
-      });
-    });
-  }
-  drawTiles(false);
-  $$('.seg button').forEach(function(b){
-    b.addEventListener('click', function(){
-      rol = b.getAttribute('data-rol'); track('reportes_rol', rol, true);
-      $$('.seg button').forEach(function(x){ x.setAttribute('aria-pressed', x === b ? 'true' : 'false'); });
-      drawTiles(true);
-    });
-  });
-
-
-  /* Aviso del checklist: salta solo a los 10 segundos, una vez por visitante. Después queda la pestaña del costado. */
+  /* Aviso del checklist: salta una sola vez, cuando el visitante pasó la mitad de la página. Después queda la pestaña del costado. */
   (function(){
     var pop = $('#pop'), tab = $('#pop-tab'); if (!pop || !pop.showModal) return;
     function inView(el){ var r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
@@ -1054,9 +857,16 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     function auto(){
       if (store.get('pop') || store.get('lead')) return;
       if (inView($('#form'))) { setTimeout(auto, 5000); return; }
-      open('a los 10 segundos');
+      open('a mitad de página');
     }
-    if (store.get('pop')) tab.hidden = false; else setTimeout(auto, 10000);
+    if (store.get('pop')) tab.hidden = false;
+    else {
+      var mitad = function(){
+        var h = doc.scrollHeight - window.innerHeight;
+        if (h > 0 && (window.scrollY || 0) / h >= 0.5) { window.removeEventListener('scroll', mitad); auto(); }
+      };
+      window.addEventListener('scroll', mitad, { passive: true });
+    }
     tab.addEventListener('click', function(){ open('pestaña del costado'); });
     $('#pop-x').addEventListener('click', function(){ pop.close(); });
     pop.addEventListener('click', function(e){ if (e.target === pop) pop.close(); });
