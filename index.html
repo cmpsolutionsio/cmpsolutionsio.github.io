@@ -4,6 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>CMP Solutions</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta name="theme-color" content="#0B1020">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="CMP Solutions">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://cmpsolutionsio.github.io/">
+<meta property="og:title" content="Todo tu portfolio de pozo, comparable y al día">
+<meta property="og:description" content="Una sola lista para todas tus desarrolladoras y un CRM a medida para tu equipo. Pedí tu comparativo sin costo.">
+<meta property="og:image" content="https://cmpsolutionsio.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Logo de CMP Solutions y el texto: Todo tu portfolio de pozo, comparable y al día.">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="description" content="Todo tu portfolio de pozo, comparable y al día. Una Sola Lista y CRM a medida para inmobiliarias que comercializan 3 o más desarrolladoras.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -59,6 +73,7 @@ section{scroll-margin-top:76px}
 .bar{position:sticky;top:0;z-index:50;background:rgba(11,16,32,.0);transition:background .25s ease, box-shadow .25s ease;margin-bottom:-68px}
 .bar.solid{background:rgba(11,16,32,.92);backdrop-filter:blur(10px);box-shadow:0 1px 0 var(--line-d)}
 .bar .wrap{height:68px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo img{width:44px;height:44px;border-radius:10px;display:block}
 .logo{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:800 22px var(--display);letter-spacing:-.02em;min-height:44px}
 .nav{display:flex;gap:30px}
 .nav a{color:#E4E7F2;text-decoration:none;font-size:15px;font-weight:500;padding:12px 0;position:relative}
@@ -367,9 +382,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <!-- 1. Barra superior -->
 <header class="bar" id="bar">
   <div class="wrap">
-    <a class="logo" href="#inicio" aria-label="Inicio">
-      <svg aria-hidden="true" width="30" height="30" viewBox="0 0 30 30" fill="none"><rect width="30" height="30" rx="7" fill="#FFC42E"/><path d="M8 15.5l4.8 4.8L22 10.5" stroke="#0B1020" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
-    </a>
+    <a class="logo" href="#inicio" aria-label="Inicio"><img src="logo.png" alt="" width="44" height="44"></a>
     <nav class="nav" aria-label="Secciones">
       <a href="#usl">Una Sola Lista</a>
       <a href="#crm">CRM</a>
@@ -704,6 +717,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <!-- 16. Pie -->
 <footer>
   <div class="wrap">
+    <img src="logo.png" alt="CMP Solutions" width="40" height="40" style="border-radius:9px">
     <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
     <nav aria-label="Legales"><a href="#inicio">Privacidad</a><a href="#inicio">Términos</a></nav>
   </div>
