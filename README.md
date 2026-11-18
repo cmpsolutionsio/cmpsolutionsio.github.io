@@ -10,7 +10,7 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 
 ## Antes de salir a vender
 
-- Reemplazar todo lo que está resaltado entre corchetes: precios, garantía, cupos, plazos y duración de la capacitación.
+- Precios, garantía, cupos y plazos están en `index.html`, sección Planes y preguntas frecuentes. Revisarlos cuando cambien.
 - Poner el número de WhatsApp en la constante `WHATSAPP` al principio del `<script>` de `index.html` (con código de país, sin signos). Sin ese número, el formulario solo muestra la confirmación y no envía nada.
 - Verificar nombre, dominio y marca.
 

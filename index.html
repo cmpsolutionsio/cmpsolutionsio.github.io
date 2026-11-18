@@ -267,6 +267,8 @@ h1 mark{background:none;color:var(--yellow);position:relative;white-space:nowrap
 .plan.top{background:var(--ink);color:#fff;border-color:var(--ink);position:relative}
 .plan.top > p{color:var(--muted-d)}.plan.top .pr{border-color:var(--line-d)}
 .plan.top::before{content:"Los dos productos";position:absolute;top:-13px;left:24px;background:var(--yellow);color:var(--ink);font:600 13px var(--body);padding:3px 10px;border-radius:5px}
+.guar{font-size:17px;margin-bottom:20px;padding:18px 22px;border:1.5px solid var(--ink);border-radius:14px}
+.fine{font-size:14px;color:var(--muted);margin-top:18px}
 .notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(320px,100%),1fr));gap:20px;font-size:16px}
 .notes p{border-radius:14px;padding:20px 22px;background:var(--blue-soft)}
 .notes p + p{background:var(--paper)}
@@ -623,31 +625,33 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     <div class="head reveal"><p class="eyebrow">Planes y garantía</p><h2>Tres planes. Puesta en marcha y abono por separado.</h2></div>
     <div class="plans stagger">
       <div class="plan">
-        <h3>Una Sola Lista</h3><p>Tus listas comparables y al día.</p>
-        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <h3>Una Sola Lista</h3><p>Tus listas comparables y al día. Hasta 5 desarrolladoras.</p>
+        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 300</strong></div>
+        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 150</strong></div>
+        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
         <a class="btn line" href="#form">Quiero mi comparativo</a>
       </div>
       <div class="plan">
-        <h3>Próximo Paso</h3><p>El CRM a medida para tu equipo.</p>
-        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <h3>Próximo Paso</h3><p>El CRM a medida para tu equipo. Hasta 5 usuarios.</p>
+        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 600</strong></div>
+        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 100</strong></div>
+        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
         <a class="btn line" href="#form">Quiero mi comparativo</a>
       </div>
       <div class="plan top">
         <h3>Los dos juntos</h3><p>El comparativo sale desde la ficha del cliente.</p>
-        <div class="pr"><span>Puesta en marcha</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Abono mensual</span><span class="ph">[PRECIO]</span></div>
-        <div class="pr"><span>Garantía</span><span class="ph">[GARANTÍA]</span></div>
+        <div class="pr"><span>Puesta en marcha</span><strong class="mono">USD 750</strong></div>
+        <div class="pr"><span>Abono mensual</span><strong class="mono">USD 220</strong></div>
+        <div class="pr"><span>Garantía</span><span>30 días de devolución</span></div>
         <a class="btn" href="#form">Quiero mi comparativo</a>
       </div>
     </div>
+    <p class="guar reveal"><strong>Garantía:</strong> si en los primeros 30 días no te sirve, te devolvemos la puesta en marcha. Sin permanencia: te das de baja cuando quieras.</p>
     <div class="notes reveal">
-      <p><strong>La cuenta de retorno:</strong> una venta que hoy se pierde por un precio viejo te deja <span class="ph">[TU COMISIÓN PROMEDIO]</span>. El abono anual es <span class="ph">[PRECIO ANUAL]</span>.</p>
-      <p><strong>Cupos:</strong> tomamos <span class="ph">[N]</span> clientes nuevos por mes, porque cargamos y controlamos cada lista a mano.</p>
+      <p><strong>La cuenta de retorno:</strong> el abono anual de Una Sola Lista es USD 1.800. Comparalo con la comisión de una sola venta de pozo que hoy se cae por un precio viejo.</p>
+      <p><strong>Cupos:</strong> tomamos 3 clientes nuevos por mes, porque cargamos y controlamos cada lista a mano.</p>
     </div>
+    <p class="fine reveal">Precios en dólares, sin impuestos. Desarrolladora adicional: USD 25 por mes. Usuario adicional del CRM: USD 15 por mes.</p>
   </div>
 </section>
 
@@ -658,10 +662,10 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     <div class="reveal">
       <details><summary>¿Tengo que dejar de usar Excel?<i aria-hidden="true">+</i></summary><p>No. Las desarrolladoras te siguen mandando sus listas como siempre y nosotros las pasamos al formato comparable.</p></details>
       <details><summary>Ya tengo un CRM. ¿Me sirve igual?<i aria-hidden="true">+</i></summary><p>Sí. Una Sola Lista se contrata sola y la usás sin cambiar tu CRM actual.</p></details>
-      <details><summary>¿Cuánto trabajo le lleva a mi equipo?<i aria-hidden="true">+</i></summary><p>Poco: mandar las listas y una capacitación de <span class="ph">[DURACIÓN]</span>. La carga y el control los hacemos nosotros.</p></details>
+      <details><summary>¿Cuánto trabajo le lleva a mi equipo?<i aria-hidden="true">+</i></summary><p>Poco: mandar las listas y una capacitación por videollamada de 1 hora. La carga y el control los hacemos nosotros.</p></details>
       <details><summary>¿Tengo que ordenar mi Drive antes?<i aria-hidden="true">+</i></summary><p>No. Trabajamos con tus carpetas como están hoy.</p></details>
       <details><summary>¿Quién ve mis listas?<i aria-hidden="true">+</i></summary><p>Solo nuestro equipo y las personas del tuyo que autorices. Firmamos NDA antes de recibirlas y tus datos van separados de los de otros clientes.</p></details>
-      <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>Te llevás tus datos. <span class="ph">[DEFINIR: formato, plazo y aviso de baja]</span></p></details>
+      <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>No hay permanencia: avisás con 30 días y te llevás tus datos en Excel.</p></details>
     </div>
   </div>
 </section>
@@ -687,9 +691,9 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <div class="done" id="done" role="status" hidden>
         <h3>Recibido. Esto es lo que sigue:</h3>
         <ol>
-          <li>Te escribimos por WhatsApp dentro de <span class="ph">[PLAZO]</span>.</li>
+          <li>Te escribimos por WhatsApp dentro de 1 día hábil.</li>
           <li>Te mandamos el NDA firmado.</li>
-          <li>Nos pasás 3 listas y te devolvemos el comparativo en <span class="ph">[PLAZO]</span>.</li>
+          <li>Nos pasás 3 listas y te devolvemos el comparativo en 3 días hábiles.</li>
         </ol>
       </div>
     </div>
@@ -764,7 +768,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     if (!ENDPOINT) return;
     data.vid = vid; data.fuente = fuente; data.dispositivo = window.innerWidth < 760 ? 'celular' : 'compu';
     var body = JSON.stringify(data);
-    try { fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }); }
+    try { fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }).catch(function(){}); }
     catch(e){ try { navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain;charset=utf-8' })); } catch(e2){} }
   }
   var once = {};
