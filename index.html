@@ -22,6 +22,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
+<!-- Analítica: Google Analytics 4. El ID y lo que se mide en todas las páginas están en analitica.js; plan de medición en _docs/plan-de-medicion.md -->
+<script src="analitica.js" defer></script>
 <style>
 /* Idea: obra de noche. Tinta azul profunda, cobalto de plano y amarillo de obra como señal. Todo en Outfit. */
 :root{
@@ -612,11 +614,12 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 </section>
 </main>
 
-<!-- 11. Pie. Faltan páginas reales de Privacidad y Términos: sumarlas acá cuando existan. -->
+<!-- 11. Pie. Falta la página de Términos: sumarla acá cuando exista. -->
 <footer>
   <div class="wrap">
     <span class="logo" style="min-height:0"><img src="logo-claro.png" alt="" width="27" height="32" style="height:32px"><span style="font-size:17px">CMP Solutions</span></span>
     <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
+    <a href="privacidad.html">Privacidad</a>
   </div>
 </footer>
 <div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>
@@ -671,7 +674,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   var fmt = function(n){ return Math.round(n).toString().replace(/\B(?=(\d{3})+(?!\d))/g, '.'); };
 
 
-  /* Envío a la planilla: contactos y actividad anónima */
+  /* Leads a la planilla (formulario y checklist). La actividad se mide con GA4: analitica.js y _docs/plan-de-medicion.md */
   var store = { get: function(k){ try { return localStorage.getItem(k); } catch(e){ return null; } }, set: function(k,v){ try { localStorage.setItem(k,v); } catch(e){} } };
   var vid = store.get('v_id');
   if (!vid) { vid = Date.now().toString(36) + Math.random().toString(36).slice(2, 8); store.set('v_id', vid); }
@@ -682,29 +685,24 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   function send(data){
     if (!ENDPOINT) return;
     data.vid = vid; data.fuente = fuente; data.dispositivo = window.innerWidth < 760 ? 'celular' : 'compu';
+    /* llegada = cómo llegó en esta sesión (UTM o sitio de origen); primera_visita = fecha y origen de su primera visita */
+    var o = window.cmpOrigen ? window.cmpOrigen() : null;
+    data.llegada = o ? o.visita : fuente; data.primera_visita = o ? o.primera : '';
     var body = JSON.stringify(data);
     try { fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }).catch(function(){}); }
     catch(e){ try { navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain;charset=utf-8' })); } catch(e2){} }
   }
+  /* Eventos de GA4 propios de esta página (los generales están en analitica.js). Sin analitica.js no hacen nada. */
   var once = {};
-  function track(ev, detalle, unaVez){
-    if (unaVez) { if (once[ev + detalle]) return; once[ev + detalle] = 1; }
-    send({ type: 'event', ev: ev, detalle: detalle || '' });
+  function track(ev, params, unaVez){
+    if (unaVez) { if (once[ev]) return; once[ev] = 1; }
+    if (window.cmpTrack) window.cmpTrack(ev, params || {});
   }
-  track('visita', location.pathname);
-  var marks = [25, 50, 75, 100];
-  window.addEventListener('scroll', function(){
-    var h = doc.scrollHeight - window.innerHeight; if (h <= 0) return;
-    var pct = (window.scrollY || 0) / h * 100;
-    marks.forEach(function(m){ if (pct >= m - 1) track('scroll', m + '%', true); });
-  }, { passive: true });
-  var planElegido = '';
+  /* Plan que eligió antes de ir al formulario: va en el mensaje de WhatsApp y en form_enviado. */
+  var eleccion = { plan: '', periodo: '' };
   document.addEventListener('click', function(e){
-    var a = e.target.closest ? e.target.closest('a[href="#form"], .plan a') : null; if (!a) return;
-    var sec = a.closest('section, header, dialog, .mob'), plan = a.closest('[data-plan]');
-    var det = sec ? (sec.id || sec.className.split(' ')[0] || sec.tagName.toLowerCase()) : '';
-    if (plan) { planElegido = plan.getAttribute('data-plan') + ' (' + periodo + ')'; det += ' · ' + planElegido; }
-    track('clic_boton', det);
+    var plan = e.target.closest ? e.target.closest('.plan a') : null; plan = plan && plan.closest('[data-plan]'); if (!plan) return;
+    eleccion = { plan: plan.getAttribute('data-plan'), periodo: periodo };
   });
 
   /* Precios: anual por defecto. Mensual = data-m; anual = 10 meses (2 sin cargo). */
@@ -725,10 +723,12 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       });
       $('#bill-save').textContent = (anual ? 'Ahorrás hasta' : 'Con el anual ahorrás hasta') + ' USD ' + fmt(maxAhorro) + ' por año';
     };
-    $$('button', bill).forEach(function(b){ b.addEventListener('click', function(){ setPeriodo(b.getAttribute('data-p')); track('precios_periodo', periodo, true); }); });
+    $$('button', bill).forEach(function(b){ b.addEventListener('click', function(){
+      var p = b.getAttribute('data-p'); if (p !== periodo) track('precios_periodo', { periodo: p });
+      setPeriodo(p);
+    }); });
     setPeriodo('anual');
   }
-  $$('details').forEach(function(d){ d.addEventListener('toggle', function(){ if (d.open) track('pregunta', $('summary', d).textContent.replace('+', '').trim(), true); }); });
 
   /* Titular: palabra por palabra */
   var h1 = $('#h1');
@@ -834,13 +834,20 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       return '<div class="row" style="margin-top:10px"><span>' + esc(u.n) + ' · ' + esc(u.t) + ' · ' + u.m + ' m²</span><span class="mono">' + fmt(u.ant) + ' + ' + fmt(u.cuo) + '/mes</span></div>';
     }).join('') : '<p style="color:var(--muted)">Sin unidades para este presupuesto.</p>';
   }
-  ant.addEventListener('input', function(){ demo(); track('demo_uso', 'anticipo', true); }); cuo.addEventListener('input', function(){ demo(); track('demo_uso', 'cuota', true); }); demo();
+  ant.addEventListener('input', demo); cuo.addEventListener('input', demo); demo();
+  /* demo_slider: al soltar el slider (no en cada paso), con el valor y cuántas unidades entran */
+  [['anticipo', ant], ['cuota', cuo]].forEach(function(s){
+    s[1].addEventListener('change', function(){ track('demo_slider', { control: s[0], valor: +s[1].value, resultado: res.textContent }); });
+  });
   $$('.tab').forEach(function(t){
     t.addEventListener('click', function(){
+      if (t.getAttribute('aria-selected') !== 'true') track('demo_pestana', { pestana: t.getAttribute('data-tab') });
       $$('.tab').forEach(function(x){ x.setAttribute('aria-selected', x === t ? 'true' : 'false'); });
       $$('[data-panel]').forEach(function(p){ p.hidden = p.getAttribute('data-panel') !== t.getAttribute('data-tab'); });
-      track('demo_pestana', t.getAttribute('data-tab'), true);
     });
+  });
+  $$('.demo .ghost').forEach(function(b){
+    b.addEventListener('click', function(){ track('demo_boton', { destino: b.textContent.trim().toLowerCase().replace(/\s+/g, '_') }); });
   });
 
   /* Aviso del checklist: salta una sola vez, cuando el visitante pasó la mitad de la página. Después queda la pestaña del costado. */
@@ -852,12 +859,12 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       if (pop.open) return;
       if (store.get('pop_ok')) listo();
       store.set('pop', '1'); tab.hidden = true;
-      try { pop.showModal(); track('popup_visto', why); setTimeout(function(){ ($('#pop-ok').hidden ? $('#pop-nombre') : $('#pop-dl')).focus(); }, 60); } catch(e){ tab.hidden = false; }
+      try { pop.showModal(); track('checklist_visto', { motivo: why }); setTimeout(function(){ ($('#pop-ok').hidden ? $('#pop-nombre') : $('#pop-dl')).focus(); }, 60); } catch(e){ tab.hidden = false; }
     }
     function auto(){
       if (store.get('pop') || store.get('lead')) return;
       if (inView($('#form'))) { setTimeout(auto, 5000); return; }
-      open('a mitad de página');
+      open('mitad_pagina');
     }
     if (store.get('pop')) tab.hidden = false;
     else {
@@ -867,34 +874,37 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       };
       window.addEventListener('scroll', mitad, { passive: true });
     }
-    tab.addEventListener('click', function(){ open('pestaña del costado'); });
+    tab.addEventListener('click', function(){ open('pestana_lateral'); });
     $('#pop-x').addEventListener('click', function(){ pop.close(); });
     pop.addEventListener('click', function(e){ if (e.target === pop) pop.close(); });
-    pop.addEventListener('close', function(){ tab.hidden = false; track('popup_cerrado', $('#pop-ok').hidden ? 'sin dejar datos' : 'con datos'); });
+    pop.addEventListener('close', function(){ tab.hidden = false; track('checklist_cerrado', { motivo: $('#pop-ok').hidden ? 'sin_datos' : 'con_datos' }); });
     $('#pop-f').addEventListener('submit', function(e){
       e.preventDefault();
       var n = $('#pop-nombre').value.trim(), m = $('#pop-mail').value.trim(), w = $('#pop-wa').value.trim();
-      var falla = !n ? ['#pop-nombre', 'Escribí tu nombre.']
-        : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m) ? ['#pop-mail', 'Revisá el mail: tiene que tener el formato nombre@dominio.com.']
-        : w.replace(/\D/g, '').length < 8 ? ['#pop-wa', 'Escribí tu WhatsApp con código de área.'] : null;
-      if (falla) { $('#pop-err').textContent = falla[1]; $('#pop-err').hidden = false; $(falla[0]).focus(); return; }
+      var falla = !n ? ['#pop-nombre', 'Escribí tu nombre.', 'nombre']
+        : !/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(m) ? ['#pop-mail', 'Revisá el mail: tiene que tener el formato nombre@dominio.com.', 'mail']
+        : w.replace(/\D/g, '').length < 8 ? ['#pop-wa', 'Escribí tu WhatsApp con código de área.', 'whatsapp'] : null;
+      if (falla) { $('#pop-err').textContent = falla[1]; $('#pop-err').hidden = false; $(falla[0]).focus(); track('checklist_error', { campo: falla[2] }); return; }
       $('#pop-err').hidden = true;
-      send({ type: 'lead', origen: 'Checklist', nombre: n, mail: m, whatsapp: w, desarrolladoras: '' }); track('popup_enviado', '');
+      send({ type: 'lead', origen: 'Checklist', nombre: n, mail: m, whatsapp: w, desarrolladoras: '' }); track('checklist_enviado');
       store.set('pop_ok', '1'); listo(); $('#pop-dl').focus();
     });
-    $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga', ''); });
+    $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga'); });
     $('#pop-cta').addEventListener('click', function(){ pop.close(); });
   })();
 
   /* Formulario */
   var form = $('#lead');
-  form.addEventListener('focusin', function(){ track('form_inicio', '', true); });
+  form.addEventListener('focusin', function(){ track('form_inicio', {}, true); });
   form.addEventListener('submit', function(e){
     e.preventDefault();
     var n = $('#f-nombre').value.trim(), w = $('#f-wa').value.trim(), c = $('#f-cant').value;
-    if (!n || w.replace(/\D/g, '').length < 8) { $('#f-err').hidden = false; (n ? $('#f-wa') : $('#f-nombre')).focus(); return; }
+    if (!n || w.replace(/\D/g, '').length < 8) { $('#f-err').hidden = false; (n ? $('#f-wa') : $('#f-nombre')).focus(); track('form_error', { campo: n ? 'whatsapp' : 'nombre' }); return; }
     form.hidden = true; $('#done').hidden = false;
-    send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c }); track('form_enviado', c); store.set('lead', '1');
+    send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c });
+    track('form_enviado', eleccion.plan ? { desarrolladoras: c, plan: eleccion.plan, periodo: eleccion.periodo } : { desarrolladoras: c });
+    store.set('lead', '1');
+    var planElegido = eleccion.plan ? eleccion.plan + ' (' + eleccion.periodo + ')' : '';
     if (WHATSAPP) {
       var msg = 'Hola, soy ' + n + '. Quiero mi comparativo. Comercializo ' + c + ' desarrolladoras.' + (planElegido ? ' Me interesa el plan ' + planElegido + '.' : '') + ' Mi WhatsApp: ' + w;
       var a = document.createElement('a');
