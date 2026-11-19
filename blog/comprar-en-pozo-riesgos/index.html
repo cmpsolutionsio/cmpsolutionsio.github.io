@@ -32,6 +32,8 @@
 <link rel="stylesheet" href="/blog/blog.css">
 <!-- Analítica: GA4. Qué se mide y cómo, en analitica.js y _docs/plan-de-medicion.md -->
 <script src="/analitica.js" defer></script>
+<script>/* Si la nota llega compartida por un inmobiliario, el cliente la ve sin los recuadros para inmobiliarios. */
+if (/[?&]utm_medium=compartido(&|$)/.test(location.search)) document.documentElement.classList.add('compartida');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -134,6 +136,12 @@
         <p>Comprar en pozo suele ser más barato que comprar terminado porque asumís tres riesgos: que la obra se atrase o no se termine, que las cuotas ajustadas por costo de construcción suban más de lo que pensabas y que el desarrollador tenga problemas. La mayoría se reduce antes de firmar: elegí un desarrollador con obras entregadas, entendé qué contrato firmás y cómo ajustan las cuotas, y preguntá si tu boleto puede quedar registrado.</p>
       </div>
 
+      <div class="box pro para-broker">
+        <p class="eyebrow">Si sos inmobiliario</p>
+        <p>Esta nota está pensada para que se la mandes a tus clientes cuando te pregunten si es seguro comprar en pozo. Tiene fuentes y fechas, y tu cliente la ve sin estos recuadros para inmobiliarios.</p>
+        <a class="btn wa" href="https://wa.me/?text=Te%20paso%20una%20nota%20que%20explica%20los%20riesgos%20de%20comprar%20en%20pozo%20y%20qu%C3%A9%20revisar%20antes%20de%20firmar%3A%20https://cmpsolutionsio.github.io/blog/comprar-en-pozo-riesgos/%3Futm_source%3Dwhatsapp%26utm_medium%3Dcompartido%26utm_campaign%3Dnota-broker" target="_blank" rel="noopener" data-evento="compartir_nota">Mandásela por WhatsApp</a>
+      </div>
+
       <h2 id="que-es">¿Qué es comprar en pozo?</h2>
       <p>Es comprar una unidad antes de que el edificio esté terminado: a veces cuando todavía es un terreno, a veces con la obra empezada. En general pagás un anticipo, cuotas mientras dura la obra y un saldo cuando te entregan la unidad.</p>
       <p>Las dos formas más comunes son:</p>
@@ -202,9 +210,10 @@
       <p>Puede convenir si se dan tres cosas: podés pagar las cuotas con margen aunque el índice suba, no necesitás mudarte ni alquilar la unidad antes de la fecha de entrega (más un colchón por atrasos) y elegiste bien a quién le comprás.</p>
       <p>Iván Kerr, abogado y ex secretario de Vivienda de la Nación, escribió en noviembre de 2026 que comprar en pozo es históricamente la forma más barata de acceder a una vivienda nueva en Argentina, pero también la más excluyente, porque exige tener ahorros para pagar las cuotas de la obra <a class="ref" href="#f4">[4]</a>. Eso empezó a cambiar con la primera línea de crédito hipotecario para comprar en pozo: la explicamos en <a href="/blog/credito-hipotecario-vs-financiacion-desarrollador/">crédito hipotecario o financiación del desarrollador</a>.</p>
 
-      <div class="box pro">
+      <div class="box pro para-broker">
         <p class="eyebrow">Si sos inmobiliario</p>
         <p>Tus clientes te van a hacer estas mismas preguntas por cada desarrollo: de cuándo es la lista, cómo ajustan las cuotas, qué tipo de contrato es y cómo viene la obra. Tenerlo a mano y al día, desarrollo por desarrollo, es lo que separa una respuesta en cinco minutos de una en tres horas. Antes de pasar un precio, repasá los <a href="/blog/como-vender-departamentos-en-pozo/#controles">7 controles antes de cotizar un pozo</a>.</p>
+        <a class="btn wa" href="https://wa.me/?text=Te%20paso%20una%20nota%20que%20explica%20los%20riesgos%20de%20comprar%20en%20pozo%20y%20qu%C3%A9%20revisar%20antes%20de%20firmar%3A%20https://cmpsolutionsio.github.io/blog/comprar-en-pozo-riesgos/%3Futm_source%3Dwhatsapp%26utm_medium%3Dcompartido%26utm_campaign%3Dnota-broker" target="_blank" rel="noopener" data-evento="compartir_nota">Mandásela por WhatsApp</a>
       </div>
 
       <section class="faq" aria-labelledby="preguntas">
@@ -232,7 +241,7 @@
         <p class="method">Cómo hicimos esta nota: la escribió el equipo de CMP Solutions, que arma listas de precios comparables y CRM para inmobiliarias que venden pozo. Las normas salen del texto oficial en InfoLEG y los datos, de las fuentes citadas con su fecha. Si ves un error, escribinos por <a href="https://wa.me/5491158714730" rel="noopener">WhatsApp</a>.</p>
       </section>
 
-      <aside class="cta" aria-label="Comparativo sin costo">
+      <aside class="cta para-broker" aria-label="Comparativo sin costo">
         <p class="eyebrow">Para inmobiliarias y comercializadoras</p>
         <h2>¿Vendés pozo de 3 o más desarrolladoras?</h2>
         <p>Te armamos un comparativo sin costo con 3 de tus listas: anticipo, cuotas y saldo de cada unidad, con la misma vara.</p>
@@ -267,7 +276,7 @@
         <h3><a href="/blog/credito-hipotecario-vs-financiacion-desarrollador/">Crédito hipotecario o financiación del desarrollador: cuál conviene para comprar en pozo</a></h3>
         <p>La primera línea hipotecaria para pozo, las tasas UVA de noviembre y cuándo conviene cada camino.</p>
       </li>
-      <li class="card">
+      <li class="card para-broker">
         <p class="eyebrow">Para inmobiliarias</p>
         <h3><a href="/blog/como-vender-departamentos-en-pozo/">Cómo vender departamentos en pozo</a></h3>
         <p>Listas al día, planes comparables, respuesta rápida y seguimiento: la guía para quien comercializa.</p>

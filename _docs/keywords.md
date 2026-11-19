@@ -19,9 +19,9 @@ No hay herramienta paga de keywords conectada (DataForSEO, Ahrefs, Semrush). El 
 
 ## La estrategia en una línea
 
-Cuatro clusters: tres traen al **comprador** de pozo (mucho volumen, construyen autoridad y citas en buscadores de IA) y uno trae al **inmobiliario o comercializador** (poco volumen, pero es el que compra CMP). Cada nota para compradores tiene un recuadro "Si sos inmobiliario" y un CTA al comparativo, porque los brokers buscan lo mismo para responderle a sus clientes y pueden mandarles la nota.
+El cliente de CMP es quien **vende** pozo, así que el blog le habla primero a él (decisión de Pedro del 19/11/2026). El cluster D (comercializar pozo) es la prioridad: tiene poco volumen, pero trae a inmobiliarios, comercializadoras y desarrolladoras. Los clusters A, B y C responden preguntas del **comprador** y se escriben como material para que el broker se lo mande a sus clientes: tienen un botón para compartir por WhatsApp, y el cliente ve la nota sin los recuadros para inmobiliarios. Esas notas traen volumen y citas de las IA, que le dan autoridad al sitio, y le dan al broker algo útil de CMP.
 
-Prioridad: el cluster D (comercializar pozo) convierte; el A y el B le dan autoridad al sitio y hoy tienen una noticia a favor (la primera línea hipotecaria para comprar en pozo, del 17/11/2026), que conviene aprovechar antes que los portales grandes.
+Proporción: 10 de cada 15 notas para vendedores (ver [plan-editorial.md](plan-editorial.md)).
 
 ## Intención de búsqueda
 
@@ -32,7 +32,7 @@ Prioridad: el cluster D (comercializar pozo) convierte; el A y el B le dan autor
 
 ---
 
-## Cluster A · Comprar en pozo y sus riesgos
+## Cluster A · Comprar en pozo y sus riesgos · para mandar al cliente
 
 **Nota pilar:** [Comprar en pozo: los riesgos reales y cómo cuidarte](../blog/comprar-en-pozo-riesgos/index.html) (escrita, para aprobar).
 
@@ -62,7 +62,7 @@ Prioridad: el cluster D (comercializar pozo) convierte; el A y el B le dan autor
 
 **Notas de apoyo** (en el plan editorial): Índice CAC explicado; Fideicomiso al costo vs. precio cerrado; Qué revisar en el contrato de pozo; Qué pasa si la obra se atrasa o se cae.
 
-## Cluster B · Financiar la compra: crédito hipotecario y cuotas del desarrollador
+## Cluster B · Financiar la compra: crédito hipotecario y cuotas del desarrollador · para mandar al cliente
 
 Une dos temas que pidió Pedro (créditos hipotecarios, e hipotecario vs. financiación del desarrollador): para quien compra en pozo es una sola decisión.
 
@@ -92,7 +92,7 @@ Une dos temas que pidió Pedro (créditos hipotecarios, e hipotecario vs. financ
 
 **Ojo:** "créditos hipotecarios" a secas lo pelean La Nación, Infobae, Clarín y los bancos. No es realista rankear ahí en 2027. Sí es realista en "crédito hipotecario para pozo" y "hipoteca divisible", donde todavía hay pocas notas buenas.
 
-## Cluster C · Pozo o usado
+## Cluster C · Pozo o usado · para mandar al cliente
 
 **Nota pilar (pendiente):** Pozo o usado: qué conviene en 2026, con números.
 
@@ -112,7 +112,7 @@ Une dos temas que pidió Pedro (créditos hipotecarios, e hipotecario vs. financ
 
 **Fuente pública útil:** Beltrán Briones (Grupo Briones). En su columna del 18/10/2026 explica por qué el pozo puede funcionar con el mercado en alza o en baja. En Forbes Argentina sostiene que comparar el precio del pozo con el del usado confunde, porque el pozo de calidad se concentra en algunas zonas. Usarlo siempre resumido, citado y con link, sin inventarle frases ni dar a entender que respalda a CMP.
 
-## Cluster D · Comercializar pozo (para inmobiliarios, comercializadoras y desarrolladoras)
+## Cluster D · Comercializar pozo (para inmobiliarios, comercializadoras y desarrolladoras) · prioridad
 
 **Nota pilar:** [Cómo vender departamentos en pozo: guía para inmobiliarias y comercializadoras](../blog/como-vender-departamentos-en-pozo/index.html) (escrita, para aprobar).
 
@@ -128,6 +128,10 @@ Une dos temas que pidió Pedro (créditos hipotecarios, e hipotecario vs. financ
 | cómo comparar planes de pago en pozo | B2B / comparativa | Bajo |
 | seguimiento de leads inmobiliarios | B2B | Bajo |
 | plantillas de WhatsApp para inmobiliarias | B2B | Bajo |
+| hipoteca divisible desarrolladora | B2B | Bajo (tema nuevo) |
+| cartera de desarrolladoras / cómo pedir listas de precios | B2B | Muy bajo |
+| métricas equipo comercial inmobiliario | B2B | Bajo |
+| cómo presentar un emprendimiento en pozo | B2B | Bajo |
 
 **Preguntas que hace la gente:**
 - ¿Cómo comparo planes de cuotas de distintas desarrolladoras?

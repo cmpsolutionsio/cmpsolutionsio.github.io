@@ -32,6 +32,8 @@
 <link rel="stylesheet" href="/blog/blog.css">
 <!-- Analítica: GA4. Qué se mide y cómo, en analitica.js y _docs/plan-de-medicion.md -->
 <script src="/analitica.js" defer></script>
+<script>/* Si la nota llega compartida por un inmobiliario, el cliente la ve sin los recuadros para inmobiliarios. */
+if (/[?&]utm_medium=compartido(&|$)/.test(location.search)) document.documentElement.classList.add('compartida');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -133,6 +135,12 @@
         <p>Hasta noviembre de 2026, casi toda compra en pozo se pagaba con el plan de cuotas del desarrollador, porque sin escritura individual no había sobre qué constituir una hipoteca. El 17/11/2026 el Banco Ciudad lanzó la primera línea hipotecaria para comprar en pozo: hasta el 75% del precio, UVA más 9,5% anual, solo en proyectos de la Ciudad de Buenos Aires aprobados por el banco. El crédito conviene si calificás por ingresos y tu desarrollo está aprobado; las cuotas del desarrollador, si no calificás, si tu proyecto no está en ninguna línea o si querés terminar de pagar cerca de la entrega.</p>
       </div>
 
+      <div class="box pro para-broker">
+        <p class="eyebrow">Si sos inmobiliario</p>
+        <p>Esta nota está pensada para que se la mandes a tus clientes cuando te pregunten si pueden comprar con crédito. Tiene fuentes y fechas, y tu cliente la ve sin estos recuadros para inmobiliarios.</p>
+        <a class="btn wa" href="https://wa.me/?text=Te%20paso%20una%20nota%20que%20compara%20el%20cr%C3%A9dito%20hipotecario%20con%20las%20cuotas%20del%20desarrollador%20para%20comprar%20en%20pozo%3A%20https://cmpsolutionsio.github.io/blog/credito-hipotecario-vs-financiacion-desarrollador/%3Futm_source%3Dwhatsapp%26utm_medium%3Dcompartido%26utm_campaign%3Dnota-broker" target="_blank" rel="noopener" data-evento="compartir_nota">Mandásela por WhatsApp</a>
+      </div>
+
       <h2 id="por-que-no">¿Por qué el pozo casi nunca se pagaba con crédito hipotecario?</h2>
       <p>Porque una hipoteca necesita un inmueble sobre el cual constituirse, y mientras el edificio está en obra la unidad que compraste todavía no existe como inmueble separado: no tiene escritura propia. Por eso las preventas se sostenían con ahorros, con cuotas pactadas con la desarrolladora o con financiamiento informal <a class="ref" href="#f1">[1]</a>.</p>
 
@@ -232,9 +240,10 @@
         <li>¿Cobra interés por financiar, o está incluido en el precio?</li>
       </ul>
 
-      <div class="box pro">
+      <div class="box pro para-broker">
         <p class="eyebrow">Si sos inmobiliario</p>
         <p>La línea nueva es un argumento de venta, pero por ahora se anunció un solo proyecto aprobado. Preguntale a cada desarrolladora que comercializás si piensa afectar sus proyectos al régimen del DNU 1017/2024: es lo que permite que un banco financie a tus compradores. Y armale a cada cliente los dos escenarios, crédito y cuotas, con los mismos números. Cómo comparar planes distintos con la misma vara está en <a href="/blog/como-vender-departamentos-en-pozo/#comparar">cómo vender departamentos en pozo</a>.</p>
+        <a class="btn wa" href="https://wa.me/?text=Te%20paso%20una%20nota%20que%20compara%20el%20cr%C3%A9dito%20hipotecario%20con%20las%20cuotas%20del%20desarrollador%20para%20comprar%20en%20pozo%3A%20https://cmpsolutionsio.github.io/blog/credito-hipotecario-vs-financiacion-desarrollador/%3Futm_source%3Dwhatsapp%26utm_medium%3Dcompartido%26utm_campaign%3Dnota-broker" target="_blank" rel="noopener" data-evento="compartir_nota">Mandásela por WhatsApp</a>
       </div>
 
       <section class="faq" aria-labelledby="preguntas">
@@ -261,7 +270,7 @@
         <p class="method">Cómo hicimos esta nota: la escribió el equipo de CMP Solutions, que arma listas de precios comparables y CRM para inmobiliarias que venden pozo. Las condiciones de los créditos salen de las notas citadas, con su fecha; antes de decidir, confirmalas en el banco. Si ves un error o un dato viejo, escribinos por <a href="https://wa.me/5491158714730" rel="noopener">WhatsApp</a>.</p>
       </section>
 
-      <aside class="cta" aria-label="Comparativo sin costo">
+      <aside class="cta para-broker" aria-label="Comparativo sin costo">
         <p class="eyebrow">Para inmobiliarias y comercializadoras</p>
         <h2>¿Vendés pozo de 3 o más desarrolladoras?</h2>
         <p>Te armamos un comparativo sin costo con 3 de tus listas: anticipo, cuotas y saldo de cada unidad, con la misma vara.</p>
@@ -296,7 +305,7 @@
         <h3><a href="/blog/comprar-en-pozo-riesgos/">Comprar en pozo: los riesgos reales y cómo cuidarte</a></h3>
         <p>Atrasos, cuotas por CAC y la solidez del desarrollador: qué puede salir mal y qué te protege la ley.</p>
       </li>
-      <li class="card">
+      <li class="card para-broker">
         <p class="eyebrow">Para inmobiliarias</p>
         <h3><a href="/blog/como-vender-departamentos-en-pozo/">Cómo vender departamentos en pozo</a></h3>
         <p>Listas al día, planes comparables, respuesta rápida y seguimiento: la guía para quien comercializa.</p>

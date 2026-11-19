@@ -175,3 +175,7 @@ tbody th small{display:block;font-weight:400;font-size:13.5px;color:var(--muted)
   table.stack td::before{content:attr(data-label);display:block;font-size:13px;font-weight:600;color:var(--muted)}
   table.stack td.empty{display:none}
 }
+/* Notas para mandarle al cliente: botón de WhatsApp y recuadros que el cliente no ve si llega por el link compartido */
+.btn.wa{background:#0E7A3A;color:#fff}.btn.wa:hover{box-shadow:0 10px 24px rgba(14,122,58,.3)}
+.box .btn{margin-top:16px}
+.compartida .para-broker,.compartida .bar .btn{display:none !important}

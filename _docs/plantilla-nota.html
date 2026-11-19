@@ -7,7 +7,12 @@
   4. Cada dato que cambia (tasas, índices, requisitos) va con fuente numerada [n] y fecha.
   5. Sumá la nota a blog/index.html (tarjeta + blogPost del JSON-LD), sitemap.xml, llms.txt
      y a "Seguí leyendo" de su nota pilar. Ver _docs/plan-editorial.md.
-  6. Borrá este comentario.
+  6. Dos tipos de nota (ver _docs/plan-editorial.md):
+     - Para vendedores: borrá el recuadro "PARA MANDAR AL CLIENTE" y usá "Cómo lo resolvemos en CMP" abajo.
+     - Para mandar al cliente: dejá ese recuadro y armá su link de WhatsApp (texto + link de la nota con
+       ?utm_source=whatsapp&utm_medium=compartido&utm_campaign=nota-broker, con "?" "&" y "=" codificados).
+       Lo que tiene la clase para-broker no lo ve el cliente que llega por ese link.
+  7. Borrá este comentario.
 -->
 <html lang="es-AR">
 <head>
@@ -42,6 +47,8 @@
 <link rel="stylesheet" href="/blog/blog.css">
 <!-- Analítica: GA4. Qué se mide y cómo, en analitica.js y _docs/plan-de-medicion.md -->
 <script src="/analitica.js" defer></script>
+<script>/* Si la nota llega compartida por un inmobiliario, el cliente la ve sin los recuadros para inmobiliarios. */
+if (/[?&]utm_medium=compartido(&|$)/.test(location.search)) document.documentElement.classList.add('compartida');</script>
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -136,6 +143,13 @@
         <p>[[Respuesta directa a la pregunta del título.]]</p>
       </div>
 
+      <!-- PARA MANDAR AL CLIENTE: solo en notas para compradores. En notas para vendedores, borrar este bloque. -->
+      <div class="box pro para-broker">
+        <p class="eyebrow">Si sos inmobiliario</p>
+        <p>Esta nota está pensada para que se la mandes a tus clientes cuando te pregunten [[por qué tema]]. Tiene fuentes y fechas, y tu cliente la ve sin estos recuadros para inmobiliarios.</p>
+        <a class="btn wa" href="https://wa.me/?text=[[Texto%20codificado]]%3A%20https://cmpsolutionsio.github.io/blog/[[slug]]/%3Futm_source%3Dwhatsapp%26utm_medium%3Dcompartido%26utm_campaign%3Dnota-broker" target="_blank" rel="noopener" data-evento="compartir_nota">Mandásela por WhatsApp</a>
+      </div>
+
       <!-- Títulos en forma de pregunta, con id para el índice. Un párrafo = una idea. -->
       <h2 id="[[seccion-1]]">[[¿Pregunta 1?]]</h2>
       <p>[[Texto. Los datos van con su fuente: según CAMARCO <a class="ref" href="#f1">[1]</a>.]]</p>
@@ -152,8 +166,8 @@
         </table>
       </div>
 
-      <!-- Recuadro para el inmobiliario en notas para compradores. En notas para inmobiliarios, "Cómo lo resolvemos en CMP". -->
-      <div class="box pro">
+      <!-- Recuadro para el inmobiliario en notas para compradores. En notas para vendedores, eyebrow "Cómo lo resolvemos en CMP" y sin la clase para-broker. -->
+      <div class="box pro para-broker">
         <p class="eyebrow">Si sos inmobiliario</p>
         <p>[[Qué significa esto para quien vende pozo, con un link interno.]]</p>
       </div>
@@ -177,7 +191,7 @@
         <p class="method">Cómo hicimos esta nota: [[de dónde salen los datos y quién la escribió]]. Si ves un error, escribinos por <a href="https://wa.me/5491158714730" rel="noopener">WhatsApp</a>.</p>
       </section>
 
-      <aside class="cta" aria-label="Comparativo sin costo">
+      <aside class="cta para-broker" aria-label="Comparativo sin costo">
         <p class="eyebrow">Para inmobiliarias y comercializadoras</p>
         <h2>¿Vendés pozo de 3 o más desarrolladoras?</h2>
         <p>Te armamos un comparativo sin costo con 3 de tus listas: anticipo, cuotas y saldo de cada unidad, con la misma vara.</p>
