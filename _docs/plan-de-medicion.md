@@ -26,6 +26,11 @@ Esta carpeta empieza con `_`, así que GitHub Pages no la publica: queda solo en
 
 Con eso ya mide la vista de página, las secciones, el scroll, el tiempo, los clics a CTA, WhatsApp y links internos, y los `<details>` como preguntas frecuentes.
 
+**Para que un link mande su propio evento,** agregale `data-evento="nombre"`. Por ejemplo, `<a href="https://wa.me/?text=…" data-evento="compartir_nota">`.
+- El nombre va en minúsculas, con letras, números y `_`, y empieza con una letra.
+- Tiene hasta 40 caracteres.
+- No puede empezar con `ga_`, `google_` ni `firebase_`.
+
 ## Pruebas en la compu
 
 1. Correr `python3 -m http.server 8790` en la carpeta del repo y abrir http://localhost:8790.
@@ -53,7 +58,9 @@ Los nombres van en castellano y en snake_case. Los parámetros vacíos no se man
 | `scroll_profundidad` | Llega al 25, 50, 75, 90 y 100 % de la página. Una vez cada uno. | `porcentaje` |
 | `tiempo_activo` | Cumple 15 s, 30 s, 1, 2 y 5 min con la pestaña visible y algún movimiento en el último minuto. | `segundos` |
 | `clic_cta` | Clic en cualquier link al formulario ("Quiero mi comparativo"). | `seccion`, y `plan` y `periodo` si está en una tarjeta de plan |
-| `clic_whatsapp` | Clic en cualquier link a WhatsApp: plan Integral, pie o el botón que aparece después del formulario. | `seccion`, y `plan` y `periodo` si está en una tarjeta de plan |
+| `clic_whatsapp` | Clic en un link a WhatsApp **con número**, es decir, un contacto a CMP: plan Integral, pie o el botón que aparece después del formulario. | `seccion`, y `plan` y `periodo` si está en una tarjeta de plan |
+| `compartir_whatsapp` | Clic en un link a WhatsApp **sin número** (`wa.me/?text=…`): alguien comparte algo con un tercero. | `seccion` |
+| *(nombre de `data-evento`)* | Clic en un link con `data-evento="nombre"`: se manda ese evento en vez del automático. Hoy: `compartir_nota`, el botón "Mandásela por WhatsApp" de las notas del blog. | `seccion` |
 | `clic_nav` | Clic en el menú, el logo, "Garantía de 30 días" o un link a otra página del sitio. | `seccion`, `destino` |
 | `faq_abierta` | Abre una pregunta frecuente. Una vez por pregunta y por página. | `pregunta`, `seccion` |
 
@@ -118,6 +125,14 @@ https://cmpsolutionsio.github.io/?utm_source=whatsapp&utm_medium=mensaje&utm_cam
 https://cmpsolutionsio.github.io/?utm_source=linkedin&utm_medium=social&utm_campaign=lanzamiento
 ```
 
+**UTM que ya usa el sitio:**
+
+| Link | `utm_source` | `utm_medium` | `utm_campaign` |
+|---|---|---|---|
+| Botón "Mandásela por WhatsApp" de las notas del blog: un broker le pasa la nota a su cliente | `whatsapp` | `compartido` | `nota-broker` |
+
+Para ver cuánta gente llega por esos links: Adquisición de tráfico, filtrado por campaña `nota-broker`.
+
 ## Cruzar un lead con su recorrido
 
 1. Cada lead llega a la planilla con `vid`, el id al azar del visitante.
@@ -171,6 +186,7 @@ Lo hace quien administre la propiedad.
 | ¿Qué plan les interesa? ¿Anual o mensual? | Exploración libre: `clic_cta` y `form_enviado` por "Plan" y "Período"; `precios_periodo` por "Período" |
 | ¿Usan la demo? ¿Con qué presupuesto? | Exploración libre: `demo_pestana` por "Pestaña demo"; `demo_slider` por "Control demo", "Valor" y "Resultado demo" |
 | ¿Qué preguntas abren? | Exploración libre: `faq_abierta` por "Pregunta" |
+| ¿Qué notas del blog comparten los brokers? | Exploración libre: `compartir_nota` por "Ruta de la página". Las visitas que traen esos links están en la campaña `nota-broker`. |
 | ¿Dónde se traban en el formulario? | `form_inicio` contra `form_enviado`; `form_error` por "Campo con error" |
 | ¿Funciona el popup del checklist? | `checklist_visto` por "Motivo" → `checklist_enviado` → `checklist_descarga`; `checklist_cerrado` por "Motivo" |
 | ¿Cuánto tiempo se quedan? | Informes → Interacción → Páginas (tiempo de interacción promedio), y `tiempo_activo` por "Segundos activo" |

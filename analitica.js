@@ -125,15 +125,21 @@
     }
   }, 1000);
 
-  /* Clics: CTA al formulario, WhatsApp y links internos. Los links externos los toma solo GA4 (clics salientes). */
+  /* Clics: CTA al formulario, WhatsApp y links internos. Los links externos los toma solo GA4 (clics salientes).
+     Un link con data-evento="nombre" manda ese evento en vez del automático (ej. compartir_nota en el blog). */
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null; if (!a) return;
     var href = a.getAttribute('href') || '';
-    if (/\.pdf($|\?)/i.test(href)) return; /* descargas: las toma GA4 (file_download) y el checklist tiene su evento */
     var p = { seccion: seccion(a) };
+    var propio = (a.getAttribute('data-evento') || '').toLowerCase();
+    if (/^[a-z][a-z0-9_]{0,39}$/.test(propio) && !/^(ga_|google_|firebase_)/.test(propio)) { track(propio, p); return; }
+    if (/\.pdf($|\?)/i.test(href)) return; /* descargas: las toma GA4 (file_download) y el checklist tiene su evento */
     var plan = a.closest('[data-plan]');
     if (plan) { p.plan = plan.getAttribute('data-plan'); p.periodo = periodo(); }
-    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//i.test(href)) { track('clic_whatsapp', p); return; }
+    if (/^https?:\/\/(wa\.me|api\.whatsapp\.com|web\.whatsapp\.com)\//i.test(href)) {
+      /* Con número es un contacto a CMP; sin número (wa.me/?text=...) es alguien compartiendo algo con un tercero. */
+      track(/wa\.me\/\d|[?&]phone=\d/i.test(href) ? 'clic_whatsapp' : 'compartir_whatsapp', p); return;
+    }
     if (/#form$/.test(href)) { track('clic_cta', p); return; }
     if (href.charAt(0) === '#') { p.destino = href.slice(1) || 'inicio'; track('clic_nav', p); return; }
     try {
