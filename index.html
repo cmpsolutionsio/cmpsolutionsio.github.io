@@ -301,6 +301,16 @@ summary i{font-style:normal;font-size:26px;line-height:1;color:var(--blue);trans
 details[open] summary i{transform:rotate(45deg)}
 details p{padding-bottom:20px;color:var(--muted);max-width:38em}
 
+/* 9b. Blog */
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.post{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;color:var(--ink);text-decoration:none;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.post:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,16,32,.1);border-color:var(--ink)}
+.post .tag{align-self:flex-start}
+.post h3{font-size:21px}
+.post p{font-size:15px;color:var(--muted)}
+.post .go{margin-top:auto;padding-top:6px;font-weight:600;color:var(--blue)}
+.blog-all{margin-top:28px;font-weight:600}
+
 /* 10. Cierre */
 .close{position:relative;background:var(--ink);color:#fff;overflow:hidden}
 .close-bg{position:absolute;inset:0;background:#16204A url('https://images.unsplash.com/photo-1742427605934-db05a2a833f6?auto=format&fit=crop&w=2000&q=70') center/cover}
@@ -362,6 +372,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   body{font-size:16.5px}
   .sec{padding:68px 0}
   .nav,.bar .btn{display:none}
+  .nav{display:flex}.nav a:not([href="/blog/"]){display:none} /* en el celular la barra muestra solo el link al blog */
   .hero{padding:112px 0 72px}
   .hero-card{transform:none;animation:none}
   body{padding-bottom:72px}
@@ -624,6 +635,19 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   </div>
 </section>
 
+<!-- 9b. Blog: guías para el equipo y notas para mandarle al cliente -->
+<section class="sec white" id="blog">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Blog</p><h2>Para vender mejor pozo</h2><p class="lead">Guías para tu equipo y notas con fuentes para mandarle a tus clientes por WhatsApp.</p></div>
+    <div class="posts stagger">
+      <a class="post" href="/blog/como-vender-departamentos-en-pozo/"><span class="tag">Para tu equipo</span><h3>Cómo vender departamentos en pozo</h3><p>Los 7 controles antes de cotizar, cómo comparar planes de distintas desarrolladoras y cómo hacer el seguimiento.</p><span class="go">Leer la guía</span></a>
+      <a class="post" href="/blog/comprar-en-pozo-riesgos/"><span class="tag">Para tus clientes</span><h3>Comprar en pozo: los riesgos reales y cómo cuidarte</h3><p>Atrasos, cuotas que ajustan por CAC y qué revisar antes de firmar. Lista para mandar por WhatsApp.</p><span class="go">Leer la nota</span></a>
+      <a class="post" href="/blog/credito-hipotecario-vs-financiacion-desarrollador/"><span class="tag">Para tus clientes</span><h3>Crédito hipotecario o cuotas del desarrollador</h3><p>La primera línea hipotecaria para comprar en pozo y cuándo conviene cada camino.</p><span class="go">Leer la nota</span></a>
+    </div>
+    <p class="blog-all reveal"><a href="/blog/">Ver todas las notas</a></p>
+  </div>
+</section>
+
 <!-- 10. Cierre y formulario -->
 <section class="sec close" id="form">
   <div class="close-bg" role="img" aria-label="Fachada de un edificio al atardecer con las ventanas iluminadas"></div>
@@ -656,13 +680,14 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 </section>
 </main>
 
-<!-- 11. Pie. Falta la página de Términos: sumarla acá cuando exista. -->
+<!-- 11. Pie -->
 <footer>
   <div class="wrap">
     <span class="logo" style="min-height:0"><img src="logo-claro.png" alt="" width="27" height="32" style="height:32px"><span style="font-size:17px">CMP Solutions</span></span>
     <a href="/blog/">Blog</a>
     <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
     <a href="privacidad.html">Privacidad</a>
+    <a href="terminos.html">Términos</a>
   </div>
 </footer>
 <div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>
