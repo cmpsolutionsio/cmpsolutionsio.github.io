@@ -179,3 +179,5 @@ tbody th small{display:block;font-weight:400;font-size:13.5px;color:var(--muted)
 .btn.wa{background:#0E7A3A;color:#fff}.btn.wa:hover{box-shadow:0 10px 24px rgba(14,122,58,.3)}
 .box .btn{margin-top:16px}
 .compartida .para-broker,.compartida .bar .btn{display:none !important}
+/* Dato que falta completar (páginas legales) */
+.ph{background:var(--warn-bg);color:var(--warn);border-radius:4px;padding:1px 6px;font-weight:600}
