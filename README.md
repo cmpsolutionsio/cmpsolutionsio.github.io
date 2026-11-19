@@ -21,6 +21,11 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 - Pestañas que crea: "Leads web" (formulario y checklist), "Analítica web" (actividad anónima) y "Resumen web" (se actualiza cada hora).
 - `checklist-7-controles.pdf` es el documento que entrega el aviso emergente.
 
+## Reglas del contenido
+
+- Todas las demos usan datos ficticios. Nunca cargar datos reales de un cliente.
+- Las funciones incompletas se describen solo con las frases acordadas (carpetas, WhatsApp, aviso de listas viejas). Finanzas no se menciona.
+
 ## Blog y SEO
 
 - El blog es HTML plano en `blog/`: una carpeta por nota (`blog/<slug>/index.html`) y una hoja de estilos compartida, `blog/blog.css`, con los mismos colores y tipografía que la página.
@@ -28,11 +33,6 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 - `_docs/` tiene la investigación de keywords, el plan editorial y lo que hay que dar de alta (Search Console, Bing, dominio). GitHub Pages no publica carpetas que empiezan con `_`.
 - `robots.txt` deja pasar a todos los buscadores y bots de IA. `llms.txt` es el resumen del sitio para modelos de lenguaje.
 - Si cambia el dominio, reemplazar `https://cmpsolutionsio.github.io` en `index.html`, `blog/`, `_docs/plantilla-nota.html`, `sitemap.xml`, `robots.txt` y `llms.txt`.
-
-## Reglas del contenido
-
-- Todas las demos usan datos ficticios. Nunca cargar datos reales de un cliente.
-- Las funciones incompletas se describen solo con las frases acordadas (carpetas, WhatsApp, aviso de listas viejas). Finanzas no se menciona.
 
 ## Fotos
 
