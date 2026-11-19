@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CMP Solutions</title>
+<title>CMP Solutions: listas de pozo y CRM para inmobiliarias</title>
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#0B1020">
@@ -19,6 +19,47 @@
 <meta property="og:image:alt" content="Logo de CMP Solutions">
 <meta name="twitter:card" content="summary">
 <meta name="description" content="Todo tu portfolio de pozo, comparable y al día. Una Sola Lista y CRM a medida para inmobiliarias que comercializan 3 o más desarrolladoras.">
+<!-- SEO: canonical, robots y datos estructurados. Si cambia el dominio, reemplazar cmpsolutionsio.github.io acá, en blog/, sitemap.xml, robots.txt y llms.txt. -->
+<link rel="canonical" href="https://cmpsolutionsio.github.io/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<link rel="alternate" type="text/plain" title="Resumen para modelos de lenguaje" href="/llms.txt">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cmpsolutionsio.github.io/#organization",
+      "name": "CMP Solutions",
+      "url": "https://cmpsolutionsio.github.io/",
+      "logo": "https://cmpsolutionsio.github.io/logo.png",
+      "description": "Listas de precios comparables (Una Sola Lista) y CRM a medida para inmobiliarias y comercializadoras que venden departamentos en pozo de 3 o más desarrolladoras en Argentina.",
+      "areaServed": { "@type": "Country", "name": "Argentina" },
+      "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "telephone": "+54 9 11 5871-4730", "availableLanguage": "es", "areaServed": "AR" }
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://cmpsolutionsio.github.io/#website",
+      "name": "CMP Solutions",
+      "url": "https://cmpsolutionsio.github.io/",
+      "inLanguage": "es-AR",
+      "publisher": { "@id": "https://cmpsolutionsio.github.io/#organization" }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://cmpsolutionsio.github.io/#faq",
+      "mainEntity": [
+        { "@type": "Question", "name": "¿Tengo que dejar de usar Excel?", "acceptedAnswer": { "@type": "Answer", "text": "No. Las desarrolladoras te siguen mandando sus listas como siempre y nosotros las pasamos al formato comparable." } },
+        { "@type": "Question", "name": "Ya tengo un CRM. ¿Me sirve igual?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Una Sola Lista se contrata sola y la usás sin cambiar tu CRM actual." } },
+        { "@type": "Question", "name": "¿Cuánto trabajo le lleva a mi equipo?", "acceptedAnswer": { "@type": "Answer", "text": "Poco: mandar las listas y una capacitación por videollamada de 1 hora. La carga y el control los hacemos nosotros." } },
+        { "@type": "Question", "name": "¿Por qué se cobra una puesta en marcha?", "acceptedAnswer": { "@type": "Answer", "text": "Porque es lo que más trabajo lleva: relevamos cómo vende tu equipo, cargamos y controlamos cada lista contra el original y armamos todo a tu medida. Se paga una sola vez." } },
+        { "@type": "Question", "name": "¿Puedo empezar con las listas y sumar el CRM después?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Pagás la diferencia de puesta en marcha y pasás al abono de Lista + CRM." } },
+        { "@type": "Question", "name": "¿Qué pasa si me doy de baja?", "acceptedAnswer": { "@type": "Answer", "text": "En el mensual no hay permanencia: avisás con 30 días. El anual cubre 12 meses y al terminar elegís si renovás. En los dos casos te llevás tus datos en Excel." } }
+      ]
+    }
+  ]
+}
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
@@ -345,6 +386,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <a href="#usl">Una Sola Lista</a>
       <a href="#crm">CRM</a>
       <a href="#precios">Precios</a>
+      <a href="/blog/">Blog</a>
     </nav>
     <a class="btn sm" href="#form">Quiero mi comparativo</a>
   </div>
@@ -616,7 +658,10 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
 <footer>
   <div class="wrap">
     <span class="logo" style="min-height:0"><img src="logo-claro.png" alt="" width="27" height="32" style="height:32px"><span style="font-size:17px">CMP Solutions</span></span>
-    <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
+    <nav aria-label="Pie">
+      <a href="/blog/">Blog</a>
+      <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
+    </nav>
   </div>
 </footer>
 <div class="mob"><a class="btn" href="#form">Quiero mi comparativo</a></div>

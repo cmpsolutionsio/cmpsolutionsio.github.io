@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<!--
+  PLANTILLA DE NOTA DEL BLOG
+  1. Copiá este archivo a blog/<slug>/index.html (slug en minúscula, con guiones, sin acentos).
+  2. Reemplazá todo lo que está entre [[corchetes dobles]]. Buscá "[[" al terminar: no tiene que quedar ninguno.
+  3. Las preguntas frecuentes van dos veces, iguales: en el JSON-LD (FAQPage) y en el HTML visible.
+  4. Cada dato que cambia (tasas, índices, requisitos) va con fuente numerada [n] y fecha.
+  5. Sumá la nota a blog/index.html (tarjeta + blogPost del JSON-LD), sitemap.xml, llms.txt
+     y a "Seguí leyendo" de su nota pilar. Ver _docs/plan-editorial.md.
+  6. Borrá este comentario.
+-->
+<html lang="es-AR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>[[Título para Google, hasta 60 caracteres, sin "| CMP Solutions": Google ya muestra el nombre del sitio aparte]]</title>
+<meta name="description" content="[[Descripción de 120 a 155 caracteres: qué responde la nota y para quién.]]">
+<link rel="canonical" href="https://cmpsolutionsio.github.io/blog/[[slug]]/">
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+<meta name="author" content="Equipo CMP Solutions">
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta name="theme-color" content="#0B1020">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="CMP Solutions">
+<meta property="og:locale" content="es_AR">
+<meta property="og:url" content="https://cmpsolutionsio.github.io/blog/[[slug]]/">
+<meta property="og:title" content="[[Título de la nota (el H1)]]">
+<meta property="og:description" content="[[Una o dos frases para cuando se comparte por WhatsApp o redes]]">
+<meta property="og:image" content="https://cmpsolutionsio.github.io/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="CMP Solutions: todo tu portfolio de pozo, comparable y al día">
+<meta property="article:published_time" content="[[AAAA-MM-DD]]">
+<meta property="article:modified_time" content="[[AAAA-MM-DD]]">
+<meta property="article:section" content="[[Cluster: Comprar en pozo | Financiación | Pozo o usado | Para inmobiliarias]]">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="alternate" type="text/plain" title="Resumen para modelos de lenguaje" href="/llms.txt">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/blog/blog.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://cmpsolutionsio.github.io/#organization",
+      "name": "CMP Solutions",
+      "url": "https://cmpsolutionsio.github.io/",
+      "logo": "https://cmpsolutionsio.github.io/logo.png"
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": "https://cmpsolutionsio.github.io/blog/[[slug]]/#article",
+      "headline": "[[Título de la nota (el H1)]]",
+      "description": "[[La misma descripción de arriba]]",
+      "image": "https://cmpsolutionsio.github.io/og.png",
+      "datePublished": "[[AAAA-MM-DD]]",
+      "dateModified": "[[AAAA-MM-DD]]",
+      "inLanguage": "es-AR",
+      "author": { "@type": "Organization", "name": "Equipo CMP Solutions", "url": "https://cmpsolutionsio.github.io/blog/#sobre-cmp" },
+      "publisher": { "@id": "https://cmpsolutionsio.github.io/#organization" },
+      "mainEntityOfPage": "https://cmpsolutionsio.github.io/blog/[[slug]]/",
+      "isPartOf": { "@type": "Blog", "@id": "https://cmpsolutionsio.github.io/blog/#blog", "name": "Blog de CMP Solutions" },
+      "articleSection": "[[Cluster]]",
+      "keywords": ["[[keyword principal]]", "[[keyword 2]]", "[[keyword 3]]"],
+      "citation": ["[[URL de la fuente 1]]", "[[URL de la fuente 2]]"]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://cmpsolutionsio.github.io/" },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://cmpsolutionsio.github.io/blog/" },
+        { "@type": "ListItem", "position": 3, "name": "[[Título corto]]", "item": "https://cmpsolutionsio.github.io/blog/[[slug]]/" }
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        { "@type": "Question", "name": "[[Pregunta 1]]", "acceptedAnswer": { "@type": "Answer", "text": "[[Respuesta 1, igual a la del HTML]]" } },
+        { "@type": "Question", "name": "[[Pregunta 2]]", "acceptedAnswer": { "@type": "Answer", "text": "[[Respuesta 2, igual a la del HTML]]" } }
+      ]
+    }
+  ]
+}
+</script>
+</head>
+<body>
+<a class="skip" href="#contenido">Saltar al contenido</a>
+
+<header class="bar">
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="CMP Solutions, inicio"><img src="/logo-claro.png" alt="" width="34" height="40"><span>CMP Solutions</span></a>
+    <nav class="nav" aria-label="Secciones">
+      <a href="/#usl">Una Sola Lista</a>
+      <a href="/#crm">CRM</a>
+      <a href="/#precios">Precios</a>
+      <a href="/blog/">Blog</a>
+    </nav>
+    <a class="btn sm" href="/#form">Quiero mi comparativo</a>
+  </div>
+</header>
+
+<main id="contenido">
+<article>
+  <header class="top">
+    <div class="wrap">
+      <nav class="crumbs" aria-label="Estás en">
+        <ol>
+          <li><a href="/">Inicio</a></li>
+          <li><a href="/blog/">Blog</a></li>
+          <li aria-current="page">[[Título corto]]</li>
+        </ol>
+      </nav>
+      <p class="eyebrow">[[Cluster]]</p>
+      <h1>[[Título de la nota]]</h1>
+      <p class="dek">[[Bajada: una frase que diga qué vas a saber al terminar de leer.]]</p>
+      <p class="byline">
+        <span>Por <strong>Equipo CMP Solutions</strong></span>
+        <span>Publicada el <time datetime="[[AAAA-MM-DD]]">[[19 de noviembre de 2026]]</time></span>
+        <span>Datos verificados al [[DD/MM/AAAA]]</span>
+        <span>[[N]] min de lectura</span>
+      </p>
+    </div>
+  </header>
+
+  <div class="post">
+    <div class="body">
+      <!-- Respuesta corta: 50 a 90 palabras que respondan la pregunta del título solas. Es lo que levantan Google y los buscadores de IA. -->
+      <div class="answer">
+        <p class="eyebrow">Respuesta corta</p>
+        <p>[[Respuesta directa a la pregunta del título.]]</p>
+      </div>
+
+      <!-- Títulos en forma de pregunta, con id para el índice. Un párrafo = una idea. -->
+      <h2 id="[[seccion-1]]">[[¿Pregunta 1?]]</h2>
+      <p>[[Texto. Los datos van con su fuente: según CAMARCO <a class="ref" href="#f1">[1]</a>.]]</p>
+
+      <h2 id="[[seccion-2]]">[[¿Pregunta 2?]]</h2>
+      <p>[[Texto.]]</p>
+
+      <!-- Tabla opcional para comparar -->
+      <div class="tbl">
+        <table>
+          <caption>[[Qué muestra la tabla, de dónde salen los datos y de qué fecha son.]]</caption>
+          <thead><tr><th scope="col">[[Columna]]</th><th scope="col">[[Columna]]</th></tr></thead>
+          <tbody><tr><th scope="row">[[Fila]]</th><td>[[Dato]]</td></tr></tbody>
+        </table>
+      </div>
+
+      <!-- Recuadro para el inmobiliario en notas para compradores. En notas para inmobiliarios, "Cómo lo resolvemos en CMP". -->
+      <div class="box pro">
+        <p class="eyebrow">Si sos inmobiliario</p>
+        <p>[[Qué significa esto para quien vende pozo, con un link interno.]]</p>
+      </div>
+
+      <section class="faq" aria-labelledby="preguntas">
+        <h2 id="preguntas">Preguntas frecuentes</h2>
+        <details><summary>[[Pregunta 1]]<i aria-hidden="true">+</i></summary><p>[[Respuesta 1]]</p></details>
+        <details><summary>[[Pregunta 2]]<i aria-hidden="true">+</i></summary><p>[[Respuesta 2]]</p></details>
+      </section>
+
+      <!-- Aviso: obligatorio en notas de normas, créditos o inversión. -->
+      <div class="box warn">
+        <p><strong>Aviso:</strong> esta nota es informativa. Resume normas y fuentes públicas al [[DD/MM/AAAA]] y no reemplaza el consejo de un escribano, abogado o asesor financiero sobre tu caso.</p>
+      </div>
+
+      <section class="sources" aria-labelledby="fuentes">
+        <h2 id="fuentes">Fuentes</h2>
+        <ol>
+          <li id="f1">[[Autor o institución]], "[[Título]]", [[medio]], [[DD/MM/AAAA]]. <a href="[[URL]]" rel="noopener">[[dominio]]</a></li>
+        </ol>
+        <p class="method">Cómo hicimos esta nota: [[de dónde salen los datos y quién la escribió]]. Si ves un error, escribinos por <a href="https://wa.me/5491158714730" rel="noopener">WhatsApp</a>.</p>
+      </section>
+
+      <aside class="cta" aria-label="Comparativo sin costo">
+        <p class="eyebrow">Para inmobiliarias y comercializadoras</p>
+        <h2>¿Vendés pozo de 3 o más desarrolladoras?</h2>
+        <p>Te armamos un comparativo sin costo con 3 de tus listas: anticipo, cuotas y saldo de cada unidad, con la misma vara.</p>
+        <a class="btn" href="/#form">Quiero mi comparativo</a>
+        <small>Firmamos NDA antes de recibir tus listas.</small>
+      </aside>
+    </div>
+
+    <nav class="toc" aria-label="En esta nota">
+      <p>En esta nota</p>
+      <ol>
+        <li><a href="#[[seccion-1]]">[[Sección 1]]</a></li>
+        <li><a href="#[[seccion-2]]">[[Sección 2]]</a></li>
+        <li><a href="#preguntas">Preguntas frecuentes</a></li>
+        <li><a href="#fuentes">Fuentes</a></li>
+      </ol>
+    </nav>
+  </div>
+</article>
+
+<section class="more" aria-labelledby="segui">
+  <div class="wrap">
+    <h2 id="segui">Seguí leyendo</h2>
+    <ul class="cards">
+      <li class="card">
+        <p class="eyebrow">[[Cluster]]</p>
+        <h3><a href="/blog/[[slug-relacionada]]/">[[Título de la nota relacionada]]</a></h3>
+        <p>[[Una frase sobre qué responde.]]</p>
+      </li>
+    </ul>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="logo" href="/" aria-label="CMP Solutions, inicio"><img src="/logo-claro.png" alt="" width="27" height="32"><span>CMP Solutions</span></a>
+    <nav aria-label="Pie">
+      <a href="/blog/">Blog</a>
+      <a href="/#precios">Precios</a>
+      <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">WhatsApp: +54 9 11 5871-4730</a>
+    </nav>
+  </div>
+</footer>
+</body>
+</html>
