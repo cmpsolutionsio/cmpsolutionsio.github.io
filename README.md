@@ -14,12 +14,21 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 - Poner el número de WhatsApp en la constante `WHATSAPP` al principio del `<script>` de `index.html` (con código de país, sin signos). Sin ese número, el formulario solo muestra la confirmación y no envía nada.
 - Verificar nombre, dominio y marca.
 
-## Contactos y analítica en Google Sheets
+## Contactos en Google Sheets
 
 - El código que recibe los datos vive en la planilla de prospectos (Extensiones > Apps Script) y está publicado como aplicación web.
 - Su dirección (termina en `/exec`) está en la constante `ENDPOINT` de `index.html`. Vacía, no se guarda nada.
-- Pestañas que crea: "Leads web" (formulario y checklist), "Analítica web" (actividad anónima) y "Resumen web" (se actualiza cada hora).
+- Recibe solo los leads del formulario y del checklist, en la pestaña "Leads web". Cada lead llega con su origen: `llegada` y `primera_visita`.
+- Desde el 19/11/2026 no recibe eventos. Las pestañas "Analítica web" y "Resumen web" quedan como histórico.
 - `checklist-7-controles.pdf` es el documento que entrega el aviso emergente.
+
+## Analítica (Google Analytics 4)
+
+- El ID de medición está en la constante `GA_ID` de `analitica.js`. Vacío, no se mide nada.
+- Cada página lo carga con `<script src="/analitica.js" defer></script>` en el `<head>`.
+- Qué se mide, cómo configurar GA4 y dónde mirar cada métrica: [`_docs/plan-de-medicion.md`](_docs/plan-de-medicion.md).
+- En localhost los eventos van en modo debug (GA4 > DebugView) y se listan en la consola del navegador.
+- La política de privacidad está en `privacidad.html`. Hay que actualizarla si se suma otra herramienta.
 
 ## Reglas del contenido
 
