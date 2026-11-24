@@ -41,7 +41,7 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 - Nota nueva: copiar `_docs/plantilla-nota.html` y seguir las instrucciones de su comentario. Después sumarla a `blog/index.html`, `sitemap.xml`, `llms.txt` y a "Seguí leyendo" de su nota pilar.
 - `_docs/` tiene la investigación de keywords, el plan editorial y lo que hay que dar de alta (Search Console, Bing, dominio). GitHub Pages no publica carpetas que empiezan con `_`.
 - `robots.txt` deja pasar a todos los buscadores y bots de IA. `llms.txt` es el resumen del sitio para modelos de lenguaje.
-- Si cambia el dominio, reemplazar `https://cmpsolutionsio.github.io` en `index.html`, `blog/`, `_docs/plantilla-nota.html`, `sitemap.xml`, `robots.txt` y `llms.txt`.
+- Si cambia el dominio, reemplazar `https://cmpsolutions.info` en `index.html`, `blog/`, `_docs/plantilla-nota.html`, `sitemap.xml`, `robots.txt` y `llms.txt`.
 
 ## Fotos
 

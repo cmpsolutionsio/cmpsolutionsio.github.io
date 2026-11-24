@@ -10,17 +10,17 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="CMP Solutions">
 <meta property="og:locale" content="es_AR">
-<meta property="og:url" content="https://cmpsolutionsio.github.io/">
+<meta property="og:url" content="https://cmpsolutions.info/">
 <meta property="og:title" content="Todo tu portfolio de pozo, comparable y al día">
 <meta property="og:description" content="Una sola lista para todas tus desarrolladoras y un CRM a medida para tu equipo. Pedí tu comparativo sin costo.">
-<meta property="og:image" content="https://cmpsolutionsio.github.io/og-logo.png">
+<meta property="og:image" content="https://cmpsolutions.info/og-logo.png">
 <meta property="og:image:width" content="800">
 <meta property="og:image:height" content="800">
 <meta property="og:image:alt" content="Logo de CMP Solutions">
 <meta name="twitter:card" content="summary">
 <meta name="description" content="Todo tu portfolio de pozo, comparable y al día. Una Sola Lista y CRM a medida para inmobiliarias que comercializan 3 o más desarrolladoras.">
-<!-- SEO: canonical, robots y datos estructurados. Si cambia el dominio, reemplazar cmpsolutionsio.github.io acá, en blog/, sitemap.xml, robots.txt y llms.txt. -->
-<link rel="canonical" href="https://cmpsolutionsio.github.io/">
+<!-- SEO: canonical, robots y datos estructurados. Si cambia el dominio, reemplazar cmpsolutions.info acá, en blog/, sitemap.xml, robots.txt y llms.txt. -->
+<link rel="canonical" href="https://cmpsolutions.info/">
 <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
 <link rel="alternate" type="text/plain" title="Resumen para modelos de lenguaje" href="/llms.txt">
 <script type="application/ld+json">
@@ -29,25 +29,25 @@
   "@graph": [
     {
       "@type": "Organization",
-      "@id": "https://cmpsolutionsio.github.io/#organization",
+      "@id": "https://cmpsolutions.info/#organization",
       "name": "CMP Solutions",
-      "url": "https://cmpsolutionsio.github.io/",
-      "logo": "https://cmpsolutionsio.github.io/logo.png",
+      "url": "https://cmpsolutions.info/",
+      "logo": "https://cmpsolutions.info/logo.png",
       "description": "Listas de precios comparables (Una Sola Lista) y CRM a medida para inmobiliarias y comercializadoras que venden departamentos en pozo de 3 o más desarrolladoras en Argentina.",
       "areaServed": { "@type": "Country", "name": "Argentina" },
       "contactPoint": { "@type": "ContactPoint", "contactType": "sales", "telephone": "+54 9 11 5871-4730", "availableLanguage": "es", "areaServed": "AR" }
     },
     {
       "@type": "WebSite",
-      "@id": "https://cmpsolutionsio.github.io/#website",
+      "@id": "https://cmpsolutions.info/#website",
       "name": "CMP Solutions",
-      "url": "https://cmpsolutionsio.github.io/",
+      "url": "https://cmpsolutions.info/",
       "inLanguage": "es-AR",
-      "publisher": { "@id": "https://cmpsolutionsio.github.io/#organization" }
+      "publisher": { "@id": "https://cmpsolutions.info/#organization" }
     },
     {
       "@type": "FAQPage",
-      "@id": "https://cmpsolutionsio.github.io/#faq",
+      "@id": "https://cmpsolutions.info/#faq",
       "mainEntity": [
         { "@type": "Question", "name": "¿Tengo que dejar de usar Excel?", "acceptedAnswer": { "@type": "Answer", "text": "No. Las desarrolladoras te siguen mandando sus listas como siempre y nosotros las pasamos al formato comparable." } },
         { "@type": "Question", "name": "Ya tengo un CRM. ¿Me sirve igual?", "acceptedAnswer": { "@type": "Answer", "text": "Sí. Una Sola Lista se contrata sola y la usás sin cambiar tu CRM actual." } },
@@ -301,6 +301,16 @@ summary i{font-style:normal;font-size:26px;line-height:1;color:var(--blue);trans
 details[open] summary i{transform:rotate(45deg)}
 details p{padding-bottom:20px;color:var(--muted);max-width:38em}
 
+/* 9b. Blog */
+.posts{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(300px,100%),1fr));gap:20px}
+.post{display:flex;flex-direction:column;gap:10px;background:var(--paper);border:1px solid var(--line);border-radius:16px;padding:26px;color:var(--ink);text-decoration:none;transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.post:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(11,16,32,.1);border-color:var(--ink)}
+.post .tag{align-self:flex-start}
+.post h3{font-size:21px}
+.post p{font-size:15px;color:var(--muted)}
+.post .go{margin-top:auto;padding-top:6px;font-weight:600;color:var(--blue)}
+.blog-all{margin-top:28px;font-weight:600}
+
 /* 10. Cierre */
 .close{position:relative;background:var(--ink);color:#fff;overflow:hidden}
 .close-bg{position:absolute;inset:0;background:#16204A url('https://images.unsplash.com/photo-1742427605934-db05a2a833f6?auto=format&fit=crop&w=2000&q=70') center/cover}
@@ -362,6 +372,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
   body{font-size:16.5px}
   .sec{padding:68px 0}
   .nav,.bar .btn{display:none}
+  .nav{display:flex}.nav a:not([href="/blog/"]){display:none} /* en el celular la barra muestra solo el link al blog */
   .hero{padding:112px 0 72px}
   .hero-card{transform:none;animation:none}
   body{padding-bottom:72px}
@@ -621,6 +632,19 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       <details><summary>¿Puedo empezar con las listas y sumar el CRM después?<i aria-hidden="true">+</i></summary><p>Sí. Pagás la diferencia de puesta en marcha y pasás al abono de Lista + CRM.</p></details>
       <details><summary>¿Qué pasa si me doy de baja?<i aria-hidden="true">+</i></summary><p>En el mensual no hay permanencia: avisás con 30 días. El anual cubre 12 meses y al terminar elegís si renovás. En los dos casos te llevás tus datos en Excel.</p></details>
     </div>
+  </div>
+</section>
+
+<!-- 9b. Blog: guías para el equipo y notas para mandarle al cliente -->
+<section class="sec white" id="blog">
+  <div class="wrap">
+    <div class="head reveal"><p class="eyebrow">Blog</p><h2>Para vender mejor pozo</h2><p class="lead">Guías para tu equipo y notas con fuentes para mandarle a tus clientes por WhatsApp.</p></div>
+    <div class="posts stagger">
+      <a class="post" href="/blog/como-vender-departamentos-en-pozo/"><span class="tag">Para tu equipo</span><h3>Cómo vender departamentos en pozo</h3><p>Los 7 controles antes de cotizar, cómo comparar planes de distintas desarrolladoras y cómo hacer el seguimiento.</p><span class="go">Leer la guía</span></a>
+      <a class="post" href="/blog/comprar-en-pozo-riesgos/"><span class="tag">Para tus clientes</span><h3>Comprar en pozo: los riesgos reales y cómo cuidarte</h3><p>Atrasos, cuotas que ajustan por CAC y qué revisar antes de firmar. Lista para mandar por WhatsApp.</p><span class="go">Leer la nota</span></a>
+      <a class="post" href="/blog/credito-hipotecario-vs-financiacion-desarrollador/"><span class="tag">Para tus clientes</span><h3>Crédito hipotecario o cuotas del desarrollador</h3><p>La primera línea hipotecaria para comprar en pozo y cuándo conviene cada camino.</p><span class="go">Leer la nota</span></a>
+    </div>
+    <p class="blog-all reveal"><a href="/blog/">Ver todas las notas</a></p>
   </div>
 </section>
 

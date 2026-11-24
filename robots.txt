@@ -31,4 +31,4 @@ User-agent: CCBot
 Allow: /
 Disallow: /_docs/
 
-Sitemap: https://cmpsolutionsio.github.io/sitemap.xml
+Sitemap: https://cmpsolutions.info/sitemap.xml
