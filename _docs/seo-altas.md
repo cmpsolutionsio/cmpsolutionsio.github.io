@@ -22,8 +22,8 @@ Por qué: la autoridad que gane el blog (links, historial en Google, citas de la
 3. Cuando GitHub muestre el check verde, tildar **Enforce HTTPS**.
 4. En la organización de GitHub: **Settings → Pages → Add a domain** para verificar el dominio (evita que otro lo use en Pages).
 5. GitHub redirige solo `cmpsolutionsio.github.io` al dominio nuevo.
-6. Hecho en el PR #4: la dirección base pasó de `https://cmpsolutionsio.github.io` a `https://cmpsolutions.info` en todo el sitio.
-7. `og.png` y `checklist-7-controles.pdf` tienen la dirección escrita dentro de la imagen: hay que regenerarlos.
+6. Hecho el 24/11/2026: la dirección base pasó de `https://cmpsolutionsio.github.io` a `https://cmpsolutions.info` en todo el sitio.
+7. `og.png` y `checklist-7-controles.pdf` tienen la dirección escrita dentro de la imagen. Ya dicen `cmpsolutions.info`; si cambia el dominio, hay que regenerarlos.
 
 **Ojo con el repo privado:** si el repo pasa a privado sin un plan pago de GitHub, Pages deja de publicar y se caen la página y el blog.
 
