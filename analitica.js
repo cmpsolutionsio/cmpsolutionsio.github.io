@@ -1,4 +1,4 @@
-/* Analítica de cmpsolutionsio.github.io con Google Analytics 4.
+/* Analítica de cmpsolutions.info con Google Analytics 4.
    Va en el <head> de cada página: <script src="/analitica.js" defer></script>
    Plan de medición (qué evento, cuándo y con qué parámetros): _docs/plan-de-medicion.md
 
