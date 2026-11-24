@@ -1,6 +1,6 @@
 # Plan de medición del sitio
 
-Qué se mide en cmpsolutionsio.github.io, cuándo y con qué datos, y dónde se ve cada cosa.
+Qué se mide en cmpsolutions.info, cuándo y con qué datos, y dónde se ve cada cosa.
 
 Esta carpeta empieza con `_`, así que GitHub Pages no la publica: queda solo en el repo.
 
@@ -121,8 +121,8 @@ La planilla sigue recibiendo además `vid`, `fuente` y `dispositivo`.
 **Para armar links con UTM:** usá siempre minúsculas y los mismos valores. Por ejemplo:
 
 ```
-https://cmpsolutionsio.github.io/?utm_source=whatsapp&utm_medium=mensaje&utm_campaign=prospeccion-nov
-https://cmpsolutionsio.github.io/?utm_source=linkedin&utm_medium=social&utm_campaign=lanzamiento
+https://cmpsolutions.info/?utm_source=whatsapp&utm_medium=mensaje&utm_campaign=prospeccion-nov
+https://cmpsolutions.info/?utm_source=linkedin&utm_medium=social&utm_campaign=lanzamiento
 ```
 
 **UTM que ya usa el sitio:**
@@ -145,7 +145,7 @@ A GA4 nunca le mandamos nombre, mail ni WhatsApp: lo prohíben los términos de 
 
 Lo hace quien administre la propiedad.
 
-1. **Propiedad:** zona horaria Argentina, moneda USD y flujo web `https://cmpsolutionsio.github.io`. El ID de medición `G-…` va en `GA_ID`, en `analitica.js`.
+1. **Propiedad:** zona horaria Argentina, moneda USD y flujo web `https://cmpsolutions.info`. El ID de medición `G-…` va en `GA_ID`, en `analitica.js`.
 2. **Medición mejorada** (Flujos de datos → el flujo → Medición mejorada):
    - apagar **Interacciones con formularios** (los formularios se miden con `form_*` y `checklist_*`);
    - dejar prendido el resto.

@@ -15,22 +15,22 @@ Datos clave, al 19/11/2026:
 
 ## Páginas principales
 
-- [Inicio](https://cmpsolutionsio.github.io/): qué resuelve, cómo funciona, demo con datos ficticios, planes, garantía y preguntas frecuentes.
-- [Blog](https://cmpsolutionsio.github.io/blog/): índice de notas sobre comprar, financiar y vender pozo.
+- [Inicio](https://cmpsolutions.info/): qué resuelve, cómo funciona, demo con datos ficticios, planes, garantía y preguntas frecuentes.
+- [Blog](https://cmpsolutions.info/blog/): índice de notas sobre comprar, financiar y vender pozo.
 
 ## Notas para quienes venden pozo
 
-- [Cómo vender departamentos en pozo: guía para inmobiliarias y comercializadoras](https://cmpsolutionsio.github.io/blog/como-vender-departamentos-en-pozo/): cómo comparar planes de distintas desarrolladoras, los 7 controles antes de cotizar un pozo, cada cuánto actualizar listas y cómo hacer el seguimiento.
+- [Cómo vender departamentos en pozo: guía para inmobiliarias y comercializadoras](https://cmpsolutions.info/blog/como-vender-departamentos-en-pozo/): cómo comparar planes de distintas desarrolladoras, los 7 controles antes de cotizar un pozo, cada cuánto actualizar listas y cómo hacer el seguimiento.
 
 ## Notas para compradores (los inmobiliarios se las mandan a sus clientes)
 
-- [Comprar en pozo: los riesgos reales y cómo cuidarte](https://cmpsolutionsio.github.io/blog/comprar-en-pozo-riesgos/): atrasos, cuotas que ajustan por el índice CAC, fideicomiso o boleto, qué protege el Código Civil y Comercial (arts. 1170, 1171, 1685, 1686 y 2071) y qué revisar en el contrato.
-- [Crédito hipotecario o financiación del desarrollador: cuál conviene para comprar en pozo](https://cmpsolutionsio.github.io/blog/credito-hipotecario-vs-financiacion-desarrollador/): la línea del Banco Ciudad para comprar en pozo (17/11/2026), la hipoteca divisible del DNU 1017/2024, las tasas UVA de noviembre de 2026 y cuándo conviene cada camino.
+- [Comprar en pozo: los riesgos reales y cómo cuidarte](https://cmpsolutions.info/blog/comprar-en-pozo-riesgos/): atrasos, cuotas que ajustan por el índice CAC, fideicomiso o boleto, qué protege el Código Civil y Comercial (arts. 1170, 1171, 1685, 1686 y 2071) y qué revisar en el contrato.
+- [Crédito hipotecario o financiación del desarrollador: cuál conviene para comprar en pozo](https://cmpsolutions.info/blog/credito-hipotecario-vs-financiacion-desarrollador/): la línea del Banco Ciudad para comprar en pozo (17/11/2026), la hipoteca divisible del DNU 1017/2024, las tasas UVA de noviembre de 2026 y cuándo conviene cada camino.
 
 ## Opcional
 
-- [Planes y garantía](https://cmpsolutionsio.github.io/#precios)
-- [Una Sola Lista, demo con datos ficticios](https://cmpsolutionsio.github.io/#usl)
-- [CRM](https://cmpsolutionsio.github.io/#crm)
-- [Términos y condiciones](https://cmpsolutionsio.github.io/terminos.html): planes, precios, puesta en marcha, garantía de 30 días, baja, confidencialidad y datos.
-- [Privacidad](https://cmpsolutionsio.github.io/privacidad.html): qué datos junta el sitio y cómo se usan.
+- [Planes y garantía](https://cmpsolutions.info/#precios)
+- [Una Sola Lista, demo con datos ficticios](https://cmpsolutions.info/#usl)
+- [CRM](https://cmpsolutions.info/#crm)
+- [Términos y condiciones](https://cmpsolutions.info/terminos.html): planes, precios, puesta en marcha, garantía de 30 días, baja, confidencialidad y datos.
+- [Privacidad](https://cmpsolutions.info/privacidad.html): qué datos junta el sitio y cómo se usan.

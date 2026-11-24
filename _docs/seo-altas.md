@@ -2,7 +2,7 @@
 
 Todo lo técnico ya está en el sitio (metas, canonical, Open Graph, JSON-LD, `sitemap.xml`, `robots.txt`, `llms.txt`). Lo que sigue necesita las cuentas de CMP y no lo puede hacer Claude.
 
-**Orden recomendado:** 1) comprar el dominio, 2) conectarlo a GitHub Pages, 3) Search Console, 4) Bing. Si el dominio tarda, se puede hacer Search Console con `cmpsolutionsio.github.io` y después sumar el dominio (paso 5).
+**Estado al 24/11/2026:** el dominio `cmpsolutions.info` ya está comprado y conectado a GitHub Pages, con HTTPS (pasos 1 y 2). Sigue: 3) Search Console, 4) Bing.
 
 Usar una cuenta de Google de CMP o la personal, **nunca la de Extendeal**.
 
@@ -22,7 +22,7 @@ Por qué: la autoridad que gane el blog (links, historial en Google, citas de la
 3. Cuando GitHub muestre el check verde, tildar **Enforce HTTPS**.
 4. En la organización de GitHub: **Settings → Pages → Add a domain** para verificar el dominio (evita que otro lo use en Pages).
 5. GitHub redirige solo `cmpsolutionsio.github.io` al dominio nuevo.
-6. Pedirle a Claude que cambie la dirección base en todo el sitio. Es un reemplazo de `https://cmpsolutionsio.github.io` por el dominio nuevo en `index.html`, `blog/`, `_docs/plantilla-nota.html`, `sitemap.xml`, `robots.txt` y `llms.txt`.
+6. Hecho en el PR #4: la dirección base pasó de `https://cmpsolutionsio.github.io` a `https://cmpsolutions.info` en todo el sitio.
 7. `og.png` y `checklist-7-controles.pdf` tienen la dirección escrita dentro de la imagen: hay que regenerarlos.
 
 **Ojo con el repo privado:** si el repo pasa a privado sin un plan pago de GitHub, Pages deja de publicar y se caen la página y el blog.
@@ -31,8 +31,7 @@ Por qué: la autoridad que gane el blog (links, historial en Google, citas de la
 
 1. Entrar a https://search.google.com/search-console.
 2. **Agregar propiedad:**
-   - Con dominio propio: tipo **Dominio**, verificación con un registro **TXT** en el DNS. Cubre www, sin www, http y https.
-   - Sin dominio todavía: tipo **Prefijo de URL** con `https://cmpsolutionsio.github.io/`. Verificación con **Etiqueta HTML**: Google da una línea `<meta name="google-site-verification" ...>`. Pasásela a Claude y la pone en el `<head>` de `index.html` (o subí el archivo `googleXXXX.html` que ofrece Google a la raíz del repo).
+   - Tipo **Dominio**, con `cmpsolutions.info`. Se verifica con un registro **TXT** en el DNS (Porkbun). Cubre www, sin www, http y https.
 3. **Sitemaps:** enviar `sitemap.xml`.
 4. **Inspección de URL:** después de mergear el blog, pedir indexación de la home, `/blog/` y las tres notas.
 5. A las 2 o 3 semanas, mirar **Rendimiento**: qué búsquedas traen impresiones. Con eso se ajusta `keywords.md`.
