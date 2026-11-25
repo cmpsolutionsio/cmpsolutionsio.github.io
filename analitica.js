@@ -14,7 +14,7 @@
 (function(){
   'use strict';
   /* CONFIGURAR: ID de medición de GA4 (Administrar > Flujos de datos > Web). Vacío = no se mide nada. */
-  var GA_ID = '';
+  var GA_ID = 'G-R6N95WP2FL';
 
   /* Las pruebas en la compu van con debug_mode: se ven en GA4 > Administrar > DebugView y no ensucian los informes.
      En la consola del navegador se lista cada evento. En archivo local (file://) no se manda nada. */
@@ -125,7 +125,7 @@
     }
   }, 1000);
 
-  /* Clics: CTA al formulario, WhatsApp y links internos. Los links externos los toma solo GA4 (clics salientes).
+  /* Clics: CTA al formulario, WhatsApp y links internos. Los links externos no se miden: los clics salientes de GA4 están apagados (ver el plan de medición).
      Un link con data-evento="nombre" manda ese evento en vez del automático (ej. compartir_nota en el blog). */
   document.addEventListener('click', function(e){
     var a = e.target && e.target.closest ? e.target.closest('a[href]') : null; if (!a) return;
