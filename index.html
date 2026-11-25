@@ -758,6 +758,9 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     var o = window.cmpOrigen ? window.cmpOrigen() : null;
     data.llegada = o ? o.visita : fuente; data.primera_visita = o ? o.primera : '';
     /* La planilla contesta "ok" cuando recibe el lead. Si no contesta eso, se reintenta una vez; si vuelve a fallar, alFallar() le avisa a la persona. */
+    /* La planilla lee como fórmula lo que empieza con =, +, - o @: el teléfono va solo con números y al resto se le saca ese comienzo. */
+    data.whatsapp = String(data.whatsapp || '').replace(/\D/g, '');
+    ['nombre', 'mail', 'fuente', 'llegada', 'primera_visita'].forEach(function(k){ data[k] = String(data[k] || '').replace(/^[\s=+\-@]+/, ''); });
     var body = JSON.stringify(data);
     function mandar(){
       return fetch(ENDPOINT, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body })
