@@ -669,6 +669,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       </form>
       <div class="done" id="done" role="status" hidden>
         <h3>Recibido. Esto es lo que sigue:</h3>
+        <p id="done-fallo" role="alert" hidden>No pudimos guardar tus datos por un problema de conexión. Tocá el botón de abajo y te respondemos por WhatsApp.</p>
         <ol>
           <li>Te escribimos por WhatsApp dentro de 1 día hábil.</li>
           <li>Te mandamos el NDA firmado.</li>
@@ -712,6 +713,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
       </div>
       <div id="pop-ok" role="status" hidden>
         <p style="margin-bottom:14px">Listo. Ya podés descargarlo.</p>
+        <p id="pop-fallo" role="alert" style="margin-bottom:14px" hidden>No pudimos guardar tus datos, pero el checklist es tuyo igual. Si querés que te contactemos, <a href="https://wa.me/5491158714730" target="_blank" rel="noopener">escribinos por WhatsApp</a>.</p>
         <div style="display:flex;flex-direction:column;gap:10px">
           <a class="btn blue" id="pop-dl" href="checklist-7-controles.pdf" target="_blank" rel="noopener">Descargar el checklist (PDF)</a>
           <a class="btn line" id="pop-cta" href="#form">Quiero mi comparativo</a>
@@ -749,15 +751,24 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     try { var u = new URLSearchParams(location.search).get('utm_source'); if (u) return u.slice(0, 60); } catch(e){}
     try { return document.referrer ? new URL(document.referrer).hostname : 'directo'; } catch(e){ return 'directo'; }
   })();
-  function send(data){
+  function send(data, alFallar){
     if (!ENDPOINT) return;
     data.vid = vid; data.fuente = fuente; data.dispositivo = window.innerWidth < 760 ? 'celular' : 'compu';
     /* llegada = cómo llegó en esta sesión (UTM o sitio de origen); primera_visita = fecha y origen de su primera visita */
     var o = window.cmpOrigen ? window.cmpOrigen() : null;
     data.llegada = o ? o.visita : fuente; data.primera_visita = o ? o.primera : '';
+    /* La planilla contesta "ok" cuando recibe el lead. Si no contesta eso, se reintenta una vez; si vuelve a fallar, alFallar() le avisa a la persona. */
     var body = JSON.stringify(data);
-    try { fetch(ENDPOINT, { method: 'POST', mode: 'no-cors', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body }).catch(function(){}); }
-    catch(e){ try { navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain;charset=utf-8' })); } catch(e2){} }
+    function mandar(){
+      return fetch(ENDPOINT, { method: 'POST', keepalive: true, headers: { 'Content-Type': 'text/plain;charset=utf-8' }, body: body })
+        .then(function(r){ if (!r.ok) throw new Error('http ' + r.status); return r.text(); })
+        .then(function(t){ if (t.trim() !== 'ok') throw new Error('respuesta inesperada'); });
+    }
+    function fallo(){ track('lead_error', { origen: data.origen }); if (alFallar) alFallar(); }
+    if (!window.fetch || !window.Promise) { fallo(); return; }
+    mandar().catch(function(){
+      return new Promise(function(ok){ setTimeout(ok, 2000); }).then(mandar);
+    }).catch(fallo);
   }
   /* Eventos de GA4 propios de esta página (los generales están en analitica.js). Sin analitica.js no hacen nada. */
   var once = {};
@@ -953,7 +964,7 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
         : w.replace(/\D/g, '').length < 8 ? ['#pop-wa', 'Escribí tu WhatsApp con código de área.', 'whatsapp'] : null;
       if (falla) { $('#pop-err').textContent = falla[1]; $('#pop-err').hidden = false; $(falla[0]).focus(); track('checklist_error', { campo: falla[2] }); return; }
       $('#pop-err').hidden = true;
-      send({ type: 'lead', origen: 'Checklist', nombre: n, mail: m, whatsapp: w, desarrolladoras: '' }); track('checklist_enviado');
+      send({ type: 'lead', origen: 'Checklist', nombre: n, mail: m, whatsapp: w, desarrolladoras: '' }, function(){ $('#pop-fallo').hidden = false; }); track('checklist_enviado');
       store.set('pop_ok', '1'); listo(); $('#pop-dl').focus();
     });
     $('#pop-dl').addEventListener('click', function(){ track('checklist_descarga'); });
@@ -968,7 +979,10 @@ dialog#pop[open]{animation:popin .35s cubic-bezier(.2,.7,.2,1)}
     var n = $('#f-nombre').value.trim(), w = $('#f-wa').value.trim(), c = $('#f-cant').value;
     if (!n || w.replace(/\D/g, '').length < 8) { $('#f-err').hidden = false; (n ? $('#f-wa') : $('#f-nombre')).focus(); track('form_error', { campo: n ? 'whatsapp' : 'nombre' }); return; }
     form.hidden = true; $('#done').hidden = false;
-    send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c });
+    send({ type: 'lead', origen: 'Formulario', nombre: n, mail: '', whatsapp: w, desarrolladoras: c }, function(){
+      $('#done h3').textContent = 'Falta un paso: mandanos el mensaje';
+      $('#done ol').hidden = true; $('#done-fallo').hidden = false;
+    });
     track('form_enviado', eleccion.plan ? { desarrolladoras: c, plan: eleccion.plan, periodo: eleccion.periodo } : { desarrolladoras: c });
     store.set('lead', '1');
     var planElegido = eleccion.plan ? eleccion.plan + ' (' + eleccion.periodo + ')' : '';

@@ -48,7 +48,8 @@ Los nombres van en castellano y en snake_case. Los parámetros vacíos no se man
 - **`page_view`**: lo manda GA4 solo al cargar cada página.
   - Lleva la URL con las UTM, el sitio de origen, el dispositivo, el navegador y la ubicación aproximada.
   - Todos los eventos llevan la propiedad de usuario `visitante`.
-- **`click`** (clics salientes), **`file_download`** (el PDF del checklist) y **`user_engagement`**: los manda GA4 solo, con la medición mejorada.
+- **`file_download`** (el PDF del checklist) y **`user_engagement`**: los manda GA4 solo, con la medición mejorada.
+- **Los clics salientes (`click`) están apagados a propósito:** el botón de WhatsApp que aparece después del formulario lleva el nombre y el teléfono en el link, y GA4 los guardaría.
 
 ### Generales (`analitica.js`)
 
@@ -80,6 +81,7 @@ Los nombres van en castellano y en snake_case. Los parámetros vacíos no se man
 | `form_inicio` | Entra por primera vez a un campo del formulario final. | — |
 | `form_error` | Intenta enviar el formulario con un dato faltante. | `campo` (`nombre` o `whatsapp`) |
 | `form_enviado` | Envía el formulario. **Conversión principal.** | `desarrolladoras`, y `plan` y `periodo` si antes hizo clic en un plan |
+| `lead_error` | La planilla no confirmó un lead, ni en el reintento. La persona ve un aviso para escribir por WhatsApp. **Si aparece, revisar el Apps Script.** | `origen` (`Formulario` o `Checklist`) |
 
 ### Valores de `seccion`
 
@@ -145,9 +147,10 @@ A GA4 nunca le mandamos nombre, mail ni WhatsApp: lo prohíben los términos de 
 
 Lo hace quien administre la propiedad.
 
-1. **Propiedad:** zona horaria Argentina, moneda USD y flujo web `https://cmpsolutions.info`. El ID de medición `G-…` va en `GA_ID`, en `analitica.js`.
+1. **Propiedad:** "CMP Solutions web", creada el 24/11/2026, con zona horaria Argentina, moneda USD y flujo web `https://cmpsolutions.info`. El ID de medición va en `GA_ID`, en `analitica.js`.
 2. **Medición mejorada** (Flujos de datos → el flujo → Medición mejorada):
    - apagar **Interacciones con formularios** (los formularios se miden con `form_*` y `checklist_*`);
+   - apagar **Clics de salida** (ver "Automáticos de GA4");
    - dejar prendido el resto.
 3. **Retención de datos:** Administrar → Recopilación y modificación de datos → Retención de datos → **14 meses**. Viene en 2, y las exploraciones más viejas se pierden.
 4. **Eventos clave** (Administrar → Eventos clave): marcar `form_enviado`, `checklist_enviado` y `clic_whatsapp`. Los eventos aparecen en la lista recién cuando llegan por primera vez; también se pueden crear a mano con el nombre exacto.
@@ -169,6 +172,7 @@ Lo hace quien administre la propiedad.
 | Profundidad (%) | Evento | `porcentaje` |
 | Segundos activo | Evento | `segundos` |
 | Desarrolladoras | Evento | `desarrolladoras` |
+| Origen del lead | Evento | `origen` |
 | Visitante | Usuario | `visitante` |
 
 6. **Tráfico de desarrolladores** (opcional): Administrar → Recopilación y modificación de datos → Filtros de datos. Activar el filtro "Tráfico de desarrolladores" para que las pruebas desde localhost no cuenten en los informes. DebugView las sigue mostrando.
