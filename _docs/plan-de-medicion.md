@@ -145,7 +145,7 @@ A GA4 nunca le mandamos nombre, mail ni WhatsApp: lo prohíben los términos de 
 
 ## Configuración de GA4 (una sola vez)
 
-Lo hace quien administre la propiedad.
+**Hecho el 25/11/2026:** pasos 1 a 5, y el 6 en modo prueba. Falta vincular Search Console (paso 7) y dar acceso a Juan y a `equipo@cmpsolutions.info`.
 
 1. **Propiedad:** "CMP Solutions web", creada el 24/11/2026, con zona horaria Argentina, moneda USD y flujo web `https://cmpsolutions.info`. El ID de medición va en `GA_ID`, en `analitica.js`.
 2. **Medición mejorada** (Flujos de datos → el flujo → Medición mejorada):
@@ -153,7 +153,7 @@ Lo hace quien administre la propiedad.
    - apagar **Clics de salida** (ver "Automáticos de GA4");
    - dejar prendido el resto.
 3. **Retención de datos:** Administrar → Recopilación y modificación de datos → Retención de datos → **14 meses**. Viene en 2, y las exploraciones más viejas se pierden.
-4. **Eventos clave** (Administrar → Eventos clave): marcar `form_enviado`, `checklist_enviado` y `clic_whatsapp`. Los eventos aparecen en la lista recién cuando llegan por primera vez; también se pueden crear a mano con el nombre exacto.
+4. **Eventos clave** (Administrar → Eventos): `form_enviado`, `checklist_enviado` y `clic_whatsapp`, sin valor predeterminado (GA4 propone USD 1 y eso inventa ingresos).
 5. **Dimensiones personalizadas** (Administrar → Definiciones personalizadas → Crear dimensión). Sin esto, los parámetros no aparecen en los informes. Cada una con su nombre exacto:
 
 | Nombre a mostrar | Alcance | Parámetro |
@@ -164,18 +164,18 @@ Lo hace quien administre la propiedad.
 | Destino | Evento | `destino` |
 | Pestaña demo | Evento | `pestana` |
 | Control demo | Evento | `control` |
-| Valor | Evento | `valor` |
+| Valor demo | Evento | `valor` |
 | Resultado demo | Evento | `resultado` |
 | Pregunta | Evento | `pregunta` |
 | Campo con error | Evento | `campo` |
 | Motivo | Evento | `motivo` |
-| Profundidad (%) | Evento | `porcentaje` |
+| Profundidad scroll | Evento | `porcentaje` |
 | Segundos activo | Evento | `segundos` |
 | Desarrolladoras | Evento | `desarrolladoras` |
 | Origen del lead | Evento | `origen` |
 | Visitante | Usuario | `visitante` |
 
-6. **Tráfico de desarrolladores** (opcional): Administrar → Recopilación y modificación de datos → Filtros de datos. Activar el filtro "Tráfico de desarrolladores" para que las pruebas desde localhost no cuenten en los informes. DebugView las sigue mostrando.
+6. **Filtros de datos:** "Pruebas locales" (tráfico de desarrolladores) está en **modo prueba**: marca los eventos de localhost, pero todavía los cuenta. Activarlo los descarta y no se recuperan; conviene hacerlo después de mirar unos días que solo marque pruebas.
 7. **Search Console:** vincularla desde Administrar → Vínculos de productos, cuando esté verificada.
 
 ## Dónde mirar cada cosa en GA4
@@ -185,10 +185,10 @@ Lo hace quien administre la propiedad.
 | ¿Cuánta gente entra y de dónde viene? | Informes → Adquisición → Adquisición de tráfico (fuente / medio / campaña) |
 | ¿De qué campaña vienen los leads? | Misma pantalla; elegí `form_enviado` en la columna "Eventos clave" |
 | ¿Qué está pasando ahora? | Informes → Tiempo real |
-| ¿Hasta dónde llegan en la página? | Explorar → Exploración libre: evento `seccion_vista` por "Sección", o `scroll_profundidad` por "Profundidad (%)" |
+| ¿Hasta dónde llegan en la página? | Explorar → Exploración libre: evento `seccion_vista` por "Sección", o `scroll_profundidad` por "Profundidad scroll" |
 | Embudo de la home | Explorar → Exploración de embudo: `page_view` → `seccion_vista` (una_sola_lista) → `seccion_vista` (precios) → `clic_cta` → `form_inicio` → `form_enviado` → `clic_whatsapp` |
 | ¿Qué plan les interesa? ¿Anual o mensual? | Exploración libre: `clic_cta` y `form_enviado` por "Plan" y "Período"; `precios_periodo` por "Período" |
-| ¿Usan la demo? ¿Con qué presupuesto? | Exploración libre: `demo_pestana` por "Pestaña demo"; `demo_slider` por "Control demo", "Valor" y "Resultado demo" |
+| ¿Usan la demo? ¿Con qué presupuesto? | Exploración libre: `demo_pestana` por "Pestaña demo"; `demo_slider` por "Control demo", "Valor demo" y "Resultado demo" |
 | ¿Qué preguntas abren? | Exploración libre: `faq_abierta` por "Pregunta" |
 | ¿Qué notas del blog comparten los brokers? | Exploración libre: `compartir_nota` por "Ruta de la página". Las visitas que traen esos links están en la campaña `nota-broker`. |
 | ¿Dónde se traban en el formulario? | `form_inicio` contra `form_enviado`; `form_error` por "Campo con error" |
