@@ -10,7 +10,7 @@ Sitio estático de una sola página. No necesita compilación: todo está en `in
 
 ## Antes de salir a vender
 
-- Precios, garantía, cupos y plazos están en `index.html`, sección Planes y preguntas frecuentes. Revisarlos cuando cambien.
+- Precios, garantía, cupos y plazos están en `index.html` (sección Planes y preguntas frecuentes), en `terminos.html` y en `llms.txt`. Si cambian, cambiarlos en los tres.
 - Poner el número de WhatsApp en la constante `WHATSAPP` al principio del `<script>` de `index.html` (con código de país, sin signos). Sin ese número, el formulario solo muestra la confirmación y no envía nada.
 - Verificar nombre, dominio y marca.
 

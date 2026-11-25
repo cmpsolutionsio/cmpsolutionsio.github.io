@@ -11,6 +11,7 @@ Datos clave, al 19/11/2026:
 - Garantía de 30 días: si no le sirve, se le devuelve la puesta en marcha y, si pagó el anual, también el abono. El mensual no tiene permanencia.
 - Puesta en marcha en 30 días. Primer paso sin costo: un comparativo con 3 listas del cliente, con NDA firmado antes de recibirlas.
 - Contacto: WhatsApp +54 9 11 5871-4730.
+- Condiciones: el comparativo sin costo no obliga a contratar. Los precios no incluyen impuestos. Las listas y los datos son del cliente: al darse de baja se los lleva en Excel y CMP los borra (art. 25 de la Ley 25.326). Detalle en los términos y condiciones.
 
 ## Páginas principales
 
@@ -31,4 +32,5 @@ Datos clave, al 19/11/2026:
 - [Planes y garantía](https://cmpsolutions.info/#precios)
 - [Una Sola Lista, demo con datos ficticios](https://cmpsolutions.info/#usl)
 - [CRM](https://cmpsolutions.info/#crm)
+- [Términos y condiciones](https://cmpsolutions.info/terminos.html): planes, precios, puesta en marcha, garantía de 30 días, baja, confidencialidad y datos.
 - [Privacidad](https://cmpsolutions.info/privacidad.html): qué datos junta el sitio y cómo se usan.
